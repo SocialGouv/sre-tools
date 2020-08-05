@@ -1,0 +1,10 @@
+{
+  "name": "sre-tools",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "execa": "^4.0.3",
+    "yargs": "^15.4.1"
+  }
+}
