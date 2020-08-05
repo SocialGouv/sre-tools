@@ -7,7 +7,6 @@ const args = yargs
     // doc
     .usage('Usage: $0 [options] <plaintext>')
     // k8s context
-    .alias('ns', 'namespace')
     .nargs('namespace', 1)
     .describe('namespace', 'k8s namespace (prod2 only)')
     // secret name
@@ -19,18 +18,24 @@ const args = yargs
     .demandOption(['context'])
     // checks
     .check((argv, options) => {
-        if (args.context==="prod2" && (!args.namespace || !args.name)) {
+        if (argv.context==="prod2" && (!argv.namespace || !argv.name)) {
           throw new Error("--name and --namespace are mandatory for prod2")
+          return false
         }
-        if (args._ && args._.length === 0) {
+        if (argv._ && argv._.length === 0) {
           throw new Error("You must provide some plain text")
-        } else {
-          return true // tell Yargs that the arguments passed the check
+          return false
         }
+        return true
       })
 
 
 const flatify = arr => arr.flatMap((a, c) => a)
+
+const sealedSecretsUrls = {
+  "prod2": "https://kubeseal.prod2.fabrique.social.gouv.fr/v1/cert.pem",
+  "dev2": "https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem"
+}
 
 // build kubeseal args
 const crypt = async ({context, namespace, name, input}) => {
@@ -41,7 +46,14 @@ const crypt = async ({context, namespace, name, input}) => {
   } else {
     args.push(["--scope", "cluster-wide"])
   }
-  const {stdout} = await execa('kubeseal', flatify(args), {input}).catch(console.log)
+  const env = {}
+  if (sealedSecretsUrls[context]) {
+    env.SEALED_SECRETS_CERT = sealedSecretsUrls[context]
+  }
+  const {stdout} = await execa('kubeseal', flatify(args), {
+    input,
+    env
+  }).catch(console.log)
   return stdout
 }
 
@@ -93,9 +105,7 @@ const makeSealSecrets =  ({
 if (require.main===module) {
   const argv = args.argv;
   makeSealSecrets({
-    ...argv,
-    namespace: argv.namespace || "test-kubeseal",
-    name: argv.name || "some-secret",
+    ...argv, //context
     secrets: {
       X: argv._ && argv._.join(" "),
       A: "coucou",
