@@ -5,6 +5,7 @@
   "license": "MIT",
   "dependencies": {
     "execa": "^4.0.3",
+    "json2yaml": "^1.1.0",
     "yargs": "^15.4.1"
   }
 }
