@@ -20,5 +20,5 @@ const createSealedSecrets = async () =>
     .then((sealed) => console.log(YAML.stringify(sealed)))
     .catch(console.log);
 
-createSealedSecrets(inputSecrets);
+createSealedSecrets();
 ```
