@@ -22,3 +22,5 @@ const createSealedSecrets = async () =>
 
 createSealedSecrets();
 ```
+
+:bulb: Copy values from Rancher secret view from Chrome console : `copy(Array.from(document.querySelectorAll("table tbody tr")).map(node => [node.querySelector("td:nth-child(1)").innerText, node.querySelector("td:nth-child(3)").innerText]).reduce((a, c) => ({...a, [c[0]]:c[1]}),{}))`
