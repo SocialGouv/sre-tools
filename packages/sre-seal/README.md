@@ -8,7 +8,9 @@
 
 ```sh
 # Dev secrets
+# crypt a bunch of key/values
 cat values.yml | sre-seal > sealed.yml
+# crypt a single value
 echo "PASSWORD=pouet" | sre-seal > sealed.yml
 
 # Prod secrets have mandatories namespace and secret name
