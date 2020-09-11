@@ -1,0 +1,41 @@
+# @socialgouv/sre-seal
+
+`yarn add -g @socialgouv/sre-seal` and you'll get `sre-seal` command available.
+
+:warning: Need `kubesel` CLI installed on your system.
+
+#### CLI
+
+```sh
+# Dev secrets
+cat values.yml | sre-seal > sealed.yml
+echo "PASSWORD=pouet" | sre-seal > sealed.yml
+
+# Prod secrets have mandatories namespace and secret name
+cat values.yml | sre-seal --context prod2 --namespace project --name secret-name > sealed.yml
+
+# Add new secret to some existing secret file with `--from`
+echo "PASSWORD=pouet" | sre-seal --from current-seal.yml > sealed.yml
+
+```
+
+#### JavaScript
+
+```js
+const YAML = require("json2yaml");
+const { cryptFromSecrets } = require("@socialgouv/sre-seal");
+
+cryptFromSecrets({
+  name: "some-secret-name",
+  //namespace: "cdtn-admin",
+  context: "dev2", // or prod2 with namespace
+  secrets: {
+    PGRST_JWT_SECRET: "FyH2ETW8zulPobZ9j6wr3jWM5OtsK2zR84NLBIb0",
+    KIKOO: "Bjd9ddeR84NLBIb0",
+  },
+})
+  .then((sealed) => console.log(YAML.stringify(sealed)))
+  .catch(console.log);
+```
+
+:bulb: Copy values from Rancher secret view from Chrome console : `copy(Array.from(document.querySelectorAll("table tbody tr")).map(node => [node.querySelector("td:nth-child(1)").innerText, node.querySelector("td:nth-child(3)").innerText]).reduce((a, c) => ({...a, [c[0]]:c[1]}),{}))`

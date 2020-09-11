@@ -1,11 +1,10 @@
 {
-  "name": "sre-tools",
+  "name": "@socialgouv/sre-tools",
+  "private": true,
   "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
-  "dependencies": {
-    "execa": "^4.0.3",
-    "json2yaml": "^1.1.0",
-    "yargs": "^15.4.1"
-  }
+  "license": "Apache-2.0",
+  "dependencies": {},
+  "workspaces": [
+    "packages/*"
+  ]
 }

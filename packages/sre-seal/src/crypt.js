@@ -7,7 +7,7 @@ const sealedSecretsUrls = {
   dev2: "https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem",
 };
 
-// build kubeseal args
+// build kubeseal args and execute kubeseal
 const crypt = async ({ context, namespace, name, input }) => {
   const args = [["--raw", "--context", context]];
   if (context === "prod2") {
