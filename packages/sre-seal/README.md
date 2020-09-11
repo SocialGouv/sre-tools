@@ -2,7 +2,7 @@
 
 `yarn add -g @socialgouv/sre-seal` and you'll get `sre-seal` command available.
 
-:warning: Need `kubesel` CLI installed on your system.
+:warning: Need `kubeseal` CLI installed on your system.
 
 #### CLI
 
