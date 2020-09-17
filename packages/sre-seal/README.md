@@ -7,6 +7,18 @@
 #### CLI
 
 ```sh
+Usage: sre-seal [options] <KEY=someSecretMessage>
+
+Options:
+  --namespace  k8s namespace (optional in dev)                   [default: null]
+  --name       k8s secret name (optional in dev)   [default: "some-secret-name"]
+  --context    k8s context                                     [default: "dev2"]
+  --from       path to existing seal file
+```
+
+###### Examples
+
+```sh
 # Dev secrets
 # crypt a bunch of key/values
 cat values.yml | sre-seal > sealed.yml
@@ -24,7 +36,7 @@ echo "PASSWORD=pouet" | sre-seal --from current-seal.yml > sealed.yml
 #### JavaScript
 
 ```js
-const YAML = require("json2yaml");
+const YAML = require("yaml");
 const { cryptFromSecrets } = require("@socialgouv/sre-seal");
 
 cryptFromSecrets({
