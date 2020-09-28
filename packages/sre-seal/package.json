@@ -2,6 +2,7 @@
   "name": "@socialgouv/sre-seal",
   "version": "1.0.0",
   "preferGlobal": true,
+  "main": "./src/cryptFromSecrets",
   "bin": {
     "sre-seal": "bin/index.js"
   },
