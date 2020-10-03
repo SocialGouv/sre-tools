@@ -1,10 +1,10 @@
 {
-  "name": "sgouv",
+  "name": "sre-secrets",
   "version": "1.0.0",
-  "main": "dist/index.js",
+  "main": "./src",
   "license": "MIT",
   "bin": {
-    "sgouv": "dist/index.js"
+    "sre-secrets": "bin/index.js"
   },
   "scripts": {
     "start": "tsc -w",

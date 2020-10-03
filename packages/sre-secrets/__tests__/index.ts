@@ -17,7 +17,7 @@ describe("Test sealed secrets generation", () => {
 
   test("Generate sealed secrets", async () => {
     const { stdout, stderr } = await exec(
-      `node ./dist/index.js --from=${filePath} --to=${folderPath}`
+      `node ./bin/index.js --from=${filePath} --to=${folderPath}`
     )
     if (stdout) console.log("stdout:", stdout)
     if (stderr) console.log("stderr:", stderr)
