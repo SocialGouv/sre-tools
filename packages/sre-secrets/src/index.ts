@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 
 import ora from "ora"
-import { stringify } from "yaml"
-import { safeLoad } from "js-yaml"
+import { safeLoad, safeDump } from "js-yaml"
 import { yellow, green } from "chalk"
 import { existsSync, readFileSync, mkdirSync, writeFileSync } from "fs"
 
@@ -12,6 +11,7 @@ import seal, { Config } from "./seal"
 const main = async () => {
   const { argv } = yargs
   const folderPath = argv.t || "./.k8s"
+
   const filePath = argv.f || "./.secrets.yaml"
 
   if (!existsSync(filePath)) {
@@ -25,9 +25,10 @@ const main = async () => {
   const environmentNames = Object.keys(environments)
 
   for (const environmentName of environmentNames) {
-    const spinner = ora(
-      `Creating sealed secrets for ${yellow(environmentName)}`
-    ).start()
+    const spinner = ora({
+      stream: process.stdout,
+      text: `Creating sealed secrets for ${yellow(environmentName)}`,
+    }).start()
 
     const environment = environments[environmentName]
 
@@ -46,7 +47,7 @@ const main = async () => {
 
     writeFileSync(
       `${folderPath}/environments/${environmentName}/${config.name}.yaml`,
-      stringify(sealed)
+      safeDump(sealed, { noRefs: true })
     )
 
     spinner.succeed(
@@ -56,7 +57,7 @@ const main = async () => {
     )
   }
 
-  return process.exit()
+  return process.exit(0)
 }
 
 main()

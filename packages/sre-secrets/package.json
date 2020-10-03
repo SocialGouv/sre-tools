@@ -8,22 +8,25 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "test": "jest"
   },
   "dependencies": {
     "@socialgouv/sre-seal": "file:/Users/gvanwoerkens/Work/dsi/sre-tools/packages/sre-seal",
     "chalk": "^4.1.0",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
-    "yaml": "^1.10.0",
     "yargs": "^16.0.3"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.34.0",
+    "@types/jest": "^26.0.14",
     "@types/node": "^14.11.2",
     "@types/yargs": "^15.0.7",
     "eslint": "^7.10.0",
+    "jest": "^26.4.2",
     "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
     "typescript": "^4.0.3"
   }
 }

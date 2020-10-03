@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Test sealed secrets generation Check dev snapshot 1`] = `
+Object {
+  "apiVersion": "bitnami.com/v1alpha1",
+  "kind": "SealedSecret",
+  "metadata": Object {
+    "annotations": Object {
+      "sealedsecrets.bitnami.com/cluster-wide": "true",
+    },
+    "name": "my-sealed-secrets",
+    "namespace": "my-app-namespace",
+  },
+  "spec": Object {
+    "encryptedData": Object {
+      "tata": Any<String>,
+      "toto": Any<String>,
+    },
+    "template": Object {
+      "metadata": Object {
+        "annotations": Object {
+          "sealedsecrets.bitnami.com/cluster-wide": "true",
+        },
+        "name": "my-sealed-secrets",
+      },
+      "type": "Opaque",
+    },
+  },
+}
+`;
+
+exports[`Test sealed secrets generation Check preprod snapshot 1`] = `
+Object {
+  "apiVersion": "bitnami.com/v1alpha1",
+  "kind": "SealedSecret",
+  "metadata": Object {
+    "annotations": Object {
+      "sealedsecrets.bitnami.com/cluster-wide": "true",
+    },
+    "name": "my-sealed-secrets",
+    "namespace": "my-app-namespace",
+  },
+  "spec": Object {
+    "encryptedData": Object {
+      "tata": Any<String>,
+      "toto": Any<String>,
+    },
+    "template": Object {
+      "metadata": Object {
+        "annotations": Object {
+          "sealedsecrets.bitnami.com/cluster-wide": "true",
+        },
+        "name": "my-sealed-secrets",
+      },
+      "type": "Opaque",
+    },
+  },
+}
+`;
+
+exports[`Test sealed secrets generation Check prod snapshot 1`] = `
+Object {
+  "apiVersion": "bitnami.com/v1alpha1",
+  "kind": "SealedSecret",
+  "metadata": Object {
+    "annotations": Object {},
+    "name": "my-prod-sealed-secrets",
+    "namespace": "my-prod-app-namespace",
+  },
+  "spec": Object {
+    "encryptedData": Object {
+      "tata": Any<String>,
+      "toto": Any<String>,
+    },
+    "template": Object {
+      "metadata": Object {
+        "annotations": Object {},
+        "name": "my-prod-sealed-secrets",
+      },
+      "type": "Opaque",
+    },
+  },
+}
+`;
