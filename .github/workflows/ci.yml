@@ -45,10 +45,10 @@ jobs:
         id: init
         shell: bash
         run: |
-          echo "::set-output name=yarn_cache::$(yarn --cwd ./packages/sre-seal cache dir)"
+          echo "::set-output name=yarn_cache::$(yarn cache dir)"
           #
           echo "Node $(node --version)"
-          echo "Yarn $(yarn --cwd ./packages/sre-seal --version)"
+          echo "Yarn $(yarn --version)"
 
       - uses: actions/checkout@v2
 
@@ -62,26 +62,26 @@ jobs:
             ${{ matrix.config.os }}-${{ matrix.config.kind }}-
 
       - name: Installing
-        run: yarn --cwd ./packages/sre-seal --frozen-lockfile --perfer-offline
+        run: yarn --frozen-lockfile --perfer-offline
 
-      # - name: Lint
-      #   run: yarn --cwd ./packages/sre-seal lint
+      - name: Lint
+        run: yarn lint
 
-      # - name: Unit tests
-      #   if: matrix.config.kind == 'test'
-      #   run: yarn --cwd ./packages/sre-seal test
+      - name: Unit tests
+        if: matrix.config.kind == 'test'
+        run: yarn test
 
       # - name: Unit tests and coverage
       #   if: matrix.config.kind == 'release'
-      #   run: yarn --cwd ./packages/sre-seal test --coverage --coverageReporters=lcov --coverageReporters=text-summary
+      #   run: yarn test --coverage --coverageReporters=lcov --coverageReporters=text-summary
 
       # - name: Send test coverage to codecov
       #   if: matrix.config.kind == 'release'
       #   continue-on-error: true
       #   uses: codecov/codecov-action@v1
 
-      # - name: Build
-      #   run: yarn --cwd ./packages/sre-seal build
+      - name: Build
+        run: yarn build
 
       - name: Archive bin components
         if: matrix.config.kind == 'release'
@@ -105,6 +105,9 @@ jobs:
           node-version: 14.x
 
       - uses: actions/checkout@v2
+
+      - name: Install lerna
+        run: npm install --no-save lerna
 
       - name: Download bin form build job
         uses: actions/download-artifact@v2
