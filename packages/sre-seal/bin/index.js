@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const fs = require("fs");
 const pipe = require("pipe-args").load();
 const yargs = require("yargs");
