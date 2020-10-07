@@ -6,6 +6,9 @@
   "bin": {
     "sre-seal": "bin/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "Apache-2.0",
   "dependencies": {
     "execa": "^4.0.3",
