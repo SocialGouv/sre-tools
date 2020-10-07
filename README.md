@@ -1,4 +1,4 @@
-# sre-tools --allé-stp-release-qd-meme
+# sre-tools
 
 | Tool                            | Usage            |
 | ------------------------------- | ---------------- |
