@@ -11,26 +11,26 @@ jobs:
         'refs/heads/master' && !startsWith(github.ref, 'refs/tags/')) }}
       matrix:
         config:
-          - os: ubuntu-latest
-            node-version: 12.x
-            kind: test
+          # - os: ubuntu-latest
+          #   node-version: 12.x
+          #   kind: test
           - os: macOS-latest
             node-version: 12.x
             kind: test
-          - os: windows-latest
-            node-version: 12.x
-            kind: test
+          # - os: windows-latest
+          #   node-version: 12.x
+          #   kind: test
           #
           - os: macOS-latest
             node-version: 14.x
             kind: test
-          - os: windows-latest
-            node-version: 14.x
-            kind: test
+          # - os: windows-latest
+          #   node-version: 14.x
+          #   kind: test
           #
-          - os: ubuntu-latest
-            node-version: 14.x
-            kind: release
+          # - os: ubuntu-latest
+          #   node-version: 14.x
+          #   kind: release
 
     name: ${{ matrix.config.kind }} on ${{ matrix.config.node-version }} (${{ matrix.config.os }})
     runs-on: ${{ matrix.config.os }}
@@ -40,6 +40,9 @@ jobs:
         uses: actions/setup-node@v2-beta
         with:
           node-version: ${{ matrix.config.node-version }}
+
+      - name: Install kubeseal
+        run: brew install kubeseal
 
       - name: Get yarn cache directory path
         id: init
