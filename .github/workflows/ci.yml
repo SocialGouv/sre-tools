@@ -67,6 +67,9 @@ jobs:
       - name: Lint
         run: yarn lint
 
+      - name: Build
+        run: yarn build
+
       - name: Unit tests
         if: matrix.config.kind == 'test'
         run: yarn test
@@ -79,9 +82,6 @@ jobs:
       #   if: matrix.config.kind == 'release'
       #   continue-on-error: true
       #   uses: codecov/codecov-action@v1
-
-      - name: Build
-        run: yarn build
 
       - name: Archive bin components
         if: matrix.config.kind == 'release'
