@@ -41,29 +41,16 @@ jobs:
         with:
           node-version: ${{ matrix.config.node-version }}
 
-      - if: matrix.config.os == 'macOS-latest'
-        name: Install kubeseal for macOS
+      - name: Install kubeseal for macOS
+        if: matrix.config.os == 'macOS-latest'
         run: brew install kubeseal
 
-      - if: matrix.config.os == 'ubuntu-latest'
-        name: Install kubeseal for Ubuntu
+      - name: Install kubeseal for Ubuntu
+        if: matrix.config.os == 'ubuntu-latest'
         run: |
           wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/kubeseal-linux-amd64 -O kubeseal
           #
           sudo install -m 755 kubeseal /usr/local/bin/kubeseal
-
-      # - name: Install kubeseal
-      #   shell: bash
-      #   run: |
-      #     if [ "$MATRIX_OS" == "ubuntu-latest" ]; then
-      #       wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/kubeseal-linux-amd64 -O kubeseal &&
-      #       sudo install -m 755 kubeseal /usr/local/bin/kubeseal
-      #     elif [ "$MATRIX_OS" == "macOS-latest" ]; then
-      #       brew install kubeseal
-      #     else
-      #       echo "$MATRIX_OS not supported"
-      #       exit 1
-      #     fi
 
       - name: Get yarn cache directory path
         id: init
@@ -99,9 +86,9 @@ jobs:
         if: matrix.config.kind == 'test'
         run: yarn test
 
-      # - name: Unit tests and coverage
-      #   if: matrix.config.kind == 'release'
-      #   run: yarn test --coverage --coverageReporters=lcov --coverageReporters=text-summary
+      - name: Test and coverage check
+        if: matrix.config.kind == 'release'
+        run: yarn test -- -- --coverage --coverageReporters=lcov --coverageReporters=text-summary
 
       # - name: Send test coverage to codecov
       #   if: matrix.config.kind == 'release'
