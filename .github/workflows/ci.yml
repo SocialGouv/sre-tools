@@ -17,17 +17,11 @@ jobs:
           - os: macOS-latest
             node-version: 12.x
             kind: test
-          # - os: windows-latest
-          #   node-version: 12.x
-          #   kind: test
-          #
+
           - os: macOS-latest
             node-version: 14.x
             kind: test
-          # - os: windows-latest
-          #   node-version: 14.x
-          #   kind: test
-          #
+
           - os: ubuntu-latest
             node-version: 14.x
             kind: release
@@ -94,8 +88,6 @@ jobs:
         if: matrix.config.kind == 'release'
         uses: codecov/codecov-action@v1
         continue-on-error: true
-        # with:
-        #   directory: ./coverage/lcov-report
 
       - name: Generate artifacts
         if: matrix.config.kind == 'release'
@@ -103,9 +95,6 @@ jobs:
         with:
           name: bin
           path: ./packages/sre-seal/bin/
-
-      # - name: Functional tests
-      #   run: yarn e2e
 
   release:
     needs:

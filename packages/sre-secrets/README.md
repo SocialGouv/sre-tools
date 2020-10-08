@@ -22,6 +22,18 @@ yarn start
 yarn build
 ```
 
+#### Test
+
+```sh
+yarn test
+```
+
+With coverage:
+
+```sh
+yarn test-coverage
+```
+
 #### Cli
 
 ```sh
