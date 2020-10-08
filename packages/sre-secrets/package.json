@@ -12,7 +12,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@socialgouv/sre-seal": "file:/Users/gvanwoerkens/Work/dsi/sre-tools/packages/sre-seal",
+    "@socialgouv/sre-seal": "^1.0.0",
     "chalk": "^4.1.0",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
