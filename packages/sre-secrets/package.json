@@ -3,7 +3,6 @@
   "version": "1.1.1",
   "preferGlobal": true,
   "main": "./src",
-  "license": "MIT",
   "bin": {
     "sre-secrets": "bin/index.js"
   },
