@@ -89,12 +89,19 @@ jobs:
         uses: codecov/codecov-action@v1
         continue-on-error: true
 
-      - name: Generate artifacts
+      - name: Generate sre-seal artifacts
         if: matrix.config.kind == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: bin
-          path: ./packages/sre-seal/bin/
+          path: ./packages/sre-seal/bin
+
+      - name: Generate sre-secrets artifacts
+        if: matrix.config.kind == 'release'
+        uses: actions/upload-artifact@v2
+        with:
+          name: bin
+          path: ./packages/sre-secrets/bin
 
   release:
     needs:
