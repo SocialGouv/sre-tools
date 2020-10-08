@@ -6,6 +6,9 @@
   "bin": {
     "sre-secrets": "bin/index.js"
   },
+  "files": [
+    "bin"
+  ],
   "publishConfig": {
     "access": "public"
   },
