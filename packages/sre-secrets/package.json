@@ -1,6 +1,6 @@
 {
   "name": "sre-secrets",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "main": "./src",
   "license": "MIT",
   "bin": {
@@ -13,7 +13,7 @@
     "test-coverage": "jest --coverage --coverageReporters=lcov --coverageReporters=text-summary"
   },
   "dependencies": {
-    "@socialgouv/sre-seal": "^1.0.0",
+    "@socialgouv/sre-seal": "^1.1.0",
     "chalk": "^4.1.0",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
