@@ -9,7 +9,8 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc -p .",
-    "test": "jest"
+    "test": "jest",
+    "test-coverage": "jest --coverage --coverageReporters=lcov --coverageReporters=text-summary"
   },
   "dependencies": {
     "@socialgouv/sre-seal": "^1.0.0",

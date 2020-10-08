@@ -88,12 +88,14 @@ jobs:
 
       - name: Test and coverage check
         if: matrix.config.kind == 'release'
-        run: yarn test -- -- --coverage --coverageReporters=lcov --coverageReporters=text-summary
+        run: yarn test-coverage
 
-      # - name: Send test coverage to codecov
-      #   if: matrix.config.kind == 'release'
-      #   continue-on-error: true
-      #   uses: codecov/codecov-action@v1
+      - name: Send test coverage to codecov
+        if: matrix.config.kind == 'release'
+        uses: codecov/codecov-action@v1
+        continue-on-error: true
+        # with:
+        #   directory: ./coverage/lcov-report
 
       - name: Generate artifacts
         if: matrix.config.kind == 'release'
