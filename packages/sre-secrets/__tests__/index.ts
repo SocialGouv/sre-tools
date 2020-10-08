@@ -5,7 +5,7 @@ const exec = util.promisify(require("child_process").exec)
 
 describe("Test sealed secrets generation", () => {
   const filePath = "./__tests__/data/.secrets.yaml"
-  const folderPath = "/tmp/sre-secrets"
+  const folderPath = `${process.env.RUNNER_TEMP || "/tmp"}/sre-secrets`
   const matchers = {
     spec: {
       encryptedData: {
