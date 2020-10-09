@@ -4,10 +4,10 @@
   "preferGlobal": true,
   "main": "./src",
   "bin": {
-    "sre-secrets": "bin/index.js"
+    "sre-secrets": "dist/index.js"
   },
   "files": [
-    "bin"
+    "dist"
   ],
   "publishConfig": {
     "access": "public"
