@@ -126,11 +126,26 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
 
+      - name: Download sre-secrets artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: sre-secrets
+          path: ./packages/sre-secrets/bin
+
+      - name: DEBUG
+        run: |
+          ls -la
+          #
+          ls -la packages/
+          #
+          ls -la packages/sre-secrets
+
       - name: Semantic Release
         if: |
           github.event_name == 'push' &&
           github.repository == 'SocialGouv/sre-tools'
         uses: cycjimmy/semantic-release-action@v2
+        id: semantic
         with:
           extra_plugins: |
             @semantic-release/exec
@@ -147,3 +162,13 @@ jobs:
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
           echo ${{ steps.semantic.outputs.new_release_version }}
+
+      # - name: Upload Release Asset
+      #     uses: actions/upload-release-asset@v1
+      #     env:
+      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     with:
+      #       upload_url: ${{ steps.create_release.outputs.upload_url }}
+      #       asset_path: ./build.zip
+      #       asset_name: build.zip
+      #       asset_content_type: application/zip
