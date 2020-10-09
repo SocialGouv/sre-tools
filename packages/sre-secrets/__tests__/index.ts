@@ -23,19 +23,19 @@ describe("Test sealed secrets generation", () => {
   })
 
   test("Check dev snapshot", () => {
-    const path = `${folderPath}/environments/dev/my-sealed-secrets.yaml`
+    const path = `${folderPath}/environments/dev/app.sealed-secret.yaml`
     const content = yaml.safeLoad(fs.readFileSync(path, "utf8"))
     expect(content).toMatchSnapshot(matchers)
   })
 
   test("Check preprod snapshot", () => {
-    const path = `${folderPath}/environments/preprod/my-sealed-secrets.yaml`
+    const path = `${folderPath}/environments/preprod/app.sealed-secret.yaml`
     const content = yaml.safeLoad(fs.readFileSync(path, "utf8"))
     expect(content).toMatchSnapshot(matchers)
   })
 
   test("Check prod snapshot", () => {
-    const path = `${folderPath}/environments/prod/my-prod-sealed-secrets.yaml`
+    const path = `${folderPath}/environments/prod/app.sealed-secret.yaml`
     const content = yaml.safeLoad(fs.readFileSync(path, "utf8"))
     expect(content).toMatchSnapshot(matchers)
   })
