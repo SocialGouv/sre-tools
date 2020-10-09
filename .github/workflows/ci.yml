@@ -89,19 +89,12 @@ jobs:
         uses: codecov/codecov-action@v1
         continue-on-error: true
 
-      # - name: Generate sre-seal artifacts
-      #   if: matrix.config.kind == 'release'
-      #   uses: actions/upload-artifact@v2
-      #   with:
-      #     name: bin
-      #     path: ./packages/sre-seal/bin
-
       - name: Generate sre-secrets artifacts
         if: matrix.config.kind == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: sre-secrets
-          path: ./packages/sre-secrets/bin
+          path: ./packages/sre-secrets/dist
 
   release:
     needs:
@@ -130,15 +123,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: sre-secrets
-          path: ./packages/sre-secrets/bin
-
-      - name: DEBUG
-        run: |
-          ls -la
-          #
-          ls -la packages/
-          #
-          ls -la packages/sre-secrets
+          path: ./packages/sre-secrets/dist
 
       - name: Semantic Release
         if: |
@@ -162,13 +147,3 @@ jobs:
         if: steps.semantic.outputs.new_release_published == 'true'
         run: |
           echo ${{ steps.semantic.outputs.new_release_version }}
-
-      # - name: Upload Release Asset
-      #     uses: actions/upload-release-asset@v1
-      #     env:
-      #       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      #     with:
-      #       upload_url: ${{ steps.create_release.outputs.upload_url }}
-      #       asset_path: ./build.zip
-      #       asset_name: build.zip
-      #       asset_content_type: application/zip
