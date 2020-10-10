@@ -13,12 +13,12 @@ const processEnvironment = async (
   namespace,
   serviceName,
   environmentName,
-  secrets
+  { fileName, secretsName, secrets }
 ) => {
   const config: Config = {
     secrets,
     namespace: namespace,
-    name: `${serviceName}-${baseName}`,
+    name: secretsName || `${serviceName}-${baseName}`,
     context: environmentName === "prod" ? "prod2" : "dev2",
   }
 
@@ -29,7 +29,9 @@ const processEnvironment = async (
   })
 
   writeFileSync(
-    `${folderPath}/environments/${environmentName}/${serviceName}.${baseName}.yaml`,
+    `${folderPath}/environments/${environmentName}/${
+      fileName || serviceName
+    }.${baseName}.yaml`,
     safeDump(sealed, { noRefs: true })
   )
 }
@@ -48,14 +50,16 @@ export const processEnvironments = async (
       )}`
     )
 
-    const { secrets } = environments[environmentName]
+    const config = environments[environmentName]
 
-    await processEnvironment(namespace, serviceName, environmentName, secrets)
+    await processEnvironment(namespace, serviceName, environmentName, config)
 
     spinner.succeed(
       `${green(serviceName)} sealed secrets created for ${green(
         environmentName
-      )} environment (${folderPath}/environments/${environmentName}/${serviceName}.${baseName}.yaml)`
+      )} environment (${folderPath}/environments/${environmentName}/${
+        config?.fileName || serviceName
+      }.${baseName}.yaml)`
     )
   }
 }

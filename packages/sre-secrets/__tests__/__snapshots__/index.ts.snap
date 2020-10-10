@@ -64,7 +64,7 @@ Object {
   "kind": "SealedSecret",
   "metadata": Object {
     "annotations": Object {},
-    "name": "app-sealed-secret",
+    "name": "app-prod-sealed-secret",
     "namespace": "my-app-namespace",
   },
   "spec": Object {
@@ -75,7 +75,7 @@ Object {
     "template": Object {
       "metadata": Object {
         "annotations": Object {},
-        "name": "app-sealed-secret",
+        "name": "app-prod-sealed-secret",
       },
       "type": "Opaque",
     },

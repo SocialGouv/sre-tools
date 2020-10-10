@@ -35,7 +35,7 @@ describe("Test sealed secrets generation", () => {
   })
 
   test("Check prod snapshot", () => {
-    const path = `${folderPath}/environments/prod/app.sealed-secret.yaml`
+    const path = `${folderPath}/environments/prod/app-prod.sealed-secret.yaml`
     const content = yaml.safeLoad(fs.readFileSync(path, "utf8"))
     expect(content).toMatchSnapshot(matchers)
   })
