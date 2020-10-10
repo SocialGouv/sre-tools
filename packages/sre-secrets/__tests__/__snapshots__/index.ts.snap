@@ -8,7 +8,7 @@ Object {
     "annotations": Object {
       "sealedsecrets.bitnami.com/cluster-wide": "true",
     },
-    "name": "my-sealed-secrets",
+    "name": "app-sealed-secret",
     "namespace": "my-app-namespace",
   },
   "spec": Object {
@@ -21,7 +21,7 @@ Object {
         "annotations": Object {
           "sealedsecrets.bitnami.com/cluster-wide": "true",
         },
-        "name": "my-sealed-secrets",
+        "name": "app-sealed-secret",
       },
       "type": "Opaque",
     },
@@ -37,7 +37,7 @@ Object {
     "annotations": Object {
       "sealedsecrets.bitnami.com/cluster-wide": "true",
     },
-    "name": "my-sealed-secrets",
+    "name": "app-sealed-secret",
     "namespace": "my-app-namespace",
   },
   "spec": Object {
@@ -50,7 +50,7 @@ Object {
         "annotations": Object {
           "sealedsecrets.bitnami.com/cluster-wide": "true",
         },
-        "name": "my-sealed-secrets",
+        "name": "app-sealed-secret",
       },
       "type": "Opaque",
     },
@@ -64,8 +64,8 @@ Object {
   "kind": "SealedSecret",
   "metadata": Object {
     "annotations": Object {},
-    "name": "my-prod-sealed-secrets",
-    "namespace": "my-prod-app-namespace",
+    "name": "app-sealed-secret",
+    "namespace": "my-app-namespace",
   },
   "spec": Object {
     "encryptedData": Object {
@@ -75,7 +75,7 @@ Object {
     "template": Object {
       "metadata": Object {
         "annotations": Object {},
-        "name": "my-prod-sealed-secrets",
+        "name": "app-sealed-secret",
       },
       "type": "Opaque",
     },
