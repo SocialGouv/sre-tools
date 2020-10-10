@@ -1,6 +1,6 @@
 {
   "name": "@socialgouv/sre-secrets",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "preferGlobal": true,
   "main": "./src",
   "bin": {
@@ -19,7 +19,7 @@
     "test-coverage": "jest --coverage --coverageReporters=lcov --coverageReporters=text-summary"
   },
   "dependencies": {
-    "@socialgouv/sre-seal": "^1.1.5",
+    "@socialgouv/sre-seal": "^1.1.6",
     "chalk": "^4.1.0",
     "js-yaml": "^3.14.0",
     "ora": "^5.1.0",
