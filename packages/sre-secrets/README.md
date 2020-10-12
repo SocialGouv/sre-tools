@@ -10,12 +10,8 @@ Generate sealed secrets files for k8s deployment.
 npm add -g @socialgouv/sre-secrets
 ```
 
-<<<<<<< HEAD
-This package can also be installed localy.
-=======
 This package can also be installed locally.
 
->>>>>>> docs: Update sre-secrets readme file.
 :warning: It requires `kubeseal` CLI installed on your system to work.
 
 #### Cli
