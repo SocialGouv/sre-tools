@@ -57,21 +57,62 @@ sre-secrets --from=./.secrets.yaml --to=./.k8s
 Assuming the existence of a `.secrets.yaml` file as follows:
 
 ```yaml
-name: "my-sealed-secrets" # default sealed secrets name
-namespace: "my-app-namespace" # deafault application namespace
-environments: # Declare up to 3 environements (dev, preprod, prod)
-  dev: # Environment name
-    secrets: # List of secrets to seal
-      PASSWORD: "my_dev_password"
-      SERVICE_TOKEN: "1234"
-  preprod:
-    secrets:
-      PASSWORD: "my_preprod_password"
-      SERVICE_TOKEN: "abcd"
-  prod:
-    name: "my-prod-sealed-secrets" # Overwrite secrets name
-    namespace: "my-prod-app-namespace" # Overwrite application namespace
-    secrets:
-      PASSWORD: "my_strong_prod_password"
-      SERVICE_TOKEN: "iBjL1Rcqzhiy4fpxIxdZqohM2Yk"
+namespace: "carnets"
+services:
+  - name: "app"
+    environments:
+      dev:
+        secrets:
+          SERVICE_TOKEN: "V16gKZBHjh8z7aO2IeFxTqvS5JFCmxHIgyuqQ"
+          USER_PASSWORD: "ObkWO7BUkmDFAl3v_XP-nNEYADymg2FeO5168-nj9BdreHTyp7NSrnmumBFNbY1dg6m-irxrEHxw"
+      preprod:
+        secrets:
+          SERVICE_TOKEN: "V16gKZBHjh8z7aO2IeFxTqvS5JFCmxHIgyuqQ"
+          USER_PASSWORD: "ObkWO7BUkmDFAl3v_XP-nNEYADymg2FeO5168-nj9BdreHTyp7NSrnmumBFNbY1dg6m-irxrEHxw"
+      prod:
+        secrets:
+          SERVICE_TOKEN: "V16gKZBHjh8z7aO2IeFxTqvS5JFCmxHIgyuqQ"
+          USER_PASSWORD: "ObkWO7BUkmDFAl3v_XP-nNEYADymg2FeO5168-nj9BdreHTyp7NSrnmumBFNbY1dg6m-irxrEHxw"
+
+  - name: "hasura"
+    environments:
+      dev:
+        secrets:
+          HASURA_GRAPHQL_ADMIN_SECRET: "hasurapassword"
+      preprod:
+        secrets:
+          HASURA_GRAPHQL_ADMIN_SECRET: "hasurapassword"
+      prod:
+        secrets:
+          HASURA_GRAPHQL_ADMIN_SECRET: "hasurapassword"
+          HASURA_GRAPHQL_DATABASE_URL: "postgresql://user%40my_server..."
+
+  - name: "pg"
+    environments:
+      dev:
+        secretsName: "azure-pg-admin-user" # overwrite default sealed secrets name
+        secrets:
+          DATABASE_URL: "postgresql://user%40my_server..."
+          PGHOST: "my_server..."
+          PGPASSWORD: "my_password..."
+          PGSSLMODE: "require"
+          PGUSER: "my_user..."
+      preprod:
+        fileName: "pg-user" # overwrite default sealed secrets file name
+        secretsName: "azure-pg-user"
+        secrets:
+          DATABASE_URL: "postgresql://user%40my_server..."
+          PGHOST: "my_server..."
+          PGPASSWORD: "my_password..."
+          PGSSLMODE: "require"
+          PGUSER: "my_user..."
+      prod:
+        fileName: "pg-user"
+        secretsName: "azure-pg-user"
+        secrets:
+          DATABASE_URL: "postgresql://user%40my_server..."
+          PGHOST: "my_server..."
+          PGPASSWORD: "my_password..."
+          PGSSLMODE: "require"
+          PGUSER: "my_user..."
 ```
