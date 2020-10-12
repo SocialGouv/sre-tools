@@ -2,37 +2,16 @@
 
 Generate sealed secrets files for k8s deployment.
 
+### Usage
+
 #### Install
 
 ```sh
-yarn add -g @socialgouv/sre-secrets
+npm add -g @socialgouv/sre-secrets
 ```
 
-:warning: Need `kubeseal` CLI installed on your system.
-
-#### Run
-
-```sh
-yarn start
-```
-
-#### Build
-
-```sh
-yarn build
-```
-
-#### Test
-
-```sh
-yarn test
-```
-
-With coverage:
-
-```sh
-yarn test-coverage
-```
+This package can also be installed localy.
+:warning: It requires `kubeseal` CLI installed on your system to work.
 
 #### Cli
 
@@ -115,4 +94,30 @@ services:
           PGPASSWORD: "my_password..."
           PGSSLMODE: "require"
           PGUSER: "my_user..."
+```
+
+### Developement
+
+#### Run
+
+```sh
+yarn start
+```
+
+#### Build
+
+```sh
+yarn build
+```
+
+#### Test
+
+```sh
+yarn test
+```
+
+With coverage:
+
+```sh
+yarn test-coverage
 ```
