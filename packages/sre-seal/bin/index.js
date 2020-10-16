@@ -25,7 +25,7 @@ const parseInputValues = (input) =>
 
 const args = yargs
   // doc
-  .usage("Usage: $0 [options] <plaintext>")
+  .usage("Usage: $0 [options] <KEY=someSecretMessage>")
   // k8s context
   .nargs("namespace", 1)
   .describe("namespace", "k8s namespace (optional in dev)")
