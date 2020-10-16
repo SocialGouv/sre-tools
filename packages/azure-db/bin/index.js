@@ -1,6 +1,13 @@
 #!/usr/bin/env node
-
 const yargs = require("yargs");
+const execa = require("execa");
+
+const {
+  createDbJob,
+} = require("@socialgouv/kosko-charts/components/azure-pg/create-db.job");
+const {
+  dropDbJob,
+} = require("@socialgouv/kosko-charts/components/azure-pg/drop-db.job");
 
 const getRandomInt = () => parseInt(Math.random() * 100000, 10);
 
@@ -40,23 +47,49 @@ const args = yargs
     console.log("check", argv, options);
     if (!["create", "drop"].includes(argv._[0])) {
       throw new Error("You must provide a valid command : create or drop");
-      return false;
     }
     if (argv._[0] === "drop" && argv.cluster === "prod2") {
       throw new Error("One cannot drop PROD databases :)");
-      return false;
     }
     return true;
   });
 
-if (require.main === module) {
+const run = async () => {
   const argv = args.argv;
-  console.log("argv", argv);
+  let job;
   if (argv._[0] === "create") {
     console.log(
       `create DB ${argv.database} for user ${argv.user} in application ${argv.application} in cluster ${argv.cluster}`
     );
+    const password = "xyz"; // todo
+    job = createDbJob({
+      database: argv.database,
+      user: argv.user,
+      password,
+    });
+    job.metadata.name = `sre-tools-create-db-job-${getRandomInt()}`;
   } else if (argv._[0] === "drop") {
     console.log(`drop DB for ${argv.application} in cluster ${argv.cluster}`);
+    job = dropDbJob({
+      database: argv.database,
+      user: argv.user,
+    });
+    job.metadata.name = `sre-tools-drop-db-job-${getRandomInt()}`;
   }
+
+  if (job) {
+    job.metadata.namespace = `${argv.application}-secret`;
+    const env = {};
+    const kubeArgs = ["--context", argv.cluster, "apply", "-f", "-"];
+    const { stdout } = await execa("kubectl", kubeArgs, {
+      input: JSON.stringify(job),
+      env,
+    }).catch(console.log);
+    console.log("stdout", stdout);
+
+    // todo: wait for job and get stdout
+  }
+};
+if (require.main === module) {
+  run();
 }

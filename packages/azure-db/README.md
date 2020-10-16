@@ -1,5 +1,7 @@
 # @socialgouv/azure-db
 
+Create/Destroy databases on Azure. Commands are run in Kubernetes.
+
 `yarn add -g @socialgouv/azure-db` and you'll get `azure-db` command available.
 
 :warning: Need `kubectl` CLI installed on your system and kubernetes context installed.
@@ -9,11 +11,16 @@
 ```sh
 Usage: azure-db command [options]
 
+Commands:
+  azure-db create  create a new database and user
+  azure-db drop    destroy a database and a user
+
 Options:
-  --namespace  k8s namespace (optional in dev)                   [default: null]
-  --name       k8s secret name (optional in dev)   [default: "some-secret-name"]
-  --context    k8s context                                     [default: "dev2"]
-  --from       path to existing seal file
+  --cluster      k8s cluster               [required] [choices: "prod2", "dev2"]
+  --application  gitlab application name                              [required]
+  --database     database name
+  --user         user name
+
 ```
 
 ###### Examples
