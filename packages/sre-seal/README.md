@@ -1,6 +1,6 @@
 # @socialgouv/sre-seal
 
-`yarn add -g @socialgouv/sre-seal` and you'll get `sre-seal` command available.
+`yarn global add @socialgouv/sre-seal` and you'll get `sre-seal` command available.
 
 :warning: Need `kubeseal` CLI installed on your system.
 
