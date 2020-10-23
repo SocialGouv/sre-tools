@@ -7,7 +7,7 @@ Generate sealed secrets files for k8s deployment.
 #### Install
 
 ```sh
-npm add -g @socialgouv/sre-secrets
+yarn global add @socialgouv/sre-secrets
 ```
 
 This package can also be installed locally.
