@@ -9,6 +9,10 @@ jest.mock("execa", (args) =>
   )
 );
 
+const mockMath = Object.create(global.Math);
+mockMath.random = () => 0.5;
+global.Math = mockMath;
+
 describe("Test azure-db commands", () => {
   test("createDb snapshot", async () => {
     const job = await createDb({
