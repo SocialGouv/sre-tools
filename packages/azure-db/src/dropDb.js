@@ -6,7 +6,7 @@ const {
 
 const getRandomInt = () => parseInt(Math.random() * 100000, 10);
 
-async function dropDb({ cluster, namespace, database, user, password }) {
+async function dropDb({ cluster, namespace, database, user }) {
   const job = dropDbJob({
     database,
     user,
