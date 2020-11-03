@@ -1,15 +1,14 @@
 #!/usr/bin/env node
 const yargs = require("yargs");
-const execa = require("execa");
+const { randomBytes } = require("crypto");
 
-const {
-  createDbJob,
-} = require("@socialgouv/kosko-charts/components/azure-pg/create-db.job");
-const {
-  dropDbJob,
-} = require("@socialgouv/kosko-charts/components/azure-pg/drop-db.job");
+const { createDb } = require("../src/createDb");
+const { dropDb } = require("../src/dropDb");
 
 const getRandomInt = () => parseInt(Math.random() * 100000, 10);
+
+const getRandomPassword = () =>
+  randomBytes(30).toString("base64").replace(/[^\w]/g, "");
 
 const getDetaultYargs = () =>
   yargs
@@ -44,7 +43,6 @@ const args = yargs
   .demandCommand(1, "Please choose a command first")
 
   .check((argv, options) => {
-    console.log("check", argv, options);
     if (!["create", "drop"].includes(argv._[0])) {
       throw new Error("You must provide a valid command : create or drop");
     }
@@ -56,40 +54,41 @@ const args = yargs
 
 const run = async () => {
   const argv = args.argv;
-  let job;
+  const namespace = `${argv.application}-secret`;
   if (argv._[0] === "create") {
     console.log(
-      `create DB ${argv.database} for user ${argv.user} in application ${argv.application} in cluster ${argv.cluster}`
+      `Create DB ${argv.database} for user ${argv.user} in application ${argv.application} in cluster ${argv.cluster}`
     );
-    const password = "xyz"; // todo
-    job = createDbJob({
+    const password = getRandomPassword();
+    await createDb({
+      cluster: argv.cluster,
+      namespace,
       database: argv.database,
       user: argv.user,
       password,
     });
-    job.metadata.name = `sre-tools-create-db-job-${getRandomInt()}`;
+    console.log(
+      `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
+    );
+    console.log(`Database : ${argv.database}`);
+    console.log(`User : ${argv.user}`);
+    console.log(`Password : ${password}`);
   } else if (argv._[0] === "drop") {
-    console.log(`drop DB for ${argv.application} in cluster ${argv.cluster}`);
-    job = dropDbJob({
+    console.log(`Drop DB for ${argv.application} in cluster ${argv.cluster}`);
+    await dropDb({
+      cluster: argv.cluster,
+      namespace: `${argv.application}-secret`,
       database: argv.database,
       user: argv.user,
     });
-    job.metadata.name = `sre-tools-drop-db-job-${getRandomInt()}`;
-  }
-
-  if (job) {
-    job.metadata.namespace = `${argv.application}-secret`;
-    const env = {};
-    const kubeArgs = ["--context", argv.cluster, "apply", "-f", "-"];
-    const { stdout } = await execa("kubectl", kubeArgs, {
-      input: JSON.stringify(job),
-      env,
-    }).catch(console.log);
-    console.log("stdout", stdout);
-
-    // todo: wait for job and get stdout
+    console.log(
+      `Created drop-db job in namespace ${namespace} on cluster ${argv.cluster} `
+    );
+    console.log(`Database : ${argv.database}`);
+    console.log(`User : ${argv.user}`);
   }
 };
+
 if (require.main === module) {
   run();
 }
