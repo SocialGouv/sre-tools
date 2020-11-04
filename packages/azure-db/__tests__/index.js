@@ -26,7 +26,7 @@ describe("Test azure-db commands", () => {
   });
 
   test("dropDb snapshot", async () => {
-    const job = await createDb({
+    const job = await dropDb({
       cluster: "cluster-2",
       namespace: "namespace-2",
       database: "database-2",

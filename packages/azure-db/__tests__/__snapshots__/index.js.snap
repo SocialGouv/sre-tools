@@ -69,33 +69,27 @@ Object {
   "apiVersion": "batch/v1",
   "kind": "Job",
   "metadata": Object {
-    "name": "sre-tools-create-db-job-50000",
+    "name": "sre-tools-drop-db-job-50000",
     "namespace": "namespace-2",
   },
   "spec": Object {
     "backoffLimit": 0,
     "template": Object {
+      "metadata": Object {},
       "spec": Object {
         "containers": Array [
           Object {
             "command": Array [
-              "create-db-user",
+              "drop-db-user",
             ],
             "env": Array [
               Object {
-                "name": "NEW_DB_NAME",
+                "name": "DROP_DATABASE",
                 "value": "database-2",
               },
               Object {
-                "name": "NEW_USER",
+                "name": "DROP_USER",
                 "value": "user-2",
-              },
-              Object {
-                "name": "NEW_PASSWORD",
-              },
-              Object {
-                "name": "NEW_DB_EXTENSIONS",
-                "value": "hstore pgcrypto citext",
               },
             ],
             "envFrom": Array [
@@ -107,7 +101,7 @@ Object {
             ],
             "image": "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:0.28.0",
             "imagePullPolicy": "IfNotPresent",
-            "name": "create-db-user",
+            "name": "drop-db-user",
             "resources": Object {
               "limits": Object {
                 "cpu": "300m",
