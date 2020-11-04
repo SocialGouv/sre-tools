@@ -4,7 +4,7 @@ const { randomBytes } = require("crypto");
 
 const { createDb } = require("../src/createDb");
 const { dropDb } = require("../src/dropDb");
-const { dropAutoDevOpsDbs } = require("../src/dropAutoDevOpsDbs");
+const { dropAutodevopsDbs } = require("../src/dropAutodevopsDbs");
 
 const getRandomInt = () => parseInt(Math.random() * 100000, 10);
 
@@ -103,7 +103,7 @@ const run = async () => {
     console.log(
       `Drop all DBs for ${argv.application} in cluster ${argv.cluster}`
     );
-    await dropAutoDevOpsDbs({
+    await dropAutodevopsDbs({
       cluster: argv.cluster,
       namespace: `${argv.application}-secret`,
     });
