@@ -4,6 +4,7 @@ const { randomBytes } = require("crypto");
 
 const { createDb } = require("../src/createDb");
 const { dropDb } = require("../src/dropDb");
+const { dropAutodevopsDbs } = require("../src/dropAutodevopsDbs");
 
 const getRandomInt = () => parseInt(Math.random() * 100000, 10);
 
@@ -40,13 +41,25 @@ const args = yargs
       .describe("user", "user to destroy")
       .demandOption(["cluster", "application", "database", "user"]);
   })
+  .command(
+    "drop-autodevops-dbs",
+    "drop all generated databases from a dev server",
+    (yargs) => {
+      return getDetaultYargs().demandOption(["cluster", "application"]);
+    }
+  )
   .demandCommand(1, "Please choose a command first")
 
   .check((argv, options) => {
-    if (!["create", "drop"].includes(argv._[0])) {
-      throw new Error("You must provide a valid command : create or drop");
+    if (!["create", "drop", "drop-autodevops-dbs"].includes(argv._[0])) {
+      throw new Error(
+        "You must provide a valid command : create, drop or drop-autodevops-dbs"
+      );
     }
     if (argv._[0] === "drop" && argv.cluster === "prod2") {
+      throw new Error("One cannot drop PROD databases :)");
+    }
+    if (argv._[0] === "drop-autodevops-dbs" && argv.cluster === "prod2") {
       throw new Error("One cannot drop PROD databases :)");
     }
     return true;
@@ -86,6 +99,14 @@ const run = async () => {
     );
     console.log(`Database : ${argv.database}`);
     console.log(`User : ${argv.user}`);
+  } else if (argv._[0] === "drop-autodevops-dbs") {
+    console.log(
+      `Drop all DBs for ${argv.application} in cluster ${argv.cluster}`
+    );
+    await dropAutodevopsDbs({
+      cluster: argv.cluster,
+      namespace: `${argv.application}-secret`,
+    });
   }
 };
 

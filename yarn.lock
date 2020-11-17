@@ -1494,14 +1494,14 @@
     eslint-plugin-simple-import-sort "~5.0.3"
     eslint-plugin-sort-keys-fix "~1.1.1"
 
-"@socialgouv/kosko-charts@^3.1.2":
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-3.1.2.tgz#8d8f90c61094d36be5fb3c13d959d5ec581f1e2d"
-  integrity sha512-w08tUeCGkGAzuX/n1ktxGfhYggmE4uVi4T0ZZeqe1puljoZJ40HcBwJ5LSrANIqwUm/rvOuGHlqFODOyidZ9Hg==
+"@socialgouv/kosko-charts@^3.2.2":
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/@socialgouv/kosko-charts/-/kosko-charts-3.2.2.tgz#180593b92629efa3e77ba6377c5d1ad166b981ac"
+  integrity sha512-P/zfNWHwHDC1LNRqveM8CgrclheP2S9pkonY19fexO7YrZUMhQXPakqQcCSYkocxCD6dX+Z7osNkqbfC4OmwTg==
   dependencies:
     "@kubernetes-models/sealed-secrets" "^1.0.1"
     "@sindresorhus/is" "^4.0.0"
-    fp-ts "^2.8.4"
+    fp-ts "^2.8.5"
     io-ts "2.2.7"
 
 "@types/babel__core@^7.0.0", "@types/babel__core@^7.1.7":
@@ -3575,10 +3575,10 @@ form-data@~2.3.2:
     combined-stream "^1.0.6"
     mime-types "^2.1.12"
 
-fp-ts@^2.8.4:
-  version "2.8.4"
-  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.8.4.tgz#d1af738a94de8591d441ef656153d04bd878edeb"
-  integrity sha512-J+kwce5SysU0YKuZ3aCnFk+dyezZD1mij6u26w1fCVfuLYgJR4eeXmVfJiUjthpZ+4yCRkRfcwMI5SkGw52oFA==
+fp-ts@^2.8.5:
+  version "2.8.5"
+  resolved "https://registry.yarnpkg.com/fp-ts/-/fp-ts-2.8.5.tgz#1b4247081ea066cc152b48a55a0bc13c30828701"
+  integrity sha512-g6do+Q/IQsxgsd2qU6+QnAbZaPR533seIbFyLGqWSxhNX4+F+cY37QdaYmMUOzekLOv/yg/2f15tc26tzDatgw==
 
 fragment-cache@^0.2.1:
   version "0.2.1"
