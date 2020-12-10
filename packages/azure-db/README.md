@@ -37,5 +37,5 @@ azure-db create --cluster prod2 --application sample-next-app --database demo42 
 azure-db drop --application sample-next-app --database demo42 --user demo42
 
 # Destroy all generated databases in DEV
-azure-db drop-dbs --application sample-next-app
+azure-db drop-autodevops-dbs --application sample-next-app
 ```
