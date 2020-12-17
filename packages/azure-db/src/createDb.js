@@ -12,8 +12,12 @@ async function createDb({ cluster, namespace, database, user, password }) {
     user,
     password,
   });
+  if (!job.metadata) {
+    job.metadata = {};
+  }
   job.metadata.name = `sre-tools-create-db-job-${getRandomInt()}`;
   job.metadata.namespace = namespace;
+
   const env = {};
   const kubeArgs = ["--context", cluster, "apply", "-f", "-"];
   const { stdout } = await execa("kubectl", kubeArgs, {

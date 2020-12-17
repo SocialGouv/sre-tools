@@ -13,6 +13,8 @@ const mockMath = Object.create(global.Math);
 mockMath.random = () => 0.5;
 global.Math = mockMath;
 
+process.env.CI_COMMIT_SHORT_SHA = "abcdefgh";
+
 describe("Test azure-db commands", () => {
   test("createDb snapshot", async () => {
     const job = await createDb({
