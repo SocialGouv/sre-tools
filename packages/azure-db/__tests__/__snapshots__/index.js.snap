@@ -32,7 +32,7 @@ Object {
               },
               Object {
                 "name": "NEW_DB_EXTENSIONS",
-                "value": "hstore pgcrypto citext",
+                "value": "hstore pgcrypto citext uuid-ossp",
               },
             ],
             "envFrom": Array [
@@ -42,7 +42,7 @@ Object {
                 },
               },
             ],
-            "image": "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:2.1.0",
+            "image": "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:2.6.1",
             "imagePullPolicy": "IfNotPresent",
             "name": "create-db-user",
             "resources": Object {
@@ -100,7 +100,7 @@ Object {
                 },
               },
             ],
-            "image": "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:2.1.0",
+            "image": "registry.gitlab.factory.social.gouv.fr/socialgouv/docker/azure-db:2.6.1",
             "imagePullPolicy": "IfNotPresent",
             "name": "drop-db-user",
             "resources": Object {
