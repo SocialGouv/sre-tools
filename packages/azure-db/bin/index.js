@@ -41,7 +41,8 @@ const args = yargs
       .default("database", () => `db_${randomInt}`)
       .describe("user", "new user name")
       .default("user", () => `user_${randomInt}`)
-      .describe("pg-name", "PG server prefix if different from application")
+      .describe("pg-name", "alternative PG server prefix")
+      .describe("secret-name", "alternative secret name")
       .demandOption(["cluster", "application"]);
   })
   .command("drop", "destroy a database and a user", (yargs) => {
@@ -102,6 +103,7 @@ const run = async () => {
     console.log(`# User : ${argv.user}`);
     console.log(`# Password : ${password}`);
     console.log("---");
+    const secretName = argv.secretName || "azure-pg-user";
     const secret = createSecret({
       database: argv.database,
       user: argv.user,
@@ -112,7 +114,7 @@ const run = async () => {
     const sealedSecret = await cryptFromSecrets({
       context: argv.cluster,
       namespace: argv.application,
-      name: "azure-pg-user",
+      name: secretName,
       secrets: secret.stringData,
     });
     const sealedYaml = YAML.stringify(sealedSecret, null, 2);

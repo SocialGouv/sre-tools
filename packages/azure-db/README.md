@@ -21,7 +21,8 @@ Options:
   --application  gitlab application name                              [required]
   --database     database name
   --user         user name
-  --pg-name      PG server prefix if different from application
+  --pg-name      alternative PG server prefix
+  --secret-name  alternative secret name
 ```
 
 ###### Examples
