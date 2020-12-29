@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 const yargs = require("yargs");
+const YAML = require("yaml");
 const { randomBytes } = require("crypto");
+const {
+  createSecret,
+} = require("@socialgouv/kosko-charts/components/pg-secret");
+const { cryptFromSecrets } = require("@socialgouv/sre-seal");
+const {
+  getPgServerHostname,
+} = require("@socialgouv/kosko-charts/utils/getPgServerHostname");
 
 const { createDb } = require("../src/createDb");
 const { dropDb } = require("../src/dropDb");
@@ -80,12 +88,34 @@ const run = async () => {
       user: argv.user,
       password,
     });
+    const dbHost = getPgServerHostname(
+      argv.application,
+      argv.cluster === "prod2" ? "prod" : "dev"
+    );
     console.log(
       `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
     );
-    console.log(`Database : ${argv.database}`);
-    console.log(`User : ${argv.user}`);
-    console.log(`Password : ${password}`);
+    console.log("---");
+    console.log(`# Host : ${dbHost}`);
+    console.log(`# Database : ${argv.database}`);
+    console.log(`# User : ${argv.user}`);
+    console.log(`# Password : ${password}`);
+    console.log("---");
+    const secret = createSecret({
+      database: argv.database,
+      user: argv.user,
+      password,
+      host: dbHost,
+      sslmode: "require",
+    });
+    const sealedSecret = await cryptFromSecrets({
+      context: argv.cluster,
+      namespace: argv.application,
+      name: "azure-pg-user",
+      secrets: secret.stringData,
+    });
+    const sealedYaml = YAML.stringify(sealedSecret, null, 2);
+    console.log(sealedYaml);
   } else if (argv._[0] === "drop") {
     console.log(`Drop DB for ${argv.application} in cluster ${argv.cluster}`);
     await dropDb({
