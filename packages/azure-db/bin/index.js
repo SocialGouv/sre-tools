@@ -41,6 +41,7 @@ const args = yargs
       .default("database", () => `db_${randomInt}`)
       .describe("user", "new user name")
       .default("user", () => `user_${randomInt}`)
+      .describe("pg-name", "PG server prefix if different from application")
       .demandOption(["cluster", "application"]);
   })
   .command("drop", "destroy a database and a user", (yargs) => {
@@ -89,7 +90,7 @@ const run = async () => {
       password,
     });
     const dbHost = getPgServerHostname(
-      argv.application,
+      argv.pgName || argv.application,
       argv.cluster === "prod2" ? "prod" : "dev"
     );
     console.log(
