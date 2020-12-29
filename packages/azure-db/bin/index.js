@@ -98,11 +98,6 @@ const run = async () => {
       `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
     );
     console.log("---");
-    console.log(`# Host : ${dbHost}`);
-    console.log(`# Database : ${argv.database}`);
-    console.log(`# User : ${argv.user}`);
-    console.log(`# Password : ${password}`);
-    console.log("---");
     const secretName = argv.secretName || "azure-pg-user";
     const secret = createSecret({
       database: argv.database,
@@ -111,6 +106,9 @@ const run = async () => {
       host: dbHost,
       sslmode: "require",
     });
+    Object.entries(secret.stringData).forEach(([key, value]) => {
+      console.log(`${key}=${value}`);
+    });
     const sealedSecret = await cryptFromSecrets({
       context: argv.cluster,
       namespace: argv.application,
@@ -118,6 +116,7 @@ const run = async () => {
       secrets: secret.stringData,
     });
     const sealedYaml = YAML.stringify(sealedSecret, null, 2);
+    console.log("---");
     console.log(sealedYaml);
   } else if (argv._[0] === "drop") {
     console.log(`Drop DB for ${argv.application} in cluster ${argv.cluster}`);
