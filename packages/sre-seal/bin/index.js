@@ -9,7 +9,7 @@ const cryptFromSecrets = require("../src/cryptFromSecrets");
 
 const readFile = (path) => fs.readFileSync(path).toString();
 
-const isValidInput = (input) => input.match(/^([\w]+)=(.*)/gm);
+const isValidInput = (input) => input.match(/^([\.\w]+)=(.*)/gm);
 
 // convert text input as AAA=XXX to a js object {AAA: XXX}
 const parseInputValues = (input) =>
