@@ -1,6 +1,14 @@
 #!/usr/bin/env node
 const yargs = require("yargs");
+const YAML = require("yaml");
 const { randomBytes } = require("crypto");
+const {
+  createSecret,
+} = require("@socialgouv/kosko-charts/components/pg-secret");
+const { cryptFromSecrets } = require("@socialgouv/sre-seal");
+const {
+  getPgServerHostname,
+} = require("@socialgouv/kosko-charts/utils/getPgServerHostname");
 
 const { createDb } = require("../src/createDb");
 const { dropDb } = require("../src/dropDb");
@@ -33,6 +41,8 @@ const args = yargs
       .default("database", () => `db_${randomInt}`)
       .describe("user", "new user name")
       .default("user", () => `user_${randomInt}`)
+      .describe("pg-name", "alternative PG server prefix")
+      .describe("secret-name", "alternative secret name")
       .demandOption(["cluster", "application"]);
   })
   .command("drop", "destroy a database and a user", (yargs) => {
@@ -80,12 +90,34 @@ const run = async () => {
       user: argv.user,
       password,
     });
+    const dbHost = getPgServerHostname(
+      argv.pgName || argv.application,
+      argv.cluster === "prod2" ? "prod" : "dev"
+    );
     console.log(
       `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
     );
-    console.log(`Database : ${argv.database}`);
-    console.log(`User : ${argv.user}`);
-    console.log(`Password : ${password}`);
+    console.log("---");
+    const secretName = argv.secretName || "azure-pg-user";
+    const secret = createSecret({
+      database: argv.database,
+      user: argv.user,
+      password,
+      host: dbHost,
+      sslmode: "require",
+    });
+    Object.entries(secret.stringData).forEach(([key, value]) => {
+      console.log(`${key}=${value}`);
+    });
+    const sealedSecret = await cryptFromSecrets({
+      context: argv.cluster,
+      namespace: argv.application,
+      name: secretName,
+      secrets: secret.stringData,
+    });
+    const sealedYaml = YAML.stringify(sealedSecret, null, 2);
+    console.log("---");
+    console.log(sealedYaml);
   } else if (argv._[0] === "drop") {
     console.log(`Drop DB for ${argv.application} in cluster ${argv.cluster}`);
     await dropDb({
