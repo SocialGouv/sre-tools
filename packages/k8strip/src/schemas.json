@@ -1,0 +1,146 @@
+{
+  "$id": "schemas",
+  "definitions": {
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "annotations": {
+          "$ref": "schemas#/definitions/annotations"
+        },
+        "labels": {
+          "$ref": "schemas#/definitions/labels"
+        },
+        "name": {
+          "type": "string"
+        },
+        "namespace": {
+          "type": "string"
+        }
+      }
+    },
+    "annotations": {
+      "type": "object",
+      "properties": {
+        "sealedsecrets.bitnami.com/cluster-wide": true,
+        "app.gitlab.com/app": true,
+        "app.gitlab.com/env": true,
+        "app.gitlab.com/env.name": true
+      }
+    },
+    "labels": {
+      "type": "object",
+      "properties": {
+        "application": true,
+        "cert": true,
+        "owner": true,
+        "team": true
+      }
+    },
+    "envVar": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "value": true
+      }
+    },
+    "envFrom": {
+      "type": "object",
+      "properties": {
+        "secretRef": true,
+        "configMapRef": true
+      }
+    },
+    "container": {
+      "type": "object",
+      "properties": {
+        "image": {
+          "type": "string"
+        },
+        "imagePullPolicy": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "env": {
+          "type": "array",
+          "items": {
+            "$ref": "schemas#/definitions/envVar"
+          }
+        },
+        "envFrom": {
+          "type": "array",
+          "items": {
+            "$ref": "schemas#/definitions/envFrom"
+          }
+        }
+      }
+    },
+    "manifest": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "type": "string"
+        },
+        "metadata": {
+          "$ref": "schemas#/definitions/metadata"
+        },
+        "data": true,
+        "spec": {
+          "type": "object",
+          "properties": {
+            "encryptedData": true,
+            "replicas": {
+              "type": "number"
+            },
+            "selector": {
+              "type": "object"
+            },
+            "strategy": {
+              "type": "object"
+            },
+            "template": {
+              "type": "object",
+              "properties": {
+                "metadata": {
+                  "$ref": "schemas#/definitions/metadata"
+                },
+                "spec": {
+                  "type": "object",
+                  "properties": {
+                    "containers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "schemas#/definitions/container"
+                      }
+                    },
+                    "initContainers": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "schemas#/definitions/container"
+                      }
+                    },
+                    "imagePullSecrets": true,
+                    "restartPolicy": true
+                  }
+                }
+              }
+            },
+            "annotations": {
+              "$ref": "schemas#/definitions/annotations"
+            },
+            "name": {
+              "type": "string"
+            },
+            "namespace": {
+              "type": "string"
+            }
+          }
+        },
+        "version": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

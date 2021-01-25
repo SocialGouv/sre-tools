@@ -1,0 +1,710 @@
+{
+  "apiVersion": "v1",
+  "items": [
+    {
+      "apiVersion": "extensions/v1beta1",
+      "kind": "Ingress",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "field.cattle.io/publicEndpoints": "[{\"addresses\":[\"1.2.4.3\"],\"port\":443,\"protocol\":\"HTTPS\",\"serviceName\":\"product-245-preprod-dev2:app\",\"ingressName\":\"product-245-preprod-dev2:app\",\"hostname\":\"preprod-product.dev2.company.com\",\"path\":\"/\",\"allNodes\":false}]",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"extensions/v1beta1\",\"kind\":\"Ingress\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\",\"kubernetes.io/ingress.class\":\"nginx\"},\"labels\":{\"app\":\"app\",\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app\",\"namespace\":\"product-245-preprod-dev2\"},\"spec\":{\"rules\":[{\"host\":\"preprod-product.dev2.company.com\",\"http\":{\"paths\":[{\"backend\":{\"serviceName\":\"app\",\"servicePort\":80},\"path\":\"/\"}]}}],\"tls\":[{\"hosts\":[\"preprod-product.dev2.company.com\"],\"secretName\":\"wildcard-crt\"}]}}\n",
+          "kubernetes.io/ingress.class": "nginx"
+        },
+        "creationTimestamp": "2020-10-27T12:22:22Z",
+        "generation": 1,
+        "labels": {
+          "app": "app",
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "app",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100990808",
+        "selfLink": "/apis/extensions/v1beta1/namespaces/product-245-preprod-dev2/ingresses/app",
+        "uid": "f88506eb-5dca-4258-9082-7de36c2c82f9"
+      },
+      "spec": {
+        "rules": [
+          {
+            "host": "preprod-product.dev2.company.com",
+            "http": {
+              "paths": [
+                {
+                  "backend": {
+                    "serviceName": "app",
+                    "servicePort": 80
+                  },
+                  "path": "/",
+                  "pathType": "ImplementationSpecific"
+                }
+              ]
+            }
+          }
+        ],
+        "tls": [
+          {
+            "hosts": ["preprod-product.dev2.company.com"],
+            "secretName": "wildcard-crt"
+          }
+        ]
+      },
+      "status": {
+        "loadBalancer": {
+          "ingress": [
+            {
+              "ip": "1.2.3.4"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "kind": "Service",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"kind\":\"Service\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\"},\"labels\":{\"app\":\"app\",\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app\",\"namespace\":\"product-245-preprod-dev2\"},\"spec\":{\"ports\":[{\"name\":\"http\",\"port\":80,\"targetPort\":3000}],\"selector\":{\"app\":\"app\"},\"type\":\"ClusterIP\"}}\n"
+        },
+        "creationTimestamp": "2020-10-27T12:22:22Z",
+        "labels": {
+          "app": "app",
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "app",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100990798",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/services/app",
+        "uid": "215124c1-e345-436f-8818-96e8f02dd505"
+      },
+      "spec": {
+        "clusterIP": "10.240.199.178",
+        "ports": [
+          {
+            "name": "http",
+            "port": 80,
+            "protocol": "TCP",
+            "targetPort": 3000
+          }
+        ],
+        "selector": {
+          "app": "app"
+        },
+        "sessionAffinity": "None",
+        "type": "ClusterIP"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "apiVersion": "apps/v1",
+      "kind": "Deployment",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "deployment.kubernetes.io/revision": "7",
+          "field.cattle.io/publicEndpoints": "[{\"addresses\":[\"1.2.3.4\"],\"port\":443,\"protocol\":\"HTTPS\",\"serviceName\":\"product-245-preprod-dev2:app\",\"ingressName\":\"product-245-preprod-dev2:app\",\"hostname\":\"preprod-product.dev2.company.com\",\"path\":\"/\",\"allNodes\":false}]",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"apps/v1\",\"kind\":\"Deployment\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\"},\"labels\":{\"app\":\"app\",\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app\",\"namespace\":\"product-245-preprod-dev2\"},\"spec\":{\"replicas\":1,\"selector\":{\"matchLabels\":{\"app\":\"app\"}},\"template\":{\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\"},\"labels\":{\"app\":\"app\",\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"}},\"spec\":{\"containers\":[{\"envFrom\":[{\"secretRef\":{\"name\":\"azure-pg-user\"}},{\"secretRef\":{\"name\":\"app-sealed-secret\"}},{\"configMapRef\":{\"name\":\"app-configmap\"}}],\"image\":\"registry.gitlab.com/company/product/app:2.5.0\",\"livenessProbe\":{\"failureThreshold\":6,\"httpGet\":{\"path\":\"/healthz\",\"port\":\"http\"},\"initialDelaySeconds\":30,\"periodSeconds\":5,\"timeoutSeconds\":5},\"name\":\"app\",\"ports\":[{\"containerPort\":3000,\"name\":\"http\"}],\"readinessProbe\":{\"failureThreshold\":15,\"httpGet\":{\"path\":\"/healthz\",\"port\":\"http\"},\"initialDelaySeconds\":0,\"periodSeconds\":5,\"successThreshold\":1,\"timeoutSeconds\":1},\"resources\":{\"limits\":{\"cpu\":\"200m\",\"memory\":\"256Mi\"},\"requests\":{\"cpu\":\"50m\",\"memory\":\"128Mi\"}},\"startupProbe\":{\"failureThreshold\":12,\"httpGet\":{\"path\":\"/healthz\",\"port\":\"http\"},\"periodSeconds\":5}}],\"initContainers\":[{\"env\":[{\"name\":\"WAIT_FOR_RETRIES\",\"value\":\"24\"}],\"envFrom\":[{\"secretRef\":{\"name\":\"azure-pg-user\"}}],\"image\":\"registry.gitlab.com/company/docker/wait-for-postgres:2.0.0\",\"imagePullPolicy\":\"Always\",\"name\":\"wait-for-postgres\",\"resources\":{\"limits\":{\"cpu\":\"20m\",\"memory\":\"32Mi\"},\"requests\":{\"cpu\":\"5m\",\"memory\":\"16Mi\"}}}]}}}}\n"
+        },
+        "creationTimestamp": "2020-10-27T12:22:22Z",
+        "generation": 8,
+        "labels": {
+          "app": "app",
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "app",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100994590",
+        "selfLink": "/apis/apps/v1/namespaces/product-245-preprod-dev2/deployments/app",
+        "uid": "784dedb4-bb18-464d-b188-48b15915b645"
+      },
+      "spec": {
+        "progressDeadlineSeconds": 600,
+        "replicas": 1,
+        "revisionHistoryLimit": 10,
+        "selector": {
+          "matchLabels": {
+            "app": "app"
+          }
+        },
+        "strategy": {
+          "rollingUpdate": {
+            "maxSurge": "25%",
+            "maxUnavailable": "25%"
+          },
+          "type": "RollingUpdate"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "app.gitlab.com/app": "company-product",
+              "app.gitlab.com/env": "preprod-dev2",
+              "app.gitlab.com/env.name": "preprod-dev2"
+            },
+            "creationTimestamp": null,
+            "labels": {
+              "app": "app",
+              "application": "v2-5-0-product",
+              "cert": "wildcard",
+              "owner": "product",
+              "team": "product"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "envFrom": [
+                  {
+                    "secretRef": {
+                      "name": "azure-pg-user"
+                    }
+                  },
+                  {
+                    "secretRef": {
+                      "name": "app-sealed-secret"
+                    }
+                  },
+                  {
+                    "configMapRef": {
+                      "name": "app-configmap"
+                    }
+                  }
+                ],
+                "image": "registry.gitlab.com/company/product/app:2.5.0",
+                "imagePullPolicy": "IfNotPresent",
+                "livenessProbe": {
+                  "failureThreshold": 6,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 30,
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 5
+                },
+                "name": "app",
+                "ports": [
+                  {
+                    "containerPort": 3000,
+                    "name": "http",
+                    "protocol": "TCP"
+                  }
+                ],
+                "readinessProbe": {
+                  "failureThreshold": 15,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "256Mi"
+                  },
+                  "requests": {
+                    "cpu": "50m",
+                    "memory": "128Mi"
+                  }
+                },
+                "startupProbe": {
+                  "failureThreshold": 12,
+                  "httpGet": {
+                    "path": "/healthz",
+                    "port": "http",
+                    "scheme": "HTTP"
+                  },
+                  "periodSeconds": 5,
+                  "successThreshold": 1,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "dnsPolicy": "ClusterFirst",
+            "initContainers": [
+              {
+                "env": [
+                  {
+                    "name": "WAIT_FOR_RETRIES",
+                    "value": "24"
+                  }
+                ],
+                "envFrom": [
+                  {
+                    "secretRef": {
+                      "name": "azure-pg-user"
+                    }
+                  }
+                ],
+                "image": "registry.gitlab.com/company/docker/wait-for-postgres:2.0.0",
+                "imagePullPolicy": "Always",
+                "name": "wait-for-postgres",
+                "resources": {
+                  "limits": {
+                    "cpu": "20m",
+                    "memory": "32Mi"
+                  },
+                  "requests": {
+                    "cpu": "5m",
+                    "memory": "16Mi"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "terminationMessagePolicy": "File"
+              }
+            ],
+            "restartPolicy": "Always",
+            "schedulerName": "default-scheduler",
+            "securityContext": {},
+            "terminationGracePeriodSeconds": 30
+          }
+        }
+      },
+      "status": {
+        "availableReplicas": 1,
+        "conditions": [
+          {
+            "lastTransitionTime": "2020-12-14T19:27:40Z",
+            "lastUpdateTime": "2020-12-14T19:27:40Z",
+            "message": "Deployment has minimum availability.",
+            "reason": "MinimumReplicasAvailable",
+            "status": "True",
+            "type": "Available"
+          },
+          {
+            "lastTransitionTime": "2021-01-14T09:06:25Z",
+            "lastUpdateTime": "2021-01-14T09:06:25Z",
+            "message": "ReplicaSet \"app-d5f7b7894\" has timed out progressing.",
+            "reason": "ProgressDeadlineExceeded",
+            "status": "False",
+            "type": "Progressing"
+          }
+        ],
+        "observedGeneration": 8,
+        "readyReplicas": 1,
+        "replicas": 2,
+        "unavailableReplicas": 1,
+        "updatedReplicas": 1
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "data": {
+        "MAIL_FROM": "xxx",
+        "MAIL_HOST": "xxx",
+        "MAIL_PASSWORD": "xxx",
+        "MAIL_PORT": "xxx",
+        "MAIL_USERNAME": "xxx"
+      },
+      "kind": "Secret",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "sealedsecrets.bitnami.com/cluster-wide": "true"
+        },
+        "creationTimestamp": "2020-11-30T13:30:52Z",
+        "labels": {
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "managedFields": [
+          {
+            "apiVersion": "v1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:data": {
+                ".": {},
+                "f:MAIL_FROM": {},
+                "f:MAIL_HOST": {},
+                "f:MAIL_PASSWORD": {},
+                "f:MAIL_PORT": {},
+                "f:MAIL_USERNAME": {}
+              },
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:app.gitlab.com/app": {},
+                  "f:app.gitlab.com/env": {},
+                  "f:app.gitlab.com/env.name": {},
+                  "f:sealedsecrets.bitnami.com/cluster-wide": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:application": {},
+                  "f:cert": {},
+                  "f:owner": {},
+                  "f:team": {}
+                },
+                "f:ownerReferences": {
+                  ".": {},
+                  "k:{\"uid\":\"c33cfc20-cb06-423f-a940-ffe28cc1f8a5\"}": {
+                    ".": {},
+                    "f:apiVersion": {},
+                    "f:controller": {},
+                    "f:kind": {},
+                    "f:name": {},
+                    "f:uid": {}
+                  }
+                }
+              },
+              "f:type": {}
+            },
+            "manager": "controller",
+            "operation": "Update",
+            "time": "2021-01-14T08:56:25Z"
+          }
+        ],
+        "name": "app-sealed-secret",
+        "namespace": "product-245-preprod-dev2",
+        "ownerReferences": [
+          {
+            "apiVersion": "bitnami.com/v1alpha1",
+            "controller": true,
+            "kind": "SealedSecret",
+            "name": "app-sealed-secret",
+            "uid": "c33cfc20-cb06-423f-a940-ffe28cc1f8a5"
+          }
+        ],
+        "resourceVersion": "100990807",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/secrets/app-sealed-secret",
+        "uid": "6acdf9e9-faef-4fcd-be5c-7074aaa47b35"
+      },
+      "type": "Opaque"
+    },
+    {
+      "apiVersion": "v1",
+      "data": {
+        "DATABASE_URL": "xxx",
+        "PGDATABASE": "xxx",
+        "PGHOST": "xxx",
+        "PGPASSWORD": "xxx",
+        "PGSSLMODE": "xxx",
+        "PGUSER": "xxx"
+      },
+      "kind": "Secret",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "sealedsecrets.bitnami.com/cluster-wide": "true"
+        },
+        "creationTimestamp": "2020-10-27T12:22:25Z",
+        "labels": {
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "azure-pg-user",
+        "namespace": "product-245-preprod-dev2",
+        "ownerReferences": [
+          {
+            "apiVersion": "bitnami.com/v1alpha1",
+            "controller": true,
+            "kind": "SealedSecret",
+            "name": "azure-pg-user",
+            "uid": "9033fbad-deaf-4aaa-9671-601b67d87489"
+          }
+        ],
+        "resourceVersion": "100990833",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/secrets/azure-pg-user",
+        "uid": "09c3553b-c7e6-4e37-8537-bce95af303ab"
+      },
+      "type": "Opaque"
+    },
+    {
+      "apiVersion": "v1",
+      "data": {
+        "ca.crt": "xxx",
+        "namespace": "xxx",
+        "token": "xxx"
+      },
+      "kind": "Secret",
+      "metadata": {
+        "annotations": {
+          "field.cattle.io/projectId": "c-bd7z2:p-ngv88",
+          "kubernetes.io/service-account.name": "default",
+          "kubernetes.io/service-account.uid": "8c460966-67a3-4eae-9a36-f746d4cabe98"
+        },
+        "creationTimestamp": "2020-10-27T12:22:22Z",
+        "name": "default-token-ccqwn",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "68457456",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/secrets/default-token-ccqwn",
+        "uid": "fb7c52e2-4003-411d-90d6-24d6852344ba"
+      },
+      "type": "kubernetes.io/service-account-token"
+    },
+    {
+      "apiVersion": "v1",
+      "data": {
+        "ca.crt": "",
+        "tls.crt": "xxx",
+        "tls.key": "xxx"
+      },
+      "kind": "Secret",
+      "metadata": {
+        "annotations": {
+          "certmanager.k8s.io/alt-names": "*.dev.prod2.company.com,*.dev2.company.com",
+          "certmanager.k8s.io/certificate-name": "wildcard-crt",
+          "certmanager.k8s.io/common-name": "*.dev2.company.com",
+          "certmanager.k8s.io/ip-sans": "",
+          "certmanager.k8s.io/issuer-kind": "ClusterIssuer",
+          "certmanager.k8s.io/issuer-name": "letsencrypt-wildcard",
+          "kubed.appscode.com/origin": "{\"namespace\":\"cert-manager\",\"name\":\"wildcard-crt\",\"uid\":\"f9781e01-668c-4567-a519-78c02f33e04a\",\"resourceVersion\":\"86020610\"}"
+        },
+        "creationTimestamp": "2020-10-27T12:22:23Z",
+        "labels": {
+          "certmanager.k8s.io/certificate-name": "wildcard-crt",
+          "kubed.appscode.com/origin.cluster": "dev2",
+          "kubed.appscode.com/origin.name": "wildcard-crt",
+          "kubed.appscode.com/origin.namespace": "cert-manager"
+        },
+        "name": "wildcard-crt",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "86020677",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/secrets/wildcard-crt",
+        "uid": "3cb00c66-aad8-452d-8221-923031b21afe"
+      },
+      "type": "kubernetes.io/tls"
+    },
+    {
+      "apiVersion": "bitnami.com/v1alpha1",
+      "kind": "SealedSecret",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"bitnami.com/v1alpha1\",\"kind\":\"SealedSecret\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\",\"sealedsecrets.bitnami.com/cluster-wide\":\"true\"},\"labels\":{\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app-sealed-secret\",\"namespace\":\"product-245-preprod-dev2\"},\"spec\":{\"encryptedData\":{\"MAIL_FROM\":\"xxx\",\"MAIL_PASSWORD\":\"xxx\",\"MAIL_USERNAME\":\"xxx\"},\"template\":{\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\",\"sealedsecrets.bitnami.com/cluster-wide\":\"true\"},\"labels\":{\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app-sealed-secret\"},\"type\":\"Opaque\"}}}\n",
+          "sealedsecrets.bitnami.com/cluster-wide": "true"
+        },
+        "creationTimestamp": "2020-11-30T13:30:51Z",
+        "generation": 5,
+        "labels": {
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "managedFields": [
+          {
+            "apiVersion": "bitnami.com/v1alpha1",
+            "fieldsType": "FieldsV1",
+            "fieldsV1": {
+              "f:metadata": {
+                "f:annotations": {
+                  ".": {},
+                  "f:app.gitlab.com/app": {},
+                  "f:app.gitlab.com/env": {},
+                  "f:app.gitlab.com/env.name": {},
+                  "f:kubectl.kubernetes.io/last-applied-configuration": {},
+                  "f:sealedsecrets.bitnami.com/cluster-wide": {}
+                },
+                "f:labels": {
+                  ".": {},
+                  "f:application": {},
+                  "f:cert": {},
+                  "f:owner": {},
+                  "f:team": {}
+                }
+              },
+              "f:spec": {
+                ".": {},
+                "f:encryptedData": {
+                  ".": {},
+                  "f:MAIL_FROM": {},
+                  "f:MAIL_HOST": {},
+                  "f:MAIL_PASSWORD": {},
+                  "f:MAIL_PORT": {},
+                  "f:MAIL_USERNAME": {}
+                },
+                "f:template": {
+                  ".": {},
+                  "f:metadata": {
+                    ".": {},
+                    "f:annotations": {
+                      ".": {},
+                      "f:app.gitlab.com/app": {},
+                      "f:app.gitlab.com/env": {},
+                      "f:app.gitlab.com/env.name": {},
+                      "f:sealedsecrets.bitnami.com/cluster-wide": {}
+                    },
+                    "f:labels": {
+                      ".": {},
+                      "f:application": {},
+                      "f:cert": {},
+                      "f:owner": {},
+                      "f:team": {}
+                    },
+                    "f:name": {}
+                  },
+                  "f:type": {}
+                }
+              }
+            },
+            "manager": "kubectl-client-side-apply",
+            "operation": "Update",
+            "time": "2021-01-14T08:56:24Z"
+          }
+        ],
+        "name": "app-sealed-secret",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100990781",
+        "selfLink": "/apis/bitnami.com/v1alpha1/namespaces/product-245-preprod-dev2/sealedsecrets/app-sealed-secret",
+        "uid": "c33cfc20-cb06-423f-a940-ffe28cc1f8a5"
+      },
+      "spec": {
+        "encryptedData": {
+          "MAIL_FROM": "xxx",
+          "MAIL_HOST": "xxx",
+          "MAIL_PASSWORD": "xxx",
+          "MAIL_PORT": "xxx",
+          "MAIL_USERNAME": "xxx"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "app.gitlab.com/app": "company-product",
+              "app.gitlab.com/env": "preprod-dev2",
+              "app.gitlab.com/env.name": "preprod-dev2",
+              "sealedsecrets.bitnami.com/cluster-wide": "true"
+            },
+            "labels": {
+              "application": "v2-5-0-product",
+              "cert": "wildcard",
+              "owner": "product",
+              "team": "product"
+            },
+            "name": "app-sealed-secret"
+          },
+          "type": "Opaque"
+        }
+      }
+    },
+    {
+      "apiVersion": "bitnami.com/v1alpha1",
+      "kind": "SealedSecret",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"bitnami.com/v1alpha1\",\"kind\":\"SealedSecret\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\",\"sealedsecrets.bitnami.com/cluster-wide\":\"true\"},\"labels\":{\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"azure-pg-user\",\"namespace\":\"product-245-preprod-dev2\"},\"spec\":{\"encryptedData\":{\"DATABASE_URL\":\"xxx\",\"PGDATABASE\":\"xxx\",\"PGHOST\":\"xxx\",\"PGPASSWORD\":\"xxx\",\"PGSSLMODE\":\"xxx\",\"PGUSER\":\"xxx\"},\"template\":{\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\",\"sealedsecrets.bitnami.com/cluster-wide\":\"true\"},\"labels\":{\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"azure-pg-user\"},\"type\":\"Opaque\"}}}\n",
+          "sealedsecrets.bitnami.com/cluster-wide": "true"
+        },
+        "creationTimestamp": "2020-10-27T12:22:23Z",
+        "generation": 7,
+        "labels": {
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "azure-pg-user",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100990811",
+        "selfLink": "/apis/bitnami.com/v1alpha1/namespaces/product-245-preprod-dev2/sealedsecrets/azure-pg-user",
+        "uid": "9033fbad-deaf-4aaa-9671-601b67d87489"
+      },
+      "spec": {
+        "encryptedData": {
+          "DATABASE_URL": "xxx",
+          "PGDATABASE": "xxx",
+          "PGHOST": "xxx",
+          "PGPASSWORD": "xxx",
+          "PGSSLMODE": "xxx",
+          "PGUSER": "xxx"
+        },
+        "template": {
+          "metadata": {
+            "annotations": {
+              "app.gitlab.com/app": "company-product",
+              "app.gitlab.com/env": "preprod-dev2",
+              "app.gitlab.com/env.name": "preprod-dev2",
+              "sealedsecrets.bitnami.com/cluster-wide": "true"
+            },
+            "labels": {
+              "application": "v2-5-0-product",
+              "cert": "wildcard",
+              "owner": "product",
+              "team": "product"
+            },
+            "name": "azure-pg-user"
+          },
+          "type": "Opaque"
+        }
+      }
+    },
+    {
+      "apiVersion": "v1",
+      "data": {
+        "MAIL_FROM": "product \u003cnoreply@company.com\u003e",
+        "MAIL_TO": "product-alerts@test.com",
+        "MAIL_WEBHOOK_TOKEN": "so-secret",
+        "NEXT_PUBLIC_MATOMO_SITE_ID": "42",
+        "NEXT_PUBLIC_MATOMO_URL": "https://matomo.company.com/",
+        "NEXT_PUBLIC_SENTRY_DSN": "https://abcddef@sentry.company.com/40",
+        "NEXT_PUBLIC_SENTRY_TOKEN": "toto",
+        "NODE_ENV": "production",
+        "PORT": "3000",
+        "POSTGRES_SSL": "true"
+      },
+      "kind": "ConfigMap",
+      "metadata": {
+        "annotations": {
+          "app.gitlab.com/app": "company-product",
+          "app.gitlab.com/env": "preprod-dev2",
+          "app.gitlab.com/env.name": "preprod-dev2",
+          "kubectl.kubernetes.io/last-applied-configuration": "{\"apiVersion\":\"v1\",\"data\":{\"MAIL_FROM\":\"product \\u003cnoreply@company.com\\u003e\",\"MAIL_TO\":\"product-alerts@test.com\",\"MAIL_WEBHOOK_TOKEN\":\"so-secret\",\"NEXT_PUBLIC_MATOMO_SITE_ID\":\"42\",\"NEXT_PUBLIC_MATOMO_URL\":\"https://matomo.company.com/\",\"NEXT_PUBLIC_SENTRY_DSN\":\"https://1234@sentry.company.com/40\",\"NEXT_PUBLIC_SENTRY_TOKEN\":\"toto\",\"NODE_ENV\":\"production\",\"PORT\":\"3000\",\"POSTGRES_SSL\":\"true\"},\"kind\":\"ConfigMap\",\"metadata\":{\"annotations\":{\"app.gitlab.com/app\":\"company-product\",\"app.gitlab.com/env\":\"preprod-dev2\",\"app.gitlab.com/env.name\":\"preprod-dev2\"},\"labels\":{\"application\":\"v2-5-0-product\",\"cert\":\"wildcard\",\"owner\":\"product\",\"team\":\"product\"},\"name\":\"app-configmap\",\"namespace\":\"product-245-preprod-dev2\"}}\n"
+        },
+        "creationTimestamp": "2020-10-27T12:22:22Z",
+        "labels": {
+          "application": "v2-5-0-product",
+          "cert": "wildcard",
+          "owner": "product",
+          "team": "product"
+        },
+        "name": "app-configmap",
+        "namespace": "product-245-preprod-dev2",
+        "resourceVersion": "100990785",
+        "selfLink": "/api/v1/namespaces/product-245-preprod-dev2/configmaps/app-configmap",
+        "uid": "63d9d3d6-37d2-48b8-bb67-eaded78e200c"
+      }
+    }
+  ],
+  "kind": "List",
+  "metadata": {
+    "resourceVersion": "",
+    "selfLink": ""
+  }
+}
