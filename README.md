@@ -7,3 +7,4 @@ To use these tools, you'll need `kubectl` configured with existing `dev2` and `p
 | [sre-seal](./packages/sre-seal)       | Seal single k8s secrets                 |
 | [sre-secrets](./packages/sre-secrets) | Create all sealed secrets files at once |
 | [azure-db](./packages/azure-db)       | Create/Drop databases and users         |
+| [k8strip](./packages/k8strip)         | Strip sensitive data from k8s manifests |

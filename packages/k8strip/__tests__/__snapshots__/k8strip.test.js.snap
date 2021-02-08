@@ -1,0 +1,359 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should sanitize sample.json 1`] = `
+Array [
+  Object {
+    "kind": "Ingress",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app",
+      "namespace": "product-245-preprod-dev2",
+    },
+    "spec": Object {},
+  },
+  Object {
+    "kind": "Service",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app",
+      "namespace": "product-245-preprod-dev2",
+    },
+    "spec": Object {
+      "selector": Object {
+        "app": "app",
+      },
+    },
+  },
+  Object {
+    "kind": "Deployment",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app",
+      "namespace": "product-245-preprod-dev2",
+    },
+    "spec": Object {
+      "replicas": 1,
+      "selector": Object {
+        "matchLabels": Object {
+          "app": "app",
+        },
+      },
+      "strategy": Object {
+        "rollingUpdate": Object {
+          "maxSurge": "25%",
+          "maxUnavailable": "25%",
+        },
+        "type": "RollingUpdate",
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "app.gitlab.com/app": "company-product",
+            "app.gitlab.com/env": "preprod-dev2",
+            "app.gitlab.com/env.name": "preprod-dev2",
+          },
+          "labels": Object {
+            "application": "v2-5-0-product",
+            "cert": "wildcard",
+            "owner": "product",
+            "team": "product",
+          },
+        },
+        "spec": Object {
+          "containers": Array [
+            Object {
+              "envFrom": Array [
+                Object {
+                  "secretRef": Object {
+                    "name": "azure-pg-user",
+                  },
+                },
+                Object {
+                  "secretRef": Object {
+                    "name": "app-sealed-secret",
+                  },
+                },
+                Object {
+                  "configMapRef": Object {
+                    "name": "app-configmap",
+                  },
+                },
+              ],
+              "image": "registry.gitlab.com/company/product/app:2.5.0",
+              "imagePullPolicy": "IfNotPresent",
+              "name": "app",
+            },
+          ],
+          "initContainers": Array [
+            Object {
+              "env": Array [
+                Object {
+                  "name": "WAIT_FOR_RETRIES",
+                  "value": "24",
+                },
+              ],
+              "envFrom": Array [
+                Object {
+                  "secretRef": Object {
+                    "name": "azure-pg-user",
+                  },
+                },
+              ],
+              "image": "registry.gitlab.com/company/docker/wait-for-postgres:2.0.0",
+              "imagePullPolicy": "Always",
+              "name": "wait-for-postgres",
+            },
+          ],
+          "restartPolicy": "Always",
+        },
+      },
+    },
+  },
+  Object {
+    "data": Object {
+      "MAIL_FROM": "some-secret-value",
+      "MAIL_HOST": "some-secret-value",
+      "MAIL_PASSWORD": "some-secret-value",
+      "MAIL_PORT": "some-secret-value",
+      "MAIL_USERNAME": "some-secret-value",
+    },
+    "kind": "Secret",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+        "sealedsecrets.bitnami.com/cluster-wide": "true",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app-sealed-secret",
+      "namespace": "product-245-preprod-dev2",
+    },
+  },
+  Object {
+    "data": Object {
+      "DATABASE_URL": "some-secret-value",
+      "PGDATABASE": "some-secret-value",
+      "PGHOST": "some-secret-value",
+      "PGPASSWORD": "some-secret-value",
+      "PGSSLMODE": "some-secret-value",
+      "PGUSER": "some-secret-value",
+    },
+    "kind": "Secret",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+        "sealedsecrets.bitnami.com/cluster-wide": "true",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "azure-pg-user",
+      "namespace": "product-245-preprod-dev2",
+    },
+  },
+  Object {
+    "data": Object {
+      "ca.crt": "some-secret-value",
+      "namespace": "some-secret-value",
+      "token": "some-secret-value",
+    },
+    "kind": "Secret",
+    "metadata": Object {
+      "annotations": Object {},
+      "name": "default-token-ccqwn",
+      "namespace": "product-245-preprod-dev2",
+    },
+  },
+  Object {
+    "data": Object {
+      "ca.crt": "some-secret-value",
+      "tls.crt": "some-secret-value",
+      "tls.key": "some-secret-value",
+    },
+    "kind": "Secret",
+    "metadata": Object {
+      "annotations": Object {},
+      "labels": Object {},
+      "name": "wildcard-crt",
+      "namespace": "product-245-preprod-dev2",
+    },
+  },
+  Object {
+    "encryptedData": Object {
+      "MAIL_FROM": "some-sealed-secret-value",
+      "MAIL_HOST": "some-sealed-secret-value",
+      "MAIL_PASSWORD": "some-sealed-secret-value",
+      "MAIL_PORT": "some-sealed-secret-value",
+      "MAIL_USERNAME": "some-sealed-secret-value",
+    },
+    "kind": "SealedSecret",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+        "sealedsecrets.bitnami.com/cluster-wide": "true",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app-sealed-secret",
+      "namespace": "product-245-preprod-dev2",
+    },
+    "spec": Object {
+      "encryptedData": Object {
+        "MAIL_FROM": "some-sealed-secret-value",
+        "MAIL_HOST": "some-sealed-secret-value",
+        "MAIL_PASSWORD": "some-sealed-secret-value",
+        "MAIL_PORT": "some-sealed-secret-value",
+        "MAIL_USERNAME": "some-sealed-secret-value",
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "app.gitlab.com/app": "company-product",
+            "app.gitlab.com/env": "preprod-dev2",
+            "app.gitlab.com/env.name": "preprod-dev2",
+            "sealedsecrets.bitnami.com/cluster-wide": "true",
+          },
+          "labels": Object {
+            "application": "v2-5-0-product",
+            "cert": "wildcard",
+            "owner": "product",
+            "team": "product",
+          },
+          "name": "app-sealed-secret",
+        },
+      },
+    },
+  },
+  Object {
+    "encryptedData": Object {
+      "DATABASE_URL": "some-sealed-secret-value",
+      "PGDATABASE": "some-sealed-secret-value",
+      "PGHOST": "some-sealed-secret-value",
+      "PGPASSWORD": "some-sealed-secret-value",
+      "PGSSLMODE": "some-sealed-secret-value",
+      "PGUSER": "some-sealed-secret-value",
+    },
+    "kind": "SealedSecret",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+        "sealedsecrets.bitnami.com/cluster-wide": "true",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "azure-pg-user",
+      "namespace": "product-245-preprod-dev2",
+    },
+    "spec": Object {
+      "encryptedData": Object {
+        "DATABASE_URL": "some-sealed-secret-value",
+        "PGDATABASE": "some-sealed-secret-value",
+        "PGHOST": "some-sealed-secret-value",
+        "PGPASSWORD": "some-sealed-secret-value",
+        "PGSSLMODE": "some-sealed-secret-value",
+        "PGUSER": "some-sealed-secret-value",
+      },
+      "template": Object {
+        "metadata": Object {
+          "annotations": Object {
+            "app.gitlab.com/app": "company-product",
+            "app.gitlab.com/env": "preprod-dev2",
+            "app.gitlab.com/env.name": "preprod-dev2",
+            "sealedsecrets.bitnami.com/cluster-wide": "true",
+          },
+          "labels": Object {
+            "application": "v2-5-0-product",
+            "cert": "wildcard",
+            "owner": "product",
+            "team": "product",
+          },
+          "name": "azure-pg-user",
+        },
+      },
+    },
+  },
+  Object {
+    "data": Object {
+      "MAIL_FROM": "some-configmap-value",
+      "MAIL_TO": "some-configmap-value",
+      "MAIL_WEBHOOK_TOKEN": "some-configmap-value",
+      "NEXT_PUBLIC_MATOMO_SITE_ID": "some-configmap-value",
+      "NEXT_PUBLIC_MATOMO_URL": "some-configmap-value",
+      "NEXT_PUBLIC_SENTRY_DSN": "some-configmap-value",
+      "NEXT_PUBLIC_SENTRY_TOKEN": "some-configmap-value",
+      "NODE_ENV": "some-configmap-value",
+      "PORT": "some-configmap-value",
+      "POSTGRES_SSL": "some-configmap-value",
+    },
+    "kind": "ConfigMap",
+    "metadata": Object {
+      "annotations": Object {
+        "app.gitlab.com/app": "company-product",
+        "app.gitlab.com/env": "preprod-dev2",
+        "app.gitlab.com/env.name": "preprod-dev2",
+      },
+      "labels": Object {
+        "application": "v2-5-0-product",
+        "cert": "wildcard",
+        "owner": "product",
+        "team": "product",
+      },
+      "name": "app-configmap",
+      "namespace": "product-245-preprod-dev2",
+    },
+  },
+]
+`;
