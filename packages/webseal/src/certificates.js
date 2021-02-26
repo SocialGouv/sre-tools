@@ -1,3 +1,4 @@
+
 // https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem
 export const dev2 = `-----BEGIN CERTIFICATE-----
 MIIErjCCApagAwIBAgIRAOqAV9ZpCl1cwMunTHirqXwwDQYJKoZIhvcNAQELBQAw
