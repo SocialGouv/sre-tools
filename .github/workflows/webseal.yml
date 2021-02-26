@@ -32,5 +32,5 @@ jobs:
         uses: Cecilapp/GitHub-Pages-deploy@3.1.0
         with:
           email: ${{ secrets.SOCIALGROOVYBOT_EMAIL }}
-          build_dir: build
+          build_dir: packages/webseal/build
           branch: gh-pages
