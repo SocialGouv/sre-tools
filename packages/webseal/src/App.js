@@ -76,7 +76,7 @@ const Editor = () => {
           name: data.name,
           scope: data.scope,
           values: {
-            VALUE: value,
+            VALUE: data.value,
           },
         });
 
