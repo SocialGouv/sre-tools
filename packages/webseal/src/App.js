@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Card, Jumbotron, Container, Row, Col } from "react-bootstrap";
+import { getSealedSecret, encryptValue } from "@socialgouv/aes-gcm-rsa-oaep";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { Clipboard } from "react-feather";
+import yaml from "js-yaml";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Form } from "./Form";
 import { certificates } from "./certificates.js";
-import { makeSecret } from "./makeSecret";
-import { makeYaml } from "./makeYaml";
 
 const Intro = () => (
   <Jumbotron style={{ padding: "2rem 1rem" }}>
@@ -15,28 +17,70 @@ const Intro = () => (
   </Jumbotron>
 );
 
+const CodeArea = (props) => (
+  <textarea
+    {...props}
+    style={{
+      fontSize: "0.8rem",
+      fontFamily: "Courier",
+      border: "1px solid #ccc",
+      width: "100%",
+      padding: 5,
+      height: 400,
+      ...(props.style || {}),
+    }}
+  ></textarea>
+);
+
+const Copier = ({ text }) => {
+  const [copied, setCopied] = useState(false);
+  return (
+    <CopyToClipboard
+      text={text}
+      onCopy={() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+    >
+      <Clipboard
+        style={{
+          marginLeft: 10,
+          cursor: "pointer",
+          transition: "all 0.2s ease-in",
+        }}
+        color={copied ? "green" : "black"}
+        title="Copy"
+        size={16}
+      />
+    </CopyToClipboard>
+  );
+};
+
 const Editor = () => {
   const [encrypted, setEncrypted] = useState(null);
-  const [yaml, setYaml] = useState(null);
+  const [yamlResult, setYamlResult] = useState(null);
   const onSubmit = (data) => {
     console.log("onSubmit2", data);
+    setYamlResult("");
+    setEncrypted("");
     const pemKey = certificates[data.cluster];
-    makeSecret({
+    encryptValue({
       pemKey,
       ...data,
     })
-      .then((value) => {
+      .then(async (value) => {
         setEncrypted(value);
-        const newYaml = makeYaml({
+        const sealedSecret = await getSealedSecret({
+          pemKey,
           namespace: data.namespace,
           name: data.name,
           scope: data.scope,
-          encryptedData: {
+          values: {
             VALUE: value,
           },
         });
 
-        setYaml(newYaml);
+        setYamlResult(yaml.dump(sealedSecret));
       })
       .catch(console.log);
   };
@@ -54,24 +98,18 @@ const Editor = () => {
             <>
               <Card style={{ marginTop: 10 }}>
                 <Card.Body>
-                  <Card.Title>Encrypted</Card.Title>
-                  <div>{encrypted}</div>
+                  <Card.Title>
+                    Encrypted <Copier text={encrypted} />
+                  </Card.Title>
+                  <CodeArea defaultValue={encrypted} style={{ height: 200 }} />
                 </Card.Body>
               </Card>
               <Card style={{ marginTop: 10 }}>
                 <Card.Body>
-                  <Card.Title>SealedSecret</Card.Title>
-                  <textarea
-                    style={{
-                      whiteSpace: "pre",
-                      fontSize: "0.8rem",
-                      fontFamily: "Courier",
-                      width: "100%",
-                      padding: 5,
-                      height: 400,
-                    }}
-                    defaultValue={yaml}
-                  ></textarea>
+                  <Card.Title>
+                    SealedSecret <Copier text={yamlResult} />
+                  </Card.Title>
+                  <CodeArea defaultValue={yamlResult} />
                 </Card.Body>
               </Card>
             </>
