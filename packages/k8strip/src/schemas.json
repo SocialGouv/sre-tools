@@ -89,6 +89,8 @@
         "spec": {
           "type": "object",
           "properties": {
+            "rules": true,
+            "tls": true,
             "encryptedData": true,
             "replicas": {
               "type": "number"

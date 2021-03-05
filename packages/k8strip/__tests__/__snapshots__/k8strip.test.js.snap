@@ -19,7 +19,33 @@ Array [
       "name": "app",
       "namespace": "product-245-preprod-dev2",
     },
-    "spec": Object {},
+    "spec": Object {
+      "rules": Array [
+        Object {
+          "host": "preprod-product.dev2.company.com",
+          "http": Object {
+            "paths": Array [
+              Object {
+                "backend": Object {
+                  "serviceName": "app",
+                  "servicePort": 80,
+                },
+                "path": "/",
+                "pathType": "ImplementationSpecific",
+              },
+            ],
+          },
+        },
+      ],
+      "tls": Array [
+        Object {
+          "hosts": Array [
+            "preprod-product.dev2.company.com",
+          ],
+          "secretName": "wildcard-crt",
+        },
+      ],
+    },
   },
   Object {
     "kind": "Service",
