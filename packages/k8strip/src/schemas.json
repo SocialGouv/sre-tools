@@ -28,13 +28,7 @@
       }
     },
     "labels": {
-      "type": "object",
-      "properties": {
-        "application": true,
-        "cert": true,
-        "owner": true,
-        "team": true
-      }
+      "type": "object"
     },
     "envVar": {
       "type": "object",
@@ -73,7 +67,8 @@
           "items": {
             "$ref": "schemas#/definitions/envFrom"
           }
-        }
+        },
+        "volumeMounts": true
       }
     },
     "manifest": {
@@ -101,6 +96,45 @@
             "strategy": {
               "type": "object"
             },
+            "schedule": true,
+            "successfulJobsHistoryLimit": true,
+            "concurrencyPolicy": true,
+            "failedJobsHistoryLimit": true,
+            "jobTemplate": {
+              "type": "object",
+              "properties": {
+                "spec": {
+                  "type": "object",
+                  "properties": {
+                    "template": {
+                      "type": "object",
+                      "properties": {
+                        "spec": {
+                          "type": "object",
+                          "properties": {
+                            "volumes": true,
+                            "containers": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "schemas#/definitions/container"
+                              }
+                            },
+                            "initContainers": {
+                              "type": "array",
+                              "items": {
+                                "$ref": "schemas#/definitions/container"
+                              }
+                            },
+                            "imagePullSecrets": true,
+                            "restartPolicy": true
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
             "template": {
               "type": "object",
               "properties": {
@@ -110,6 +144,7 @@
                 "spec": {
                   "type": "object",
                   "properties": {
+                    "volumes": true,
                     "containers": {
                       "type": "array",
                       "items": {

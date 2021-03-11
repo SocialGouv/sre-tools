@@ -11,6 +11,7 @@ Array [
         "app.gitlab.com/env.name": "preprod-dev2",
       },
       "labels": Object {
+        "app": "app",
         "application": "v2-5-0-product",
         "cert": "wildcard",
         "owner": "product",
@@ -56,6 +57,7 @@ Array [
         "app.gitlab.com/env.name": "preprod-dev2",
       },
       "labels": Object {
+        "app": "app",
         "application": "v2-5-0-product",
         "cert": "wildcard",
         "owner": "product",
@@ -79,6 +81,7 @@ Array [
         "app.gitlab.com/env.name": "preprod-dev2",
       },
       "labels": Object {
+        "app": "app",
         "application": "v2-5-0-product",
         "cert": "wildcard",
         "owner": "product",
@@ -109,6 +112,7 @@ Array [
             "app.gitlab.com/env.name": "preprod-dev2",
           },
           "labels": Object {
+            "app": "app",
             "application": "v2-5-0-product",
             "cert": "wildcard",
             "owner": "product",
@@ -240,7 +244,12 @@ Array [
     "kind": "Secret",
     "metadata": Object {
       "annotations": Object {},
-      "labels": Object {},
+      "labels": Object {
+        "certmanager.k8s.io/certificate-name": "wildcard-crt",
+        "kubed.appscode.com/origin.cluster": "dev2",
+        "kubed.appscode.com/origin.name": "wildcard-crt",
+        "kubed.appscode.com/origin.namespace": "cert-manager",
+      },
       "name": "wildcard-crt",
       "namespace": "product-245-preprod-dev2",
     },
