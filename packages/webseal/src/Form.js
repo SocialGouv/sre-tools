@@ -2,6 +2,7 @@ import React from "react";
 
 import { Row, Col, Form as BsForm, Button } from "react-bootstrap";
 import { useForm, Controller } from "react-hook-form";
+import { useQueryParams } from "./useQueryParams";
 
 const RadioChoice = React.forwardRef(({ name, value, ...props }, ref) => (
   <BsForm.Check
@@ -16,30 +17,51 @@ const RadioChoice = React.forwardRef(({ name, value, ...props }, ref) => (
   />
 ));
 
+const isValidQueryParamsKey = (key) => ["namespace", "scope", "cluster", "name"].includes(key);
+
+const removeInvalidKeys = (keyValidator) => (object) =>
+    Object.keys(object)
+        .filter(keyValidator)
+        .reduce((acc, key) => ({
+            ...acc,
+            [key]: object[key]
+        }), {});
+
+const keepValidQueryParamKeys = removeInvalidKeys(isValidQueryParamsKey);
+
 export const Form = ({ onSubmit }) => {
-  const {
-    register,
-    handleSubmit,
-    getValues,
-    formState,
-    setValue,
-    trigger,
-  } = useForm({
-    mode: "onChange",
-    defaultValues: {
+
+  const [queryParamsData, setQueryParamsData] = useQueryParams();
+
+  const defaultValues = {
       cluster: "dev2",
       value: "",
       namespace: "",
       name: "",
       scope: "cluster",
-    },
+      ...keepValidQueryParamKeys(queryParamsData)
+  };
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState,
+    setValue,
+    trigger,
+  } = useForm({
+    mode: "onChange",
+    defaultValues,
   });
   const _onSubmit = (data) => {
+    setQueryParamsData(keepValidQueryParamKeys(data));
     console.log("onSubmit", data);
     onSubmit(data);
   };
-  const cluster = getValues("cluster");
-  const scope = getValues("scope");
+
+  const cluster = watch("cluster");
+  const scope = watch("scope");
+
   return (
     <BsForm onSubmit={handleSubmit(_onSubmit)}>
       <Row>
@@ -145,6 +167,7 @@ export const Form = ({ onSubmit }) => {
           style={{ marginTop: 10 }}
           rows={4}
           ref={register({ required: true })}
+          onChange={() => trigger()}
           placeholder="Value to encrypt"
         />
       </BsForm.Group>
