@@ -118,6 +118,7 @@ Object {
         "restartPolicy": "Never",
       },
     },
+    "ttlSecondsAfterFinished": 86400,
   },
 }
 `;
