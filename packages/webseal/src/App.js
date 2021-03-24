@@ -60,7 +60,6 @@ const Editor = () => {
   const [encrypted, setEncrypted] = useState(null);
   const [yamlResult, setYamlResult] = useState(null);
   const onSubmit = (data) => {
-    console.log("onSubmit2", data);
     setYamlResult("");
     setEncrypted("");
     const pemKey = certificates[data.cluster];
@@ -72,8 +71,8 @@ const Editor = () => {
         setEncrypted(value);
         const sealedSecret = await getSealedSecret({
           pemKey,
-          namespace: data.namespace,
-          name: data.name,
+          namespace: data.namespace || "some-namespace",
+          name: data.name || "some-secret-name",
           scope: data.scope,
           values: {
             VALUE: data.value,

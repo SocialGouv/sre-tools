@@ -17,29 +17,32 @@ const RadioChoice = React.forwardRef(({ name, value, ...props }, ref) => (
   />
 ));
 
-const isValidQueryParamsKey = (key) => ["namespace", "scope", "cluster", "name"].includes(key);
+const isValidQueryParamsKey = (key) =>
+  ["namespace", "scope", "cluster", "name"].includes(key);
 
 const removeInvalidKeys = (keyValidator) => (object) =>
-    Object.keys(object)
-        .filter(keyValidator)
-        .reduce((acc, key) => ({
-            ...acc,
-            [key]: object[key]
-        }), {});
+  Object.keys(object)
+    .filter(keyValidator)
+    .reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: object[key],
+      }),
+      {}
+    );
 
 const keepValidQueryParamKeys = removeInvalidKeys(isValidQueryParamsKey);
 
 export const Form = ({ onSubmit }) => {
-
   const [queryParamsData, setQueryParamsData] = useQueryParams();
 
   const defaultValues = {
-      cluster: "dev2",
-      value: "",
-      namespace: "",
-      name: "",
-      scope: "cluster",
-      ...keepValidQueryParamKeys(queryParamsData)
+    cluster: "dev2",
+    value: "",
+    namespace: "",
+    name: "",
+    scope: "cluster",
+    ...keepValidQueryParamKeys(queryParamsData),
   };
 
   const {
@@ -55,7 +58,7 @@ export const Form = ({ onSubmit }) => {
   });
   const _onSubmit = (data) => {
     setQueryParamsData(keepValidQueryParamKeys(data));
-    console.log("onSubmit", data);
+
     onSubmit(data);
   };
 
