@@ -21,7 +21,7 @@
   "dependencies": {
     "@socialgouv/sre-seal": "^1.7.3",
     "chalk": "^4.1.0",
-    "js-yaml": "^3.14.1",
+    "js-yaml": "^4.1.0",
     "ora": "^5.1.0",
     "yargs": "^16.1.1"
   },
