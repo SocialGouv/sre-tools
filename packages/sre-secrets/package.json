@@ -20,15 +20,15 @@
   },
   "dependencies": {
     "@socialgouv/sre-seal": "^1.7.3",
-    "chalk": "^4.1.0",
+    "chalk": "^4.1.1",
     "js-yaml": "^3.14.1",
     "ora": "^5.1.0",
     "yargs": "^16.1.1"
   },
   "devDependencies": {
     "@socialgouv/eslint-config-recommended": "^1.46.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.14.35",
+    "@types/jest": "^26.0.23",
+    "@types/node": "^14.14.45",
     "@types/yargs": "^15.0.13",
     "eslint": "^7.12.1",
     "jest": "^26.6.3",
