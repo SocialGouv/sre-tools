@@ -1,6 +1,6 @@
 
 // https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem
-export const dev2 = `-----BEGIN CERTIFICATE-----
+export const dev = `-----BEGIN CERTIFICATE-----
 MIIErjCCApagAwIBAgIRAOqAV9ZpCl1cwMunTHirqXwwDQYJKoZIhvcNAQELBQAw
 ADAeFw0yMDA1MjYwODQxMTBaFw0zMDA1MjQwODQxMTBaMAAwggIiMA0GCSqGSIb3
 DQEBAQUAA4ICDwAwggIKAoICAQDc5wz/el5+ghmNAsQzpFK3jtLRIDcoYgyeGHaG
@@ -30,7 +30,7 @@ bag=
 -----END CERTIFICATE-----`;
 
 // https://kubeseal.prod2.fabrique.social.gouv.fr/v1/cert.pem
-export const prod2 = `-----BEGIN CERTIFICATE-----
+export const prod = `-----BEGIN CERTIFICATE-----
 MIIErTCCApWgAwIBAgIQXJCfJIfF/fpww3KcvD0j1TANBgkqhkiG9w0BAQsFADAA
 MB4XDTIwMDUyNjA4NDkyN1oXDTMwMDUyNDA4NDkyN1owADCCAiIwDQYJKoZIhvcN
 AQEBBQADggIPADCCAgoCggIBAK8tTm78wfObpDaAa00eli9TwZfjbSO+Bis6DqNX
@@ -60,6 +60,6 @@ fg==
 -----END CERTIFICATE-----`;
 
 export const certificates = {
-  dev2,
-  prod2,
+  dev,
+  prod,
 };
