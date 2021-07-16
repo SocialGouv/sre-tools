@@ -37,7 +37,7 @@ export const Form = ({ onSubmit }) => {
   const [queryParamsData, setQueryParamsData] = useQueryParams();
 
   const defaultValues = {
-    cluster: "dev2",
+    cluster: "dev",
     value: "",
     namespace: "",
     name: "",
@@ -76,7 +76,7 @@ export const Form = ({ onSubmit }) => {
             <Col sm="9">
               <RadioChoice
                 name="cluster"
-                value="dev2"
+                value="dev"
                 ref={register}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
@@ -86,7 +86,7 @@ export const Form = ({ onSubmit }) => {
               />
               <RadioChoice
                 name="cluster"
-                value="prod2"
+                value="prod"
                 ref={register}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
@@ -106,7 +106,7 @@ export const Form = ({ onSubmit }) => {
               <RadioChoice
                 name="scope"
                 value="cluster"
-                disabled={cluster === "prod2"}
+                disabled={cluster === "prod"}
                 ref={register}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
@@ -116,7 +116,7 @@ export const Form = ({ onSubmit }) => {
               <RadioChoice
                 name="scope"
                 value="namespace"
-                disabled={cluster === "prod2"}
+                disabled={cluster === "prod"}
                 ref={register}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
