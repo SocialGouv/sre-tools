@@ -12,20 +12,21 @@ jobs:
       matrix:
         config:
           - os: macOS-latest
-            node-version: 15.x
             kind: test
           - os: ubuntu-latest
-            node-version: 15.x
             kind: release
 
     name: ${{ matrix.config.kind }} on ${{ matrix.config.node-version }} (${{ matrix.config.os }})
     runs-on: ${{ matrix.config.os }}
 
     steps:
-      - name: Set up Node.js ${{ matrix.config.node-version }}
-        uses: actions/setup-node@v2-beta
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.config.node-version }}
+          node-version: lts/*
+          cache: yarn
 
       - name: Install kubeseal for macOS
         if: matrix.config.os == 'macOS-latest'
@@ -37,27 +38,6 @@ jobs:
           wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/kubeseal-linux-amd64 -O kubeseal
           #
           sudo install -m 755 kubeseal /usr/local/bin/kubeseal
-
-      - name: Get yarn cache directory path
-        id: init
-        shell: bash
-        run: |
-          echo "::set-output name=yarn_cache::$(yarn cache dir)"
-          #
-          echo "Node $(node --version)"
-          echo "Yarn $(yarn --version)"
-
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Cache Yarn packages
-        id: yarn_cache_packages
-        uses: actions/cache@v1
-        with:
-          path: ${{ steps.init.outputs.yarn_cache }}
-          key: ${{ matrix.config.os }}-${{ matrix.config.kind }}-${{ hashFiles('yarn.lock') }}
-          restore-keys: |
-            ${{ matrix.config.os }}-${{ matrix.config.kind }}-
 
       - name: Install
         run: yarn --frozen-lockfile --perfer-offline
@@ -78,7 +58,7 @@ jobs:
 
       - name: Send test coverage to codecov
         if: matrix.config.kind == 'release'
-        uses: codecov/codecov-action@v1
+        uses: codecov/codecov-action@v2
         continue-on-error: true
 
       - name: Generate sre-secrets artifacts
@@ -94,12 +74,12 @@ jobs:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Node
-        uses: actions/setup-node@v2-beta
-        with:
-          node-version: 14.x
-
       - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: lts/*
 
       - name: Install lerna
         run: npm install --no-save lerna
