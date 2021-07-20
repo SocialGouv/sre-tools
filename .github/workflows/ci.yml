@@ -25,7 +25,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/*
+          node-version: 16.x
           cache: yarn
 
       - name: Install kubeseal for macOS
@@ -79,7 +79,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: lts/*
+          node-version: 16.x
 
       - name: Install lerna
         run: npm install --no-save lerna
