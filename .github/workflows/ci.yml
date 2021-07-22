@@ -80,9 +80,7 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.x
-
-      - name: Install lerna
-        run: npm install --no-save lerna
+          cache: yarn
 
       - name: Npm Authenticate
         run: |
