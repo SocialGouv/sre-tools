@@ -145,7 +145,7 @@ export const Form = ({ onSubmit }) => {
               ref={register({ required: true })}
               required
               type="text"
-              placeholder="Namespace"
+              placeholder="K8s Namespace"
             />
           </Col>
         </BsForm.Group>
@@ -158,7 +158,7 @@ export const Form = ({ onSubmit }) => {
               name="name"
               ref={register({ required: true })}
               type="text"
-              placeholder="Secret name"
+              placeholder="K8s secret name"
             />
           </Col>
         </BsForm.Group>
