@@ -15,5 +15,8 @@
     "pipe-args": "^1.3.0",
     "yaml": "^1.10.2",
     "yargs": "^15.4.1"
+  },
+  "devDependencies": {
+    "@kubernetes-models/sealed-secrets": "^1.6.3"
   }
 }

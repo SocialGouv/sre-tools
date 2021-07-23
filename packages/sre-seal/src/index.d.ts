@@ -1,28 +1,10 @@
+import { ISealedSecret } from "@kubernetes-models/sealed-secrets/bitnami.com/v1alpha1/SealedSecret";
+
 export interface Options {
   context: string;
   namespace: string;
   name: string;
   secrets: Record<string, string>;
-}
-
-export interface ISealSecret {
-  apiVersion: "bitnami.com/v1alpha1";
-  kind: "SealedSecret";
-  metadata: {
-    annotations: Record<string, string>;
-    name: string;
-    namespace: string;
-  };
-  spec: {
-    encryptedData: Record<string, string>;
-    template: {
-      metadata: {
-        annotations: Record<string, string>;
-        name: string;
-      };
-      type: "Opaque";
-    };
-  };
 }
 
 export function createSealedSecret(options: Options): Promise<ISealSecret>;
