@@ -7,6 +7,9 @@
   "bin": {
     "k8strip": "bin/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "src"
   ],
