@@ -4,7 +4,7 @@
   "preferGlobal": true,
   "main": "./src",
   "bin": {
-    "sre-secrets": "dist/index.js"
+    "sre-secrets": "dist/bin/sre-secrets.js"
   },
   "files": [
     "dist"
@@ -14,26 +14,46 @@
   },
   "scripts": {
     "start": "tsc -w",
-    "build": "tsc -p .",
+    "build": "tsc -p src",
     "test": "jest",
+    "lint": "eslint .",
     "test-coverage": "jest --coverage --coverageReporters=lcov --coverageReporters=text-summary"
   },
   "dependencies": {
     "@socialgouv/sre-seal": "^1.8.1",
-    "chalk": "^4.1.0",
-    "js-yaml": "^3.14.1",
+    "chalk": "^4.1.1",
+    "js-yaml": "^4.1.0",
     "ora": "^5.4.1",
-    "yargs": "^16.2.0"
+    "yargs": "^17.0.1"
   },
   "devDependencies": {
-    "@socialgouv/eslint-config-recommended": "^1.75.0",
-    "@types/jest": "^26.0.20",
-    "@types/node": "^14.17.5",
-    "@types/yargs": "^15.0.13",
+    "@babel/core": "^7.14.8",
+    "@babel/plugin-transform-modules-commonjs": "^7.14.5",
+    "@babel/preset-typescript": "^7.14.5",
+    "@socialgouv/eslint-config-typescript": "^1.82.0",
+    "@tsconfig/node14": "^1.0.1",
+    "@types/jest": "^26.0.24",
+    "@types/js-yaml": "^4.0.2",
+    "@types/node": "^16.4.1",
+    "@types/yargs": "^17.0.2",
     "eslint": "^7.31.0",
-    "jest": "^26.6.3",
+    "jest": "^27.0.6",
     "prettier": "^2.3.2",
-    "ts-jest": "^26.5.6",
+    "tempy": "^1.0.1",
     "typescript": "^4.3.5"
+  },
+  "babel": {
+    "env": {
+      "test": {
+        "presets": [
+          "@babel/preset-typescript"
+        ],
+        "plugins": [
+          [
+            "@babel/plugin-transform-modules-commonjs"
+          ]
+        ]
+      }
+    }
   }
 }

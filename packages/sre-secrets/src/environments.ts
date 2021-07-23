@@ -1,65 +1,73 @@
-import yargs from "./yargs"
-import spinner from "./spinner"
-import { safeDump } from "js-yaml"
-import seal, { Config } from "./seal"
-import { yellow, green } from "chalk"
-import { mkdirSync, writeFileSync } from "fs"
+import { cryptFromSecrets } from "@socialgouv/sre-seal";
+import { green, yellow } from "chalk";
+import { mkdirSync, writeFileSync } from "fs";
+import { dump } from "js-yaml";
 
-const { argv } = yargs
-const baseName = "sealed-secret"
-const folderPath = argv.t || "./.k8s"
+import type { ServiceEnvironment } from "./services";
+import spinner from "./spinner";
 
-const processEnvironment = async (
-  namespace,
-  serviceName,
-  environmentName,
-  { fileName, secretsName, secrets }
-) => {
-  const config: Config = {
-    secrets,
-    namespace: namespace,
-    name: secretsName || `${serviceName}-${baseName}`,
-    context: environmentName === "prod" ? "prod2" : "dev2",
-  }
+const baseName = "sealed-secret";
 
-  const sealed = await seal(config)
+const processEnvironment =
+  ({ toPath }: { toPath: string }) =>
+  async (
+    namespace: string,
+    serviceName: string,
+    environmentName: string,
+    { fileName, secretsName, secrets }: ServiceEnvironment
+  ) => {
+    const context = environmentName === "prod" ? "prod2" : "dev2";
+    const name = secretsName ?? `${serviceName}-${baseName}`;
+    const sealed = await cryptFromSecrets({
+      context,
+      name,
+      namespace,
+      secrets,
+    });
 
-  mkdirSync(`${folderPath}/environments/${environmentName}`, {
-    recursive: true,
-  })
+    mkdirSync(`${toPath}/environments/${environmentName}`, {
+      recursive: true,
+    });
 
-  writeFileSync(
-    `${folderPath}/environments/${environmentName}/${
-      fileName || serviceName
-    }.${baseName}.yaml`,
-    safeDump(sealed, { noRefs: true })
-  )
-}
+    writeFileSync(
+      `${toPath}/environments/${environmentName}/${
+        fileName ?? serviceName
+      }.${baseName}.yaml`,
+      dump(sealed, { noRefs: true })
+    );
+  };
 
-export const processEnvironments = async (
-  namespace,
-  serviceName,
-  environments
-) => {
-  const environmentNames = Object.keys(environments)
+export const processEnvironments =
+  ({ toPath }: { toPath: string }) =>
+  async (
+    namespace: string,
+    serviceName: string,
+    environments: Record<string, ServiceEnvironment>
+  ): Promise<void> => {
+    const environmentNames = Object.keys(environments);
 
-  for (const environmentName of environmentNames) {
-    spinner.start(
-      `creating ${yellow(serviceName)} sealed secrets for ${yellow(
-        environmentName
-      )}`
-    )
+    for (const environmentName of environmentNames) {
+      spinner.start(
+        `creating ${yellow(serviceName)} sealed secrets for ${yellow(
+          environmentName
+        )}`
+      );
 
-    const config = environments[environmentName]
+      const config = environments[environmentName];
 
-    await processEnvironment(namespace, serviceName, environmentName, config)
+      await processEnvironment({ toPath })(
+        namespace,
+        serviceName,
+        environmentName,
+        config
+      );
 
-    spinner.succeed(
-      `${green(serviceName)} sealed secrets created for ${green(
-        environmentName
-      )} environment (${folderPath}/environments/${environmentName}/${
-        config?.fileName || serviceName
-      }.${baseName}.yaml)`
-    )
-  }
-}
+      spinner.succeed(
+        `${green(serviceName)} sealed secrets created for ${green(
+          environmentName
+        )} environment (${toPath}/environments/${environmentName}/${
+          config.fileName ?? serviceName
+        }.${baseName}.yaml)`
+      );
+    }
+  };

@@ -1,2 +1,3 @@
-import ora from "ora"
-export default ora({ stream: process.stdout })
+import ora from "ora";
+
+export default ora({ stream: process.stdout });

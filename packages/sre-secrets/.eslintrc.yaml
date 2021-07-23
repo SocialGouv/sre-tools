@@ -1,0 +1,8 @@
+root: true
+overrides:
+  - files: "*.js"
+    extends:
+      - "@socialgouv/eslint-config-recommended"
+  - files: "*.ts"
+    extends:
+      - "@socialgouv/eslint-config-typescript"

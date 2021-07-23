@@ -1,34 +1,32 @@
 #!/usr/bin/env node
 
-import { red } from "chalk"
-import { safeLoad } from "js-yaml"
-import { existsSync, readFileSync } from "fs"
+import { red } from "chalk";
+import { existsSync, readFileSync } from "fs";
+import { load } from "js-yaml";
 
-import yargs from "./yargs"
-import spinner from "./spinner"
-import { processServices } from "./services"
+import type { Service } from "./services";
+import { processServices } from "./services";
 
-const { argv } = yargs
-const filePath = argv.f || "./.secrets.yaml"
-
-const main = async () => {
-  if (!existsSync(filePath)) {
-    return Promise.reject(`File not found: ${red(filePath)}`)
+export const main = async ({
+  fromPath = "./.secrets.yaml",
+  toPath = "./.k8s",
+}: {
+  fromPath: string;
+  toPath: string;
+}): Promise<void> => {
+  if (!existsSync(fromPath)) {
+    return Promise.reject(`File not found: ${red(fromPath)}`);
   }
 
-  const file = readFileSync(filePath, "utf8")
+  const file = readFileSync(fromPath, "utf8");
 
   try {
-    const { namespace, services } = safeLoad(file)
-    await processServices(namespace, services)
-  } catch (error) {
-    return Promise.reject(`Cannot load yaml file: ${red(filePath)}`)
+    const { namespace, services } = load(file) as {
+      namespace: string;
+      services: Service[];
+    };
+    await processServices({ toPath })(namespace, services);
+  } catch {
+    return Promise.reject(`Cannot load yaml file: ${red(fromPath)}`);
   }
-
-  return process.exit(0)
-}
-
-main().catch((error) => {
-  spinner.fail(error)
-  process.exit(1)
-})
+};
