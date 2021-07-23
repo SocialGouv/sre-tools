@@ -1,11 +1,12 @@
 import { readFileSync } from "fs";
 import { load } from "js-yaml";
+import { directory } from "tempy";
 
 import { main } from "../src/index";
 
 describe("Test sealed secrets generation", () => {
   const filePath = "./__tests__/data/.secrets.yaml";
-  const folderPath = `${process.env.RUNNER_TEMP || "/tmp"}/sre-secrets`;
+  const folderPath = directory({ prefix: "sre-secrets" });
   const matchers = {
     spec: {
       encryptedData: {
