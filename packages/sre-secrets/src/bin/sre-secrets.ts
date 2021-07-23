@@ -4,16 +4,13 @@ import { main } from "../index";
 import spinner from "../spinner";
 import yargs from "../yargs";
 
-const { argv } = yargs;
-const fromPath = argv.f;
-const toPath = argv.t;
-
-main({ fromPath, toPath }).then(
-  () => {
+Promise.resolve()
+  .then(async () => {
+    const { f: fromPath, t: toPath } = await yargs.parse();
+    await main({ fromPath, toPath });
     process.exit(0);
-  },
-  (error) => {
+  })
+  .catch((error) => {
     spinner.fail(error);
     process.exit(1);
-  }
-);
+  });
