@@ -1,6 +1,6 @@
-import fs from "fs";
-import yaml from "js-yaml";
-import { resolve } from "path";
+import { readFileSync } from "fs";
+import { load } from "js-yaml";
+
 import { main } from "../src/index";
 
 describe("Test sealed secrets generation", () => {
@@ -9,8 +9,8 @@ describe("Test sealed secrets generation", () => {
   const matchers = {
     spec: {
       encryptedData: {
-        toto: expect.any(String),
         tata: expect.any(String),
+        toto: expect.any(String),
       },
     },
   };
@@ -23,24 +23,26 @@ describe("Test sealed secrets generation", () => {
     // HACK(douglasduteil): ensure EOL after logs
     // We might want to remove all spinner logs in the future
     process.stdout.write("\n");
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await new Promise((resolve) => {
+      setTimeout(resolve, 500);
+    });
   });
 
   test("Check dev snapshot", () => {
     const path = `${folderPath}/environments/dev/app.sealed-secret.yaml`;
-    const content = yaml.load(fs.readFileSync(path, "utf8"));
+    const content = load(readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 
   test("Check preprod snapshot", () => {
     const path = `${folderPath}/environments/preprod/app.sealed-secret.yaml`;
-    const content = yaml.load(fs.readFileSync(path, "utf8"));
+    const content = load(readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 
   test("Check prod snapshot", () => {
     const path = `${folderPath}/environments/prod/app-prod.sealed-secret.yaml`;
-    const content = yaml.load(fs.readFileSync(path, "utf8"));
+    const content = load(readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 });

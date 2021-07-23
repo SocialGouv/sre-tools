@@ -14,5 +14,10 @@
     "test": "lerna run --parallel --stream test",
     "build": "lerna run --parallel --stream build",
     "test-coverage": "lerna run --parallel --stream test-coverage"
+  },
+  "resolutions": {
+    "jest": "27.0.6",
+    "@typescript-eslint/typescript-estree": "4.28.4",
+    "@babel/plugin-transform-modules-commonjs": "7.14.5"
   }
 }
