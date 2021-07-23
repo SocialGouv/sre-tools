@@ -10,7 +10,7 @@
     "lerna": "^4.0.0"
   },
   "resolutions": {
-    "jest": "26.6.0"
+    "jest": "27.0.6"
   },
   "scripts": {
     "lint": "lerna run --parallel --stream lint",
