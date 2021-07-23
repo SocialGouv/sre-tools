@@ -1,4 +1,4 @@
-import yargs from "yargs"
+import yargs from "yargs";
 
 export default yargs
   .usage("Usage: $0 [options]")
@@ -10,17 +10,17 @@ export default yargs
   .options({
     f: {
       alias: "from",
-      type: "string",
       default: "./.secrets.yaml",
       describe: "File containing secrets",
-    },
-    t: {
-      alias: "to",
       type: "string",
-      default: "./.k8s",
-      describe: "Folder to store sealed secrets",
     },
     h: { alias: "help", describe: "Show help" },
+    t: {
+      alias: "to",
+      default: "./.k8s",
+      describe: "Folder to store sealed secrets",
+      type: "string",
+    },
     v: { alias: "version" },
   })
-  .epilog("SocialGouv © 2020")
+  .epilog("SocialGouv © 2021");

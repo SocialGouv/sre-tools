@@ -1,10 +1,10 @@
-import { cryptFromSecrets } from "@socialgouv/sre-seal"
+import { cryptFromSecrets } from "@socialgouv/sre-seal";
 
 export interface Config {
-  name: String
-  secrets: Object
-  namespace: String
-  context: "prod2" | "dev2"
+  name: string;
+  secrets: Object;
+  namespace: string;
+  context: "dev2" | "prod2";
 }
 
-export default (config: Config) => cryptFromSecrets(config)
+export default (config: Config) => cryptFromSecrets(config);

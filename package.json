@@ -9,9 +9,6 @@
   "devDependencies": {
     "lerna": "^4.0.0"
   },
-  "resolutions": {
-    "jest": "27.0.6"
-  },
   "scripts": {
     "lint": "lerna run --parallel --stream lint",
     "test": "lerna run --parallel --stream test",
