@@ -11,11 +11,11 @@
   "scripts": {
     "test": "jest"
   },
-  "version": "1.8.2",
+  "version": "1.8.3",
   "license": "Apache-2.0",
   "dependencies": {
     "@socialgouv/kosko-charts": "^8.0.2",
-    "@socialgouv/sre-seal": "^1.8.2",
+    "@socialgouv/sre-seal": "^1.8.3",
     "execa": "^5.1.1",
     "yaml": "^1.10.2"
   },
