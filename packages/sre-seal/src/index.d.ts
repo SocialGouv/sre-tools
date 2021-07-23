@@ -2,7 +2,7 @@ export interface Options {
   context: string;
   namespace: string;
   name: string;
-  secrets: string;
+  secrets: Record<string, string>;
 }
 
 export interface ISealSecret {
@@ -24,6 +24,7 @@ export interface ISealSecret {
     };
   };
 }
+
 export function createSealedSecret(options: Options): Promise<ISealSecret>;
-export function crypt(options: Options): Promise<string>;
+export function crypt(options: Omit<Options, secrets>): Promise<string>;
 export function cryptFromSecrets(options: Options): Promise<ISealSecret>;

@@ -2,23 +2,27 @@
 
 import { red } from "chalk";
 import { existsSync, readFileSync } from "fs";
-import { safeLoad } from "js-yaml";
+import { load } from "js-yaml";
 
-import { processServices } from "./services";
+import { processServices, Service } from "./services";
 
-export const main = async (filePath: string) => {
-  if (!existsSync(filePath)) {
-    return Promise.reject(`File not found: ${red(filePath)}`);
+export const main = async ({
+  fromPath = "./.secrets.yaml",
+  toPath = "./.k8s",
+}) => {
+  if (!existsSync(fromPath)) {
+    return Promise.reject(`File not found: ${red(fromPath)}`);
   }
 
-  const file = readFileSync(filePath, "utf8");
+  const file = readFileSync(fromPath, "utf8");
 
   try {
-    const { namespace, services } = safeLoad(file);
-    await processServices(namespace, services);
+    const { namespace, services } = load(file) as {
+      namespace: string;
+      services: Service[];
+    };
+    await processServices({ toPath })(namespace, services);
   } catch (error) {
-    return Promise.reject(`Cannot load yaml file: ${red(filePath)}`);
+    return Promise.reject(`Cannot load yaml file: ${red(fromPath)}`);
   }
-
-  return process.exit(0);
 };

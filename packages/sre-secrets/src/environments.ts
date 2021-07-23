@@ -1,20 +1,18 @@
 import { green, yellow } from "chalk";
 import { mkdirSync, writeFileSync } from "fs";
-import { safeDump } from "js-yaml";
+import { dump } from "js-yaml";
 
 import { cryptFromSecrets } from "@socialgouv/sre-seal";
 import spinner from "./spinner";
-import yargs from "./yargs";
+import { ServiceEnvironment } from "./services";
 
-const { argv } = yargs;
 const baseName = "sealed-secret";
-const folderPath = argv.t || "./.k8s";
 
-const processEnvironment = async (
+const processEnvironment = ({ toPath }: { toPath: string }) => async (
   namespace: string,
   serviceName: string,
   environmentName: string,
-  { fileName, secretsName, secrets }: Config
+  { fileName, secretsName, secrets }: ServiceEnvironment
 ) => {
   const context = environmentName === "prod" ? "prod2" : "dev2";
   const name = secretsName || `${serviceName}-${baseName}`;
@@ -25,22 +23,22 @@ const processEnvironment = async (
     secrets,
   });
 
-  mkdirSync(`${folderPath}/environments/${environmentName}`, {
+  mkdirSync(`${toPath}/environments/${environmentName}`, {
     recursive: true,
   });
 
   writeFileSync(
-    `${folderPath}/environments/${environmentName}/${
+    `${toPath}/environments/${environmentName}/${
       fileName || serviceName
     }.${baseName}.yaml`,
-    safeDump(sealed, { noRefs: true })
+    dump(sealed, { noRefs: true })
   );
 };
 
-export const processEnvironments = async (
+export const processEnvironments = ({ toPath }: { toPath: string }) => async (
   namespace: string,
   serviceName: string,
-  environments: Record<string, unknown>
+  environments: Record<string, ServiceEnvironment>
 ) => {
   const environmentNames = Object.keys(environments);
 
@@ -53,12 +51,17 @@ export const processEnvironments = async (
 
     const config = environments[environmentName];
 
-    await processEnvironment(namespace, serviceName, environmentName, config);
+    await processEnvironment({ toPath })(
+      namespace,
+      serviceName,
+      environmentName,
+      config
+    );
 
     spinner.succeed(
       `${green(serviceName)} sealed secrets created for ${green(
         environmentName
-      )} environment (${folderPath}/environments/${environmentName}/${
+      )} environment (${toPath}/environments/${environmentName}/${
         config?.fileName || serviceName
       }.${baseName}.yaml)`
     );

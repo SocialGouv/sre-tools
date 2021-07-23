@@ -1,7 +1,7 @@
-const fs = require("fs");
-const util = require("util");
-const yaml = require("js-yaml");
-const exec = util.promisify(require("child_process").exec);
+import fs from "fs";
+import yaml from "js-yaml";
+import { resolve } from "path";
+import { main } from "../src/index";
 
 describe("Test sealed secrets generation", () => {
   const filePath = "./__tests__/data/.secrets.yaml";
@@ -15,28 +15,32 @@ describe("Test sealed secrets generation", () => {
     },
   };
 
-  test("Generate sealed secrets", async () => {
-    const cmd = `node ./dist/index.js --from=${filePath} --to=${folderPath}`;
-    const { stdout, stderr } = await exec(cmd);
-    if (stdout) console.log("stdout:", stdout);
-    if (stderr) console.log("stderr:", stderr);
+  beforeAll(async () => {
+    await main({
+      fromPath: filePath,
+      toPath: folderPath,
+    });
+    // HACK(douglasduteil): ensure EOL after logs
+    // We might want to remove all spinner logs in the future
+    process.stdout.write("\n");
+    await new Promise((resolve) => setTimeout(resolve, 500));
   });
 
   test("Check dev snapshot", () => {
     const path = `${folderPath}/environments/dev/app.sealed-secret.yaml`;
-    const content = yaml.safeLoad(fs.readFileSync(path, "utf8"));
+    const content = yaml.load(fs.readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 
   test("Check preprod snapshot", () => {
     const path = `${folderPath}/environments/preprod/app.sealed-secret.yaml`;
-    const content = yaml.safeLoad(fs.readFileSync(path, "utf8"));
+    const content = yaml.load(fs.readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 
   test("Check prod snapshot", () => {
     const path = `${folderPath}/environments/prod/app-prod.sealed-secret.yaml`;
-    const content = yaml.safeLoad(fs.readFileSync(path, "utf8"));
+    const content = yaml.load(fs.readFileSync(path, "utf8"));
     expect(content).toMatchSnapshot(matchers);
   });
 });

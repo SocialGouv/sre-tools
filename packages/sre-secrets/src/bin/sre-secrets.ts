@@ -5,8 +5,14 @@ import spinner from "../spinner";
 import yargs from "../yargs";
 
 const { argv } = yargs;
-const filePath = argv.f || "./.secrets.yaml";
-main(filePath).catch((error) => {
-  spinner.fail(error);
-  process.exit(1);
-});
+const fromPath = argv.f;
+const toPath = argv.t;
+main({ fromPath, toPath }).then(
+  () => {
+    process.exit(0);
+  },
+  (error) => {
+    spinner.fail(error);
+    process.exit(1);
+  }
+);
