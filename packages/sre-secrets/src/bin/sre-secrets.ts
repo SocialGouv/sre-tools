@@ -10,7 +10,8 @@ Promise.resolve()
     await main({ fromPath, toPath });
     process.exit(0);
   })
-  .catch((error) => {
-    spinner.fail(error);
+  .catch((error: Error) => {
+    spinner.fail(error.message);
+    console.error(error);
     process.exit(1);
   });
