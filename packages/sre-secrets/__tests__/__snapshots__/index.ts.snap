@@ -29,35 +29,6 @@ Object {
 }
 `;
 
-exports[`Test sealed secrets generation Check preprod snapshot 1`] = `
-Object {
-  "apiVersion": "bitnami.com/v1alpha1",
-  "kind": "SealedSecret",
-  "metadata": Object {
-    "annotations": Object {
-      "sealedsecrets.bitnami.com/cluster-wide": "true",
-    },
-    "name": "app-sealed-secret",
-    "namespace": "my-app-namespace",
-  },
-  "spec": Object {
-    "encryptedData": Object {
-      "tata": Any<String>,
-      "toto": Any<String>,
-    },
-    "template": Object {
-      "metadata": Object {
-        "annotations": Object {
-          "sealedsecrets.bitnami.com/cluster-wide": "true",
-        },
-        "name": "app-sealed-secret",
-      },
-      "type": "Opaque",
-    },
-  },
-}
-`;
-
 exports[`Test sealed secrets generation Check prod snapshot 1`] = `
 Object {
   "apiVersion": "bitnami.com/v1alpha1",
