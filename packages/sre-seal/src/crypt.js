@@ -3,14 +3,14 @@ const execa = require("execa");
 const flatify = (arr) => arr.flatMap((a, c) => a);
 
 const sealedSecretsUrls = {
-  prod2: "https://kubeseal.prod2.fabrique.social.gouv.fr/v1/cert.pem",
-  dev2: "https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem",
+  prod: "https://kubeseal.prod2.fabrique.social.gouv.fr/v1/cert.pem",
+  dev: "https://kubeseal.dev2.fabrique.social.gouv.fr/v1/cert.pem",
 };
 
 // build kubeseal args and execute kubeseal
 const crypt = async ({ context, namespace, name, input }) => {
   const args = [["--raw", "--context", context]];
-  if (context === "prod2") {
+  if (context === "prod") {
     args.push(["--name", name]);
     args.push(["--namespace", namespace]);
   } else {

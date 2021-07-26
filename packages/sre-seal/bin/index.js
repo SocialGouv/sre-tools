@@ -36,14 +36,14 @@ const args = yargs
   // context
   .nargs("context", 1)
   .describe("context", "k8s context")
-  .default("context", "dev2")
+  .default("context", "dev")
   // use existing seal file
   .nargs("from", 1)
   .describe("from", "path to existing seal file")
   // checks
   .check((argv, options) => {
-    if (argv.context === "prod2" && (!argv.namespace || !argv.name)) {
-      throw new Error("--name and --namespace are mandatory for prod2");
+    if (argv.context === "prod" && (!argv.namespace || !argv.name)) {
+      throw new Error("--name and --namespace are mandatory for prod");
       return false;
     }
     if (argv._ && argv._.length === 0) {

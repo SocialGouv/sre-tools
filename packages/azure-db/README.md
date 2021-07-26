@@ -17,7 +17,7 @@ Commands:
   azure-db drop-autodevops-dbs   destroy all generated databases
 
 Options:
-  --cluster      k8s cluster               [required] [choices: "prod2", "dev2"]
+  --cluster      k8s cluster               [required] [choices: "prod", "dev"]
   --application  gitlab application name                              [required]
   --database     database name
   --user         user name

@@ -8,4 +8,4 @@ To use `sre-seal` and `sre-secrets`, you'll need `kubectl` configured with exist
 | [sre-secrets](./packages/sre-secrets)              | Create all sealed secrets files at once |
 | [azure-db](./packages/azure-db)                    | Create/Drop databases and users         |
 | [k8strip](./packages/k8strip)                      | Strip sensitive data from k8s manifests |
-| [WebSeal](https://socialgouv.github.io/sre-tools/) | Online sealed-secrets generator |
+| [WebSeal](https://socialgouv.github.io/sre-tools/) | Online sealed-secrets generator         |
