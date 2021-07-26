@@ -16,10 +16,9 @@ const processEnvironment =
     environmentName: string,
     { fileName, secretsName, secrets }: ServiceEnvironment
   ) => {
-    const context = environmentName === "prod" ? "prod2" : "dev2";
     const name = secretsName ?? `${serviceName}-${baseName}`;
     const sealed = await cryptFromSecrets({
-      context,
+      context: environmentName,
       name,
       namespace,
       secrets,

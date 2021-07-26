@@ -17,7 +17,7 @@ const cryptFromSecrets = ({ context, namespace, name, secrets }) =>
       }).then((value) => ({ key, value }))
     )
   ).then((encrypteds) => {
-    const annotations = context === "prod2" ? {} : clusterWideAnnotations;
+    const annotations = context === "prod" ? {} : clusterWideAnnotations;
     return createSealedSecret({
       namespace,
       name,

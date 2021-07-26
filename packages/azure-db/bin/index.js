@@ -23,8 +23,8 @@ const getDetaultYargs = () =>
   yargs
     .nargs("cluster", 1)
     .describe("cluster", "k8s cluster")
-    .choices("cluster", ["prod2", "dev2"])
-    .default("cluster", "dev2")
+    .choices("cluster", ["prod", "dev"])
+    .default("cluster", "dev")
     .nargs("application", 1)
     .describe("application", "gitlab application name")
     .nargs("database", 1)
@@ -66,10 +66,10 @@ const args = yargs
         "You must provide a valid command : create, drop or drop-autodevops-dbs"
       );
     }
-    if (argv._[0] === "drop" && argv.cluster === "prod2") {
+    if (argv._[0] === "drop" && argv.cluster === "prod") {
       throw new Error("One cannot drop PROD databases :)");
     }
-    if (argv._[0] === "drop-autodevops-dbs" && argv.cluster === "prod2") {
+    if (argv._[0] === "drop-autodevops-dbs" && argv.cluster === "prod") {
       throw new Error("One cannot drop PROD databases :)");
     }
     return true;
@@ -92,7 +92,7 @@ const run = async () => {
     });
     const dbHost = getPgServerHostname(
       argv.pgName || argv.application,
-      argv.cluster === "prod2" ? "prod" : "dev"
+      argv.cluster === "prod" ? "prod" : "dev"
     );
     console.log(
       `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
