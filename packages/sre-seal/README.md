@@ -12,7 +12,7 @@ Usage: sre-seal [options] <KEY=someSecretMessage>
 Options:
   --namespace  k8s namespace (optional in dev)                   [default: null]
   --name       k8s secret name (optional in dev)   [default: "some-secret-name"]
-  --context    k8s context                                     [default: "dev2"]
+  --context    k8s context                                     [default: "dev"]
   --from       path to existing seal file
 ```
 
@@ -26,7 +26,7 @@ cat values.yml | sre-seal > sealed.yml
 echo "PASSWORD=pouet" | sre-seal > sealed.yml
 
 # Prod secrets have mandatories namespace and secret name
-cat values.yml | sre-seal --context prod2 --namespace project --name secret-name > sealed.yml
+cat values.yml | sre-seal --context prod --namespace project --name secret-name > sealed.yml
 
 # Add new secret to some existing secret file with `--from`
 echo "PASSWORD=pouet" | sre-seal --from current-seal.yml > sealed.yml
@@ -42,7 +42,7 @@ const { cryptFromSecrets } = require("@socialgouv/sre-seal");
 cryptFromSecrets({
   name: "some-secret-name",
   //namespace: "cdtn-admin",
-  context: "dev2", // or prod2 with namespace
+  context: "dev", // or prod with namespace
   secrets: {
     PGRST_JWT_SECRET: "FyH2ETW8zulPobZ9j6wr3jWM5OtsK2zR84NLBIb0",
     KIKOO: "Bjd9ddeR84NLBIb0",

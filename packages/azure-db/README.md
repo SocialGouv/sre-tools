@@ -32,7 +32,7 @@ Options:
 azure-db create --application sample-next-app
 
 # Create a database in PROD
-azure-db create --cluster prod2 --application sample-next-app --database demo42 --user demo42
+azure-db create --cluster prod --application sample-next-app --database demo42 --user demo42
 
 # Destroy a database in DEV
 azure-db drop --application sample-next-app --database demo42 --user demo42

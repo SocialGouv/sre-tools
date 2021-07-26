@@ -1,6 +1,6 @@
 # sre-tools
 
-To use `sre-seal` and `sre-secrets`, you'll need `kubectl` configured with existing `dev2` and `prod2` contexts. [kubeseal](https://github.com/bitnami-labs/sealed-secrets) is also required for generating secrets.
+To use `sre-seal` and `sre-secrets`, you'll need `kubectl` configured with existing `dev` and `prod` contexts. [kubeseal](https://github.com/bitnami-labs/sealed-secrets) is also required for generating secrets.
 
 | Tool                                               | Usage                                   |
 | -------------------------------------------------- | --------------------------------------- |
