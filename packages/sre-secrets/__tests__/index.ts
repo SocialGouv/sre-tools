@@ -35,12 +35,6 @@ describe("Test sealed secrets generation", () => {
     expect(content).toMatchSnapshot(matchers);
   });
 
-  test("Check preprod snapshot", () => {
-    const path = `${folderPath}/environments/preprod/app.sealed-secret.yaml`;
-    const content = load(readFileSync(path, "utf8"));
-    expect(content).toMatchSnapshot(matchers);
-  });
-
   test("Check prod snapshot", () => {
     const path = `${folderPath}/environments/prod/app-prod.sealed-secret.yaml`;
     const content = load(readFileSync(path, "utf8"));
