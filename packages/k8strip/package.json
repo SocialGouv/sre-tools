@@ -1,7 +1,7 @@
 {
   "name": "@socialgouv/k8strip",
   "description": "CLI tool and JS module to strip out sensitive content from kubernetes manifests.",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "preferGlobal": true,
   "main": "./src",
   "bin": {

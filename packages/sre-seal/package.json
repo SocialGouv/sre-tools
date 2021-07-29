@@ -1,6 +1,6 @@
 {
   "name": "@socialgouv/sre-seal",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "preferGlobal": true,
   "main": "./src/index.js",
   "bin": {
