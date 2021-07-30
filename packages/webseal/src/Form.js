@@ -45,17 +45,11 @@ export const Form = ({ onSubmit }) => {
     ...keepValidQueryParamKeys(queryParamsData),
   };
 
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState,
-    setValue,
-    trigger,
-  } = useForm({
-    mode: "onChange",
-    defaultValues,
-  });
+  const { register, handleSubmit, watch, formState, setValue, trigger } =
+    useForm({
+      mode: "onChange",
+      defaultValues,
+    });
   const _onSubmit = (data) => {
     setQueryParamsData(keepValidQueryParamKeys(data));
 
@@ -77,7 +71,7 @@ export const Form = ({ onSubmit }) => {
               <RadioChoice
                 name="cluster"
                 value="dev"
-                ref={register}
+                {...register("cluster")}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
                   setValue("scope", "cluster");
@@ -87,7 +81,7 @@ export const Form = ({ onSubmit }) => {
               <RadioChoice
                 name="cluster"
                 value="prod"
-                ref={register}
+                {...register("cluster")}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
                   setValue("scope", "strict");
@@ -107,7 +101,7 @@ export const Form = ({ onSubmit }) => {
                 name="scope"
                 value="cluster"
                 disabled={cluster === "prod"}
-                ref={register}
+                {...register("scope")}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
                   trigger();
@@ -117,7 +111,7 @@ export const Form = ({ onSubmit }) => {
                 name="scope"
                 value="namespace"
                 disabled={cluster === "prod"}
-                ref={register}
+                {...register("scope")}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
                   trigger();
@@ -126,7 +120,7 @@ export const Form = ({ onSubmit }) => {
               <RadioChoice
                 name="scope"
                 value="strict"
-                ref={register}
+                {...register("scope")}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
                   trigger();
@@ -142,7 +136,7 @@ export const Form = ({ onSubmit }) => {
           <Col sm="9">
             <BsForm.Control
               name="namespace"
-              ref={register({ required: true })}
+              {...register("namespace", { required: true })}
               required
               type="text"
               placeholder="K8s Namespace"
@@ -156,7 +150,7 @@ export const Form = ({ onSubmit }) => {
           <Col sm="9">
             <BsForm.Control
               name="name"
-              ref={register({ required: true })}
+              {...register("name", { required: true })}
               type="text"
               placeholder="K8s secret name"
             />
@@ -169,7 +163,7 @@ export const Form = ({ onSubmit }) => {
           name="value"
           style={{ marginTop: 10 }}
           rows={4}
-          ref={register({ required: true })}
+          {...register("value", { required: true })}
           onChange={() => trigger()}
           placeholder="Value to encrypt"
         />
