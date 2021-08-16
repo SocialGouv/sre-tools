@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should parse manifests correctly 1`] = `
+Object {
+  "app.github.com/repo": "company/app",
+  "app.github.com/run": "1127909139",
+  "hosts": Array [
+    "backend-app-preprod.dev.company.com",
+    "version1-app-preprod.dev.company.com",
+    "version2-app-preprod.dev.company.com",
+  ],
+  "images": Array [
+    "ghcr.io/company/app/backend:1.1.0-alpha.6",
+    "ghcr.io/company/docker/wait-for-postgres:6.38.3",
+    "ghcr.io/company/app/frontend-version1:1.1.0-alpha.6",
+    "ghcr.io/company/app/frontend-version2:1.1.0-alpha.6",
+  ],
+  "manifests": Array [
+    Object {
+      "kind": "Deployment",
+      "name": "backend",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "SealedSecret",
+      "name": "backend-sealed-secret",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Service",
+      "name": "backend",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Ingress",
+      "name": "backend",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "SealedSecret",
+      "name": "azure-app-volume",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "PersistentVolumeClaim",
+      "name": "uploads",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "PersistentVolume",
+      "name": "app-uploads",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Deployment",
+      "name": "version1",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Service",
+      "name": "version1",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Ingress",
+      "name": "version1",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Deployment",
+      "name": "version2",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Service",
+      "name": "version2",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "Ingress",
+      "name": "version2",
+      "namespace": "app-preprod",
+    },
+    Object {
+      "kind": "SealedSecret",
+      "name": "azure-pg-user",
+      "namespace": "app-preprod",
+    },
+  ],
+  "namespace": "app-preprod",
+}
+`;
