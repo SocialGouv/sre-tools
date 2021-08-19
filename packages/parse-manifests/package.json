@@ -21,6 +21,6 @@
     "access": "public"
   },
   "scripts": {
-    "test": "jest"
+    "test": "node --experimental-vm-modules node_modules/.bin/jest"
   }
 }
