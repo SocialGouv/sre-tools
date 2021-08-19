@@ -3,6 +3,7 @@
   "description": "Parse and summarize a bunch of kubernetes YAML manifests",
   "version": "1.9.3",
   "main": "index.js",
+  "type": "module",
   "types": "index.d.ts",
   "preferGlobal": true,
   "license": "Apache-2.0",

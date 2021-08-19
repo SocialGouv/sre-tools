@@ -1,4 +1,4 @@
-const YAML = require("yaml");
+import YAML from "yaml";
 
 /** extract hostnames from a set of ingresses */
 const getHosts = (manifests) => {
@@ -87,4 +87,4 @@ const parseManifests = (yaml) => {
   return result;
 };
 
-module.exports = parseManifests;
+export default parseManifests;
