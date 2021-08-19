@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const getStdin = require("get-stdin");
+import getStdin from "get-stdin";
 
-const parseManifests = require("..");
+import parseManifests from "../index.js";
 
 const GRAFANA_URL =
   process.env.GRAFANA_URL || "https://grafana.fabrique.social.gouv.fr";
@@ -13,7 +13,9 @@ const usage = () => {
 
 const getOutputFormat = () => {
   const option =
-    process.argv.length >= 2 ? process.argv[2].replace(/^--/, "") : "json";
+    process.argv.length >= 2
+      ? process.argv[process.argv.length - 1].replace(/^--/, "")
+      : "json";
   return option || "json";
 };
 
@@ -72,30 +74,28 @@ ${getGrafanaLogsUrl(parsed)}
 `;
 };
 
-if (require.main === module) {
-  if (process.argv.length < 2) {
-    usage();
-    throw new Error("parse-manifests need some YAML input");
-  }
-  (async () => {
-    const input = await getStdin();
-    const format = getOutputFormat();
-    try {
-      if (input) {
-        if (format === "markdown") {
-          const markdown = toMarkdown(input);
-          console.log(markdown);
-          return;
-        }
-        console.log(JSON.stringify(parseManifests(input), null, 2));
-      } else {
-        usage();
-      }
-    } catch (e) {
-      console.error(
-        "Error: cannot parse input; parse-manifests only support YAML input"
-      );
-      console.error(e);
-    }
-  })();
+if (process.argv.length < 2) {
+  usage();
+  throw new Error("parse-manifests need some YAML input");
 }
+(async () => {
+  const input = await getStdin();
+  const format = getOutputFormat();
+  try {
+    if (input) {
+      if (format === "markdown") {
+        const markdown = toMarkdown(input);
+        console.log(markdown);
+        return;
+      }
+      console.log(JSON.stringify(parseManifests(input), null, 2));
+    } else {
+      usage();
+    }
+  } catch (e) {
+    console.error(
+      "Error: cannot parse input; parse-manifests only support YAML input"
+    );
+    console.error(e);
+  }
+})();
