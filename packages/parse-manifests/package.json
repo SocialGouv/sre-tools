@@ -1,7 +1,7 @@
 {
   "name": "@socialgouv/parse-manifests",
   "description": "Parse and summarize a bunch of kubernetes YAML manifests",
-  "version": "1.9.3",
+  "version": "1.9.4",
   "main": "index.js",
   "type": "module",
   "types": "index.d.ts",
