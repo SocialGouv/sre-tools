@@ -1,12 +1,20 @@
-# parse-manifests
+# @socialgouv/parse-manifests
 
 Extract basic informations from a bunch of kubernetes manifests
 
 ## Usage
 
+### Bin
+
+```sh
+cat manifests.yml | parse-manifests [--json|markdown]
+```
+
+### Module
+
 ```js
 import fs from "fs";
-import parseManifests from "@company/parse-manifests";
+import parseManifests from "@socialgouv/parse-manifests";
 
 const manifests = fs.readFileSync("./sample.yml").toString();
 

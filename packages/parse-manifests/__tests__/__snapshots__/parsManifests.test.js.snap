@@ -15,6 +15,7 @@ Object {
     "ghcr.io/company/app/frontend-version1:1.1.0-alpha.6",
     "ghcr.io/company/app/frontend-version2:1.1.0-alpha.6",
   ],
+  "isProduction": false,
   "manifests": Array [
     Object {
       "kind": "Deployment",
