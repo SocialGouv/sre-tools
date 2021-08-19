@@ -5,9 +5,9 @@ exports[`should render markdown 1`] = `
 <details>
   <summary>Ingresses</summary>
 
- - 🚀 [https://backend-app-preprod.dev.company.com](backend-app-preprod.dev.company.com)
- - 🚀 [https://version1-app-preprod.dev.company.com](version1-app-preprod.dev.company.com)
- - 🚀 [https://version2-app-preprod.dev.company.com](version2-app-preprod.dev.company.com)
+ - 🚀 [backend-app-preprod.dev.company.com](https://backend-app-preprod.dev.company.com)
+ - 🚀 [version1-app-preprod.dev.company.com](https://version1-app-preprod.dev.company.com)
+ - 🚀 [version2-app-preprod.dev.company.com](https://version2-app-preprod.dev.company.com)
 
 </details>
 
