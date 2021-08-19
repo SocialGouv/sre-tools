@@ -7,7 +7,7 @@ Extract basic informations from a bunch of kubernetes manifests
 ### Bin
 
 ```sh
-cat manifests.yml | parse-manifests [--json|markdown]
+cat manifests.yml | parse-manifests [--json|markdown|text]
 ```
 
 ### Module
