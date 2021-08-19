@@ -70,6 +70,7 @@ const parseManifests = (yaml) => {
     doc.toJSON()
   );
   const result = {
+    isProduction: isProduction(manifests),
     manifests: getResume(manifests),
     hosts: getHosts(manifests),
     images: getImages(manifests),
