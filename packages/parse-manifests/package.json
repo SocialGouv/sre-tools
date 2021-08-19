@@ -10,6 +10,7 @@
     "parse-manifests": "bin/index.js"
   },
   "dependencies": {
+    "get-stdin": "^9.0.0",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
