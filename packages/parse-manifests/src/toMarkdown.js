@@ -13,7 +13,7 @@ const toMarkdown = (manifests) => {
 <details>
   <summary>Ingresses</summary>
 
-${parsed.hosts.map((host) => ` - 🚀 [https://${host}](${host})`).join("\n")}
+${parsed.hosts.map((host) => ` - 🚀 [${host}](https://${host})`).join("\n")}
 
 </details>
 
