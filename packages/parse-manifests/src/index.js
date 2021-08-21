@@ -8,7 +8,7 @@ const getHosts = (manifests) => {
 };
 
 const getNamespace = (manifests) => {
-  return manifests[0].metadata.namespace;
+  return manifests.filter((m) => m.kind !== "Namespace")[0].metadata.namespace;
 };
 
 /** extract some annotation from first deployment */
