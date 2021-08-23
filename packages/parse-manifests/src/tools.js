@@ -1,6 +1,9 @@
 const GRAFANA_URL =
   process.env.GRAFANA_URL || "https://grafana.fabrique.social.gouv.fr";
 
+const RANCHER_URL =
+  process.env.RANCHER_URL || "https://rancher.fabrique.social.gouv.fr";
+
 export const getGrafanaLogsUrl = (parsed) => {
   const namespace = parsed.namespace;
   return `${GRAFANA_URL}/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22${namespace}%5C%22%7D%22%7D%5D`;
@@ -20,5 +23,5 @@ export const getGrafanaWorkloadsUrl = (parsed) => {
 
 export const getRancherUrl = (parsed) => {
   const projectId = process.env.RANCHER_PROJECT_ID || "";
-  return `https://rancher.fabrique.social.gouv.fr/p/${projectId}/workloads`;
+  return projectId ? `${RANCHER_URL}/p/${projectId}/workloads` : RANCHER_URL;
 };
