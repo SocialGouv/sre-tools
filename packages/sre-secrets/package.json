@@ -33,7 +33,7 @@
     "@socialgouv/eslint-config-typescript": "^1.82.0",
     "@tsconfig/node14": "^1.0.1",
     "@types/jest": "^26.0.24",
-    "@types/js-yaml": "^4.0.2",
+    "@types/js-yaml": "^4.0.3",
     "@types/node": "^16.4.1",
     "@types/yargs": "^17.0.2",
     "eslint": "^7.31.0",
