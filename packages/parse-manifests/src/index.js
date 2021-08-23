@@ -66,9 +66,9 @@ const isProduction = (manifests) => {
 /** parse a bunch of yaml manifests */
 const parseManifests = (yaml) => {
   const options = { prettyErrors: true };
-  const manifests = YAML.parseAllDocuments(yaml, options).map((doc) =>
-    doc.toJSON()
-  );
+  const manifests = YAML.parseAllDocuments(yaml, options)
+    .map((doc) => doc.toJSON())
+    .filter(Boolean);
   const result = {
     isProduction: isProduction(manifests),
     manifests: getResume(manifests),
