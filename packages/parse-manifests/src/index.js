@@ -58,8 +58,9 @@ const isProduction = (manifests) => {
   const ingresses = manifests.filter((m) => m.kind === "Ingress");
   return !!ingresses.filter(
     (ing) =>
+      ing.metadata.annotations &&
       ing.metadata.annotations["certmanager.k8s.io/cluster-issuer"] ===
-      "letsencrypt-prod"
+        "letsencrypt-prod"
   ).length;
 };
 
