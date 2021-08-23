@@ -27,15 +27,15 @@ ${getGrafanaLogsUrl(parsed)}
 
 #### 📈 Pods monitoring for namespace ${parsed.namespace}:
 
- ${getGrafanaPodsUrl(parsed)}
+${getGrafanaPodsUrl(parsed)}
 
 #### 📈 Workloads monitoring for namespace ${parsed.namespace}:
 
- ${getGrafanaWorkloadsUrl(parsed)}
+${getGrafanaWorkloadsUrl(parsed)}
 
 #### 👮‍♂️ Rancher project ${parsed.namespace}:
 
- ${getRancherUrl(parsed)}
+${getRancherUrl(parsed)}
 
 `;
 };
