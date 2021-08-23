@@ -95,3 +95,29 @@ console.log(parseManifests(manifests));
 }
 
 ```
+
+---
+
+#### example markdown output with [sample.yml](./sample.yml) :
+
+---
+
+<details>
+  <summary>Ingresses</summary>
+
+ - 🚀 [backend-app-preprod.dev.company.com](https://backend-app-preprod.dev.company.com)
+ - 🚀 [version1-app-preprod.dev.company.com](https://version1-app-preprod.dev.company.com)
+ - 🚀 [version2-app-preprod.dev.company.com](https://version2-app-preprod.dev.company.com)
+
+</details>
+
+<details>
+  <summary>Docker images</summary>
+
+ - 📦 docker pull ghcr.io/company/app/backend:1.1.0-alpha.6
+ - 📦 docker pull ghcr.io/company/docker/wait-for-postgres:6.38.3
+ - 📦 docker pull ghcr.io/company/app/frontend-version1:1.1.0-alpha.6
+ - 📦 docker pull ghcr.io/company/app/frontend-version2:1.1.0-alpha.6
+
+</details>
+
