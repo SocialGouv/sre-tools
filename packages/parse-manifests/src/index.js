@@ -58,17 +58,18 @@ const isProduction = (manifests) => {
   const ingresses = manifests.filter((m) => m.kind === "Ingress");
   return !!ingresses.filter(
     (ing) =>
+      ing.metadata.annotations &&
       ing.metadata.annotations["certmanager.k8s.io/cluster-issuer"] ===
-      "letsencrypt-prod"
+        "letsencrypt-prod"
   ).length;
 };
 
 /** parse a bunch of yaml manifests */
 const parseManifests = (yaml) => {
   const options = { prettyErrors: true };
-  const manifests = YAML.parseAllDocuments(yaml, options).map((doc) =>
-    doc.toJSON()
-  );
+  const manifests = YAML.parseAllDocuments(yaml, options)
+    .map((doc) => doc.toJSON())
+    .filter(Boolean);
   const result = {
     isProduction: isProduction(manifests),
     manifests: getResume(manifests),
