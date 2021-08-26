@@ -57,31 +57,43 @@ const Copier = ({ text }) => {
 };
 
 const Editor = () => {
+  const [formData, setFormData] = useState({
+    cluster: "dev",
+    value: "",
+    namespace: "",
+    name: "",
+  });
   const [encrypted, setEncrypted] = useState(null);
   const [yamlResult, setYamlResult] = useState(null);
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    //console.log("onSubmit", data);
+    setFormData(data);
     setYamlResult("");
     setEncrypted("");
-    const pemKey = certificates[data.cluster];
-    encryptValue({
-      pemKey,
-      ...data,
-    })
-      .then(async (value) => {
-        setEncrypted(value);
-        const sealedSecret = await getSealedSecret({
-          pemKey,
-          namespace: data.namespace || "some-namespace",
-          name: data.name || "some-secret-name",
-          scope: data.scope,
-          values: {
-            VALUE: data.value,
-          },
-        });
-
-        setYamlResult(yaml.dump(sealedSecret));
-      })
-      .catch(console.log);
+    if (data.value && data.value !== formData.value) {
+      const pemKey = certificates[data.cluster];
+      const sealedSecret = await getSealedSecret({
+        pemKey,
+        namespace: data.namespace || "some-namespace",
+        name: data.name || "some-secret-name",
+        scope: data.scope,
+        values: {
+          VALUE: data.value,
+        },
+      });
+      if (data.scope === "strict" && (!data.namespace || !data.name)) {
+        console.log("namespace and name are mandatory");
+        setYamlResult("");
+        setEncrypted("");
+      } else if (!data.value) {
+        console.log("value is mandatory");
+        setYamlResult("");
+        setEncrypted("");
+      } else {
+        setEncrypted(sealedSecret.spec.encryptedData.VALUE);
+        setYamlResult(yaml.dump(sealedSecret, { noRefs: true }));
+      }
+    }
   };
   return (
     <Container>
@@ -90,10 +102,10 @@ const Editor = () => {
         <Col xs={12}>
           <Card>
             <Card.Body>
-              <Form onSubmit={onSubmit} />
+              <Form onSubmit={onSubmit} initialFormData={formData} />
             </Card.Body>
           </Card>
-          {encrypted && (
+          {
             <>
               <Card style={{ marginTop: 10 }}>
                 <Card.Body>
@@ -112,7 +124,7 @@ const Editor = () => {
                 </Card.Body>
               </Card>
             </>
-          )}
+          }
         </Col>
       </Row>
     </Container>
