@@ -1,7 +1,7 @@
 import React from "react";
 
 import { Row, Col, Form as BsForm, Button } from "react-bootstrap";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useQueryParams } from "./useQueryParams";
 
 const RadioChoice = React.forwardRef(({ name, value, ...props }, ref) => (
@@ -33,31 +33,54 @@ const removeInvalidKeys = (keyValidator) => (object) =>
 
 const keepValidQueryParamKeys = removeInvalidKeys(isValidQueryParamsKey);
 
-export const Form = ({ onSubmit }) => {
+export const Form = ({ onSubmit, initialFormData }) => {
   const [queryParamsData, setQueryParamsData] = useQueryParams();
 
+  const queryParams = keepValidQueryParamKeys(queryParamsData);
+
   const defaultValues = {
-    cluster: "dev",
-    value: "",
-    namespace: "",
-    name: "",
-    scope: "cluster",
-    ...keepValidQueryParamKeys(queryParamsData),
+    ...initialFormData,
+    ...queryParams,
+    scope: queryParams.cluster === "prod" ? "strict" : "cluster",
   };
 
-  const { register, handleSubmit, watch, formState, setValue, trigger } =
+  const { register, handleSubmit, watch, setValue, trigger, getValues } =
     useForm({
       mode: "onChange",
       defaultValues,
     });
+
   const _onSubmit = (data) => {
     setQueryParamsData(keepValidQueryParamKeys(data));
-
     onSubmit(data);
+    //console.log("submit", data);
   };
 
   const cluster = watch("cluster");
   const scope = watch("scope");
+  const value = watch("value");
+
+  React.useEffect(() => {
+    const subscription = watch(
+      ("value",
+      ({ name, type }) => {
+        const values = getValues();
+        _onSubmit(values);
+      })
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
+
+  React.useEffect(() => {
+    const subscription = watch(
+      ("cluster",
+      ({ name, type }) => {
+        const values = getValues();
+        _onSubmit(values);
+      })
+    );
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   return (
     <BsForm onSubmit={handleSubmit(_onSubmit)}>
@@ -91,7 +114,7 @@ export const Form = ({ onSubmit }) => {
             </Col>
           </Row>
         </Col>
-        <Col>
+        <Col style={{ display: "none" }}>
           <Row>
             <Col xs={12} sm={3}>
               <BsForm.Label>Scope</BsForm.Label>
@@ -161,21 +184,13 @@ export const Form = ({ onSubmit }) => {
         <BsForm.Control
           as="textarea"
           name="value"
+          id="value"
           style={{ marginTop: 10 }}
           rows={4}
-          {...register("value", { required: true })}
-          onChange={() => trigger()}
+          {...register("value", { required: true, value })}
           placeholder="Value to encrypt"
         />
       </BsForm.Group>
-      <Button
-        disabled={!formState.isDirty || !formState.isValid}
-        block
-        variant="primary"
-        type="submit"
-      >
-        Encrypt
-      </Button>
     </BsForm>
   );
 };
