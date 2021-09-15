@@ -87,7 +87,22 @@ Object {
       "name": "azure-pg-user",
       "namespace": "app-preprod",
     },
+    Object {
+      "kind": "Ingress",
+      "name": "cdtn-redirect",
+      "namespace": "cdtn",
+    },
   ],
   "namespace": "app-preprod",
+  "redirects": Array [
+    Object {
+      "from": "www.some.url",
+      "to": "https://target.fr$request_uri",
+    },
+    Object {
+      "from": "www.some.alternative.url",
+      "to": "https://target.fr$request_uri",
+    },
+  ],
 }
 `;

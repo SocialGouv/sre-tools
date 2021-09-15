@@ -17,6 +17,19 @@ ${parsed.hosts.map((host) => ` - 🚀 [${host}](https://${host})`).join("\n")}
 
 </details>
 
+
+${
+  parsed.redirects.length &&
+  `### Redirects
+
+${parsed.redirects
+  .map(({ from, to }) => ` - https://${from} ➡️ ${to}`)
+  .join("\n")}
+`
+}
+
+
+
 <details>
   <summary>Docker images</summary>
 

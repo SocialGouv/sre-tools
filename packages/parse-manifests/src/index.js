@@ -1,9 +1,31 @@
 import YAML from "yaml";
 
+const isRedirectIngress = (ingress) =>
+  "nginx.ingress.kubernetes.io/permanent-redirect" in
+  ingress.metadata.annotations;
+
 /** extract hostnames from a set of ingresses */
 const getHosts = (manifests) => {
-  const ingresses = manifests.filter((m) => m.kind === "Ingress");
+  const ingresses = manifests
+    .filter((m) => m.kind === "Ingress")
+    .filter((m) => !isRedirectIngress(m));
   const hosts = ingresses.flatMap((ing) => ing.spec.rules.map((r) => r.host));
+  return hosts;
+};
+
+/** extract redirects from a set of ingresses */
+const getRedirects = (manifests) => {
+  const ingresses = manifests
+    .filter((m) => m.kind === "Ingress")
+    .filter(isRedirectIngress);
+  const hosts = ingresses.flatMap((ing) =>
+    ing.spec.rules.map((r) => ({
+      from: r.host,
+      to: ing.metadata.annotations[
+        "nginx.ingress.kubernetes.io/permanent-redirect"
+      ],
+    }))
+  );
   return hosts;
 };
 
@@ -74,6 +96,7 @@ const parseManifests = (yaml) => {
     isProduction: isProduction(manifests),
     manifests: getResume(manifests),
     hosts: getHosts(manifests),
+    redirects: getRedirects(manifests),
     images: getImages(manifests),
     namespace: getNamespace(manifests),
     "app.github.com/run": getDeploymentAnnotation(

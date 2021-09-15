@@ -8,6 +8,12 @@ exports[`should render text 1`] = `
  - 🚀 https://version1-app-preprod.dev.company.com
  - 🚀 https://version2-app-preprod.dev.company.com
 
+### Redirects
+
+ - https://www.some.url ➡️ https://target.fr$request_uri
+ - https://www.some.alternative.url ➡️ https://target.fr$request_uri
+
+
 ### Docker images
 
  - 📦 docker pull ghcr.io/company/app/backend:1.1.0-alpha.6
