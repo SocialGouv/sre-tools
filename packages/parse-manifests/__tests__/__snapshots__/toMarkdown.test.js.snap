@@ -12,10 +12,13 @@ exports[`should render markdown 1`] = `
 </details>
 
 
-### Redirects
+<details>
+  <summary>### Redirects</summary>
 
  - https://www.some.url ➡️ https://target.fr$request_uri
  - https://www.some.alternative.url ➡️ https://target.fr$request_uri
+
+</details>
 
 
 
