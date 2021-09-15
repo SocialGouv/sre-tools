@@ -32,7 +32,7 @@ const getDeploymentAnnotation = (manifests, annotation) => {
 const getImages = (manifests) => {
   const deployments = manifests.filter((m) => m.kind === "Deployment");
   if (deployments.length) {
-    return deployments.flatMap((deploy) => [
+    const images = deployments.flatMap((deploy) => [
       ...deploy.spec.template.spec.containers.map(
         (container) => container.image
       ),
@@ -42,6 +42,7 @@ const getImages = (manifests) => {
         )) ||
         []),
     ]);
+    return Array.from(new Set(images)).sort();
   }
 };
 
