@@ -17,9 +17,9 @@ exports[`should render text 1`] = `
 ### Docker images
 
  - 📦 docker pull ghcr.io/company/app/backend:1.1.0-alpha.6
- - 📦 docker pull ghcr.io/company/docker/wait-for-postgres:6.38.3
  - 📦 docker pull ghcr.io/company/app/frontend-version1:1.1.0-alpha.6
  - 📦 docker pull ghcr.io/company/app/frontend-version2:1.1.0-alpha.6
+ - 📦 docker pull ghcr.io/company/docker/wait-for-postgres:6.38.3
 
 ### Debug
 

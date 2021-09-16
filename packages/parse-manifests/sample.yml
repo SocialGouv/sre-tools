@@ -96,6 +96,8 @@ spec:
             claimName: uploads
           name: uploads
       initContainers:
+        - name: some-duplicate-image
+          image: ghcr.io/company/docker/wait-for-postgres:6.38.3
         - env:
             - name: WAIT_FOR_RETRIES
               value: "24"

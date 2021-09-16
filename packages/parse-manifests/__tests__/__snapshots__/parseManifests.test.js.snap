@@ -11,9 +11,9 @@ Object {
   ],
   "images": Array [
     "ghcr.io/company/app/backend:1.1.0-alpha.6",
-    "ghcr.io/company/docker/wait-for-postgres:6.38.3",
     "ghcr.io/company/app/frontend-version1:1.1.0-alpha.6",
     "ghcr.io/company/app/frontend-version2:1.1.0-alpha.6",
+    "ghcr.io/company/docker/wait-for-postgres:6.38.3",
   ],
   "isProduction": false,
   "manifests": Array [
