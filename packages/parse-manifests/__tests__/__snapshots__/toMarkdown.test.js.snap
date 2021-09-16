@@ -11,6 +11,18 @@ exports[`should render markdown 1`] = `
 
 </details>
 
+
+<details>
+  <summary>### Redirects</summary>
+
+ - https://www.some.url ➡️ https://target.fr$request_uri
+ - https://www.some.alternative.url ➡️ https://target.fr$request_uri
+
+</details>
+
+
+
+
 <details>
   <summary>Docker images</summary>
 
