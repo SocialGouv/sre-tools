@@ -19,8 +19,8 @@ ${parsed.hosts.map((host) => ` - 🚀 [${host}](https://${host})`).join("\n")}
 
 
 ${
-  parsed.redirects.length &&
-  `<details>
+  (parsed.redirects.length &&
+    `<details>
   <summary>### Redirects</summary>
 
 ${parsed.redirects
@@ -28,7 +28,8 @@ ${parsed.redirects
   .join("\n")}
 
 </details>
-`
+`) ||
+  ""
 }
 
 
