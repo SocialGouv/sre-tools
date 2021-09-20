@@ -1,8 +1,9 @@
 import YAML from "yaml";
 
 const isRedirectIngress = (ingress) =>
+  ingress.metadata.annotations &&
   "nginx.ingress.kubernetes.io/permanent-redirect" in
-  ingress.metadata.annotations;
+    ingress.metadata.annotations;
 
 /** extract hostnames from a set of ingresses */
 const getHosts = (manifests) => {
