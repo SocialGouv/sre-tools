@@ -7,8 +7,9 @@ import path from "path";
 
 test("should parse manifests correctly", () => {
   const yaml = fs.readFileSync(path.join("sample.yml")).toString();
-  expect(parseManifests(yaml)).toMatchSnapshot();
-  expect(parseManifests(yaml).isProduction).toEqual(false);
+  const redirect = fs.readFileSync(path.join("redirect.yml")).toString();
+  expect(parseManifests(yaml + redirect)).toMatchSnapshot();
+  expect(parseManifests(yaml + redirect).isProduction).toEqual(false);
 });
 
 test("PROD manifests correctly should be detected based on ingress rule", () => {

@@ -1,0 +1,23 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/permanent-redirect: https://target.fr$request_uri
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+  labels:
+    app.kubernetes.io/component: redirect
+    app.kubernetes.io/name: xxx
+  name: xxx-redirect
+  namespace: xxx
+spec:
+  rules:
+    - host: www.some.url
+    - host: www.some.alternative.url
+  tls:
+    - hosts:
+        - www.some.url
+        - www.some.alternative.url
+      secretName: redirect-crt

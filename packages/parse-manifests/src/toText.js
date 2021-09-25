@@ -14,10 +14,10 @@ const toText = (manifests) => {
 ### Ingresses
 
 ${parsed.hosts.map((host) => ` - 🚀 https://${host}`).join("\n")}
-
 ${
   (parsed.redirects.length &&
-    `### Redirects
+    `
+### Redirects
 
 ${parsed.redirects
   .map(({ from, to }) => ` - https://${from} ➡️ ${to}`)
@@ -25,7 +25,6 @@ ${parsed.redirects
 `) ||
   ""
 }
-
 ### Docker images
 
 ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}

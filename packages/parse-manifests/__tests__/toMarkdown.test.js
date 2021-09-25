@@ -7,5 +7,11 @@ import path from "path";
 
 test("should render markdown", () => {
   const yaml = fs.readFileSync(path.join("sample.yml")).toString();
+  const redirect = fs.readFileSync(path.join("redirect.yml")).toString();
+  expect(toMarkdown(yaml + redirect)).toMatchSnapshot();
+});
+
+test("should render markdown without redirects", () => {
+  const yaml = fs.readFileSync(path.join("sample.yml")).toString();
   expect(toMarkdown(yaml)).toMatchSnapshot();
 });

@@ -16,12 +16,11 @@ const toMarkdown = (manifests) => {
 ${parsed.hosts.map((host) => ` - 🚀 [${host}](https://${host})`).join("\n")}
 
 </details>
-
-
 ${
   (parsed.redirects.length &&
-    `<details>
-  <summary>### Redirects</summary>
+    `
+<details>
+  <summary>Redirects</summary>
 
 ${parsed.redirects
   .map(({ from, to }) => ` - https://${from} ➡️ ${to}`)
@@ -31,9 +30,6 @@ ${parsed.redirects
 `) ||
   ""
 }
-
-
-
 <details>
   <summary>Docker images</summary>
 
@@ -55,7 +51,6 @@ ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
  }](${getGrafanaWorkloadsUrl(parsed)})
  - [👮‍♂️ Rancher project ${parsed.namespace}](${getRancherUrl(parsed)})
 
-   </summary>
 </details>
 `;
 };
