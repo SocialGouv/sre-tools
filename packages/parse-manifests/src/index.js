@@ -20,12 +20,16 @@ const getRedirects = (manifests) => {
     .filter((m) => m.kind === "Ingress")
     .filter(isRedirectIngress);
   const hosts = ingresses.flatMap((ing) =>
-    ing.spec.rules.map((r) => ({
-      from: r.host,
-      to: ing.metadata.annotations[
-        "nginx.ingress.kubernetes.io/permanent-redirect"
-      ],
-    }))
+    ing.spec.rules.map((r) => {
+      const destination =
+        ing.metadata.annotations[
+          "nginx.ingress.kubernetes.io/permanent-redirect"
+        ];
+      return {
+        from: r.host,
+        to: destination,
+      };
+    })
   );
   return hosts;
 };

@@ -89,8 +89,8 @@ Object {
     },
     Object {
       "kind": "Ingress",
-      "name": "cdtn-redirect",
-      "namespace": "cdtn",
+      "name": "xxx-redirect",
+      "namespace": "xxx",
     },
   ],
   "namespace": "app-preprod",
