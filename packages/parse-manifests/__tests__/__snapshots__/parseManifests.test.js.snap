@@ -4,6 +4,47 @@ exports[`should parse manifests correctly 1`] = `
 Object {
   "app.github.com/repo": "company/app",
   "app.github.com/run": "1127909139",
+  "deployments": Array [
+    Object {
+      "containers": Array [
+        Object {
+          "image": "ghcr.io/company/app/backend:1.1.0-alpha.6",
+          "name": "backend",
+        },
+      ],
+      "initContainers": Array [
+        Object {
+          "image": "ghcr.io/company/docker/wait-for-postgres:6.38.3",
+          "name": "some-duplicate-image",
+        },
+        Object {
+          "image": "ghcr.io/company/docker/wait-for-postgres:6.38.3",
+          "name": "wait-for-postgres",
+        },
+      ],
+      "name": "backend",
+    },
+    Object {
+      "containers": Array [
+        Object {
+          "image": "ghcr.io/company/app/frontend-version1:1.1.0-alpha.6",
+          "name": "version1",
+        },
+      ],
+      "initContainers": Array [],
+      "name": "version1",
+    },
+    Object {
+      "containers": Array [
+        Object {
+          "image": "ghcr.io/company/app/frontend-version2:1.1.0-alpha.6",
+          "name": "version2",
+        },
+      ],
+      "initContainers": Array [],
+      "name": "version2",
+    },
+  ],
   "hosts": Array [
     "backend-app-preprod.dev.company.com",
     "version1-app-preprod.dev.company.com",
