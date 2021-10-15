@@ -5,21 +5,9 @@ on:
 
 jobs:
   build:
-    strategy:
-      # Don't fast-fail on tag and master
-      fail-fast: ${{ github.event_name == 'pull_request' || (github.ref !=
-        'refs/heads/master' && !startsWith(github.ref, 'refs/tags/')) }}
-      matrix:
-        include:
-          - os: macOS-latest
-            node-version: 16.x
-            kind: test
-          - os: ubuntu-latest
-            node-version: 16.x
-            kind: release
 
-    name: ${{ matrix.kind }} on ${{ matrix.node-version }} (${{ matrix.os }})
-    runs-on: ${{ matrix.os }}
+    name: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
@@ -27,15 +15,10 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 16.x
           cache: yarn
 
-      - name: Install kubeseal for macOS
-        if: matrix.os == 'macOS-latest'
-        run: brew install kubeseal
-
       - name: Install kubeseal for Ubuntu
-        if: matrix.os == 'ubuntu-latest'
         run: |
           wget https://github.com/bitnami-labs/sealed-secrets/releases/download/v0.12.6/kubeseal-linux-amd64 -O kubeseal
           #
@@ -51,20 +34,16 @@ jobs:
         run: yarn build
 
       - name: Test
-        if: matrix.kind == 'test'
         run: yarn test
 
       - name: Test and coverage check
-        if: matrix.kind == 'release'
         run: yarn test-coverage
 
       - name: Send test coverage to codecov
-        if: matrix.kind == 'release'
         uses: codecov/codecov-action@v2
         continue-on-error: true
 
       - name: Generate sre-secrets artifacts
-        if: matrix.kind == 'release'
         uses: actions/upload-artifact@v2
         with:
           name: sre-secrets
