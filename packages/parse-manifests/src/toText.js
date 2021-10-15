@@ -3,7 +3,7 @@ import parseManifests from "./index.js";
 import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
-  getRancherUrl,
+  getRancherUrls,
   getGrafanaPodsUrl,
 } from "./tools.js";
 
@@ -45,7 +45,9 @@ ${getGrafanaWorkloadsUrl(parsed)}
 
 #### 👮‍♂️ Rancher project ${parsed.namespace}:
 
-${getRancherUrl(parsed)}
+${getRancherUrls(parsed)
+  .map(({ name, url }) => ` - ${name} : ${url}`)
+  .join("\n")}
 
 `;
 };

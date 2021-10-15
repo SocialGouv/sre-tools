@@ -21,7 +21,26 @@ export const getGrafanaWorkloadsUrl = (parsed) => {
   return `${GRAFANA_URL}/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}&var-type=deployment`;
 };
 
-export const getRancherUrl = (parsed) => {
+export const getRancherUrls = (parsed) => {
   const projectId = process.env.RANCHER_PROJECT_ID || "";
-  return projectId ? `${RANCHER_URL}/p/${projectId}/workloads` : RANCHER_URL;
+  if (projectId) {
+    return [
+      {
+        name: `Project rancher ${parsed.namespace}`,
+        url: `${RANCHER_URL}/p/${projectId}/workloads`,
+      },
+      ...((parsed.deployments &&
+        parsed.deployments.map((deployment) => ({
+          name: `Deployment ${deployment.name}`,
+          url: `${RANCHER_URL}/p/${projectId}/workload/deployment:${parsed.namespace}:${deployment.name}`,
+        }))) ||
+        []),
+    ];
+  }
+  return [
+    {
+      name: `Project rancher ${parsed.namespace}`,
+      url: RANCHER_URL,
+    },
+  ];
 };

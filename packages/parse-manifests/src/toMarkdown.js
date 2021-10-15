@@ -2,7 +2,7 @@ import parseManifests from "./index.js";
 import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
-  getRancherUrl,
+  getRancherUrls,
   getGrafanaPodsUrl,
 } from "./tools.js";
 
@@ -49,7 +49,9 @@ ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
  - [📈 Workloads monitoring for namespace ${
    parsed.namespace
  }](${getGrafanaWorkloadsUrl(parsed)})
- - [👮‍♂️ Rancher project ${parsed.namespace}](${getRancherUrl(parsed)})
+${getRancherUrls(parsed)
+  .map(({ name, url }) => ` - [👮‍♂️ ${name}}](${url})`)
+  .join("\n")}
 
 </details>
 `;
