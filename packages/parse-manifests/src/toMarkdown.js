@@ -50,7 +50,7 @@ ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
    parsed.namespace
  }](${getGrafanaWorkloadsUrl(parsed)})
 ${getRancherUrls(parsed)
-  .map(({ name, url }) => ` - [👮‍♂️ ${name}}](${url})`)
+  .map(({ name, url }) => ` - [👮‍♂️ ${name}](${url})`)
   .join("\n")}
 
 </details>
