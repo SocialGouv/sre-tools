@@ -4,16 +4,16 @@
     "main.js.map": "/sre-tools/static/js/main.ed3735ff.chunk.js.map",
     "runtime-main.js": "/sre-tools/static/js/runtime-main.111c2aa1.js",
     "runtime-main.js.map": "/sre-tools/static/js/runtime-main.111c2aa1.js.map",
-    "static/css/2.7d64f28b.chunk.css": "/sre-tools/static/css/2.7d64f28b.chunk.css",
+    "static/css/2.bb6cd37f.chunk.css": "/sre-tools/static/css/2.bb6cd37f.chunk.css",
     "static/js/2.a48bb55d.chunk.js": "/sre-tools/static/js/2.a48bb55d.chunk.js",
     "static/js/2.a48bb55d.chunk.js.map": "/sre-tools/static/js/2.a48bb55d.chunk.js.map",
     "index.html": "/sre-tools/index.html",
-    "static/css/2.7d64f28b.chunk.css.map": "/sre-tools/static/css/2.7d64f28b.chunk.css.map",
+    "static/css/2.bb6cd37f.chunk.css.map": "/sre-tools/static/css/2.bb6cd37f.chunk.css.map",
     "static/js/2.a48bb55d.chunk.js.LICENSE.txt": "/sre-tools/static/js/2.a48bb55d.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.111c2aa1.js",
-    "static/css/2.7d64f28b.chunk.css",
+    "static/css/2.bb6cd37f.chunk.css",
     "static/js/2.a48bb55d.chunk.js",
     "static/js/main.ed3735ff.chunk.js"
   ]
