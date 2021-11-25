@@ -94,6 +94,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
               <RadioChoice
                 name="cluster"
                 value="dev"
+                label="dev / preprod"
                 {...register("cluster")}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
