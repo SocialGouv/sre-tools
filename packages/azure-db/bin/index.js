@@ -41,8 +41,21 @@ const args = yargs
       .default("database", () => `db_${randomInt}`)
       .describe("user", "new user name")
       .default("user", () => `user_${randomInt}`)
-      .describe("pg-name", "alternative PG server prefix")
+      .describe(
+        "pg-host",
+        "alternative PG server host ex: some-srv.postgres.database.azure.com"
+      )
+      .describe(
+        "pg-admin-secret",
+        "name of the secret for the create-db job secretKeyRef"
+      )
+      .default("pg-admin-secret", "azure-admin-pg-user")
       .describe("secret-name", "alternative secret name")
+      .default("secret-name", "azure-pg-user")
+      .describe(
+        "dry-run",
+        "Dont kubectl apply the create-db job, just print it"
+      )
       .demandOption(["cluster", "application"]);
   })
   .command("drop", "destroy a database and a user", (yargs) => {
@@ -79,21 +92,29 @@ const run = async () => {
   const argv = args.argv;
   const namespace = `${argv.application}-secret`;
   if (argv._[0] === "create") {
+    const dryRun = argv.dryRun;
     console.log(
       `Create DB ${argv.database} for user ${argv.user} in application ${argv.application} in cluster ${argv.cluster}`
     );
     const password = getRandomPassword();
-    await createDb({
+    const job = await createDb({
       cluster: argv.cluster,
       namespace,
       database: argv.database,
+      secretRefName: argv.pgAdminSecret,
       user: argv.user,
       password,
+      dryRun,
     });
-    const dbHost = getPgServerHostname(
-      argv.pgName || argv.application,
-      argv.cluster === "prod" ? "prod" : "dev"
-    );
+    if (dryRun) {
+      console.log(JSON.stringify(job.toJSON(), null, 2));
+    }
+    const dbHost =
+      argv.pgHost ||
+      getPgServerHostname(
+        argv.application,
+        argv.cluster === "prod" ? "prod" : "dev"
+      );
     console.log(
       `Created create-db job in namespace ${namespace} on cluster ${argv.cluster}`
     );
