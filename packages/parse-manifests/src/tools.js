@@ -6,7 +6,7 @@ const RANCHER_URL =
 
 export const getGrafanaLogsUrl = (parsed) => {
   const namespace = parsed.namespace;
-  return `${GRAFANA_URL}/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22${namespace}%5C%22%7D%22%7D%5D`;
+  return `${GRAFANA_URL}/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22${namespace}%5C%22%7D%22%7D%5D`;
 };
 
 export const getGrafanaPodsUrl = (parsed) => {
