@@ -24,7 +24,7 @@ exports[`should render text 1`] = `
 
 #### 📕 Loki logs for namespace app-preprod:
 
-https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
+https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
 
 #### 📈 Pods monitoring for namespace app-preprod:
 
@@ -65,7 +65,7 @@ exports[`should render text with rancher details 1`] = `
 
 #### 📕 Loki logs for namespace app-preprod:
 
-https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
+https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
 
 #### 📈 Pods monitoring for namespace app-preprod:
 
@@ -104,7 +104,7 @@ exports[`should render text without redirect 1`] = `
 
 #### 📕 Loki logs for namespace app-preprod:
 
-https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki-tail%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
+https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D
 
 #### 📈 Pods monitoring for namespace app-preprod:
 
