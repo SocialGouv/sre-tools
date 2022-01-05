@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Card, Jumbotron, Container, Row, Col } from "react-bootstrap";
-import { getSealedSecret, encryptValue } from "@socialgouv/aes-gcm-rsa-oaep";
+import { getSealedSecret } from "@socialgouv/aes-gcm-rsa-oaep";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Clipboard } from "react-feather";
 import yaml from "js-yaml";
@@ -72,14 +72,23 @@ const Editor = () => {
     setEncrypted("");
     if (data.value && data.value !== formData.value) {
       const pemKey = certificates[data.cluster];
+      const values = {};
+      if (data.value.match(/^([A-Z]+)=(.+)$/im)) {
+        data.value.split("\n").forEach((row) => {
+          const matches = row.match(/^([A-Z]+)=(.*)$/i);
+          if (matches) {
+            values[matches[1]] = matches[2];
+          }
+        });
+      } else {
+        values.VALUE = data.value;
+      }
       const sealedSecret = await getSealedSecret({
         pemKey,
         namespace: data.namespace || "some-namespace",
         name: data.name || "some-secret-name",
         scope: data.scope,
-        values: {
-          VALUE: data.value,
-        },
+        values,
       });
       if (data.scope === "strict" && (!data.namespace || !data.name)) {
         console.log("namespace and name are mandatory");
@@ -90,8 +99,15 @@ const Editor = () => {
         setYamlResult("");
         setEncrypted("");
       } else {
-        setEncrypted(sealedSecret.spec.encryptedData.VALUE);
-        setYamlResult(yaml.dump(sealedSecret, { noRefs: true }));
+        const keys = Object.keys(values);
+        if (keys.length === 1) {
+          setEncrypted(sealedSecret.spec.encryptedData[keys[0]]);
+        } else {
+          setEncrypted(
+            "Not available for multiple values, use the below secret"
+          );
+        }
+        setYamlResult(yaml.dump(sealedSecret, { noRefs: true, lineWidth: -1 }));
       }
     }
   };
