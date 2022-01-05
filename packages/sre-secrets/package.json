@@ -15,7 +15,7 @@
   "scripts": {
     "start": "tsc -w",
     "build": "tsc -p src",
-    "test": "exit 0",
+    "test": "jest",
     "lint": "eslint .",
     "test-coverage": "jest --coverage --coverageReporters=lcov --coverageReporters=text-summary"
   },
