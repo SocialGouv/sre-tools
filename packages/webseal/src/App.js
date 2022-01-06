@@ -73,9 +73,9 @@ const Editor = () => {
     if (data.value && data.value !== formData.value) {
       const pemKey = certificates[data.cluster];
       const values = {};
-      if (data.value.match(/^([A-Z]+)=(.+)$/im)) {
+      if (data.value.match(/^([\w_\d]+)=(.+)$/im)) {
         data.value.split("\n").forEach((row) => {
-          const matches = row.match(/^([A-Z]+)=(.*)$/i);
+          const matches = row.match(/^([\w_\d]+)=(.*)$/i);
           if (matches) {
             values[matches[1]] = matches[2];
           }
