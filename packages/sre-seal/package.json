@@ -17,6 +17,6 @@
     "yargs": "^17.0.1"
   },
   "devDependencies": {
-    "@kubernetes-models/sealed-secrets": "^1.6.3"
+    "@kubernetes-models/sealed-secrets": "^2.0.0"
   }
 }
