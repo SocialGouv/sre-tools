@@ -11,6 +11,11 @@ Object {
   "spec": Object {
     "backoffLimit": 5,
     "template": Object {
+      "metadata": Object {
+        "annotations": Object {
+          "kapp.k14s.io/deploy-logs": "for-new",
+        },
+      },
       "spec": Object {
         "containers": Array [
           Object {
@@ -32,7 +37,7 @@ Object {
               },
               Object {
                 "name": "NEW_DB_EXTENSIONS",
-                "value": "hstore pgcrypto citext uuid-ossp",
+                "value": "hstore pgcrypto citext uuid-ossp postgis",
               },
             ],
             "envFrom": Array [
@@ -42,7 +47,7 @@ Object {
                 },
               },
             ],
-            "image": "ghcr.io/socialgouv/docker/azure-db:6.32.2",
+            "image": "ghcr.io/socialgouv/docker/azure-db:6.56.1",
             "imagePullPolicy": "IfNotPresent",
             "name": "create-db-user",
             "resources": Object {
