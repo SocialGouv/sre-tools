@@ -13,7 +13,12 @@ const mockMath = Object.create(global.Math);
 mockMath.random = () => 0.5;
 global.Math = mockMath;
 
-process.env.CI_COMMIT_SHORT_SHA = "abcdefgh";
+process.env.SOCIALGOUV_BASE_DOMAIN = "testing";
+process.env.GITHUB_SHA = "sha-123456";
+process.env.GITHUB_REF = "ref-aaa";
+process.env.GITHUB_REPOSITORY = "socialgouv/sre-tools";
+process.env.GITHUB_JOB = "job-678";
+process.env.GITHUB_RUN_ID = "123456789";
 
 describe("Test azure-db commands", () => {
   test("createDb snapshot", async () => {

@@ -14,7 +14,7 @@
   "version": "1.13.1",
   "license": "Apache-2.0",
   "dependencies": {
-    "@socialgouv/kosko-charts": "^9.0.0",
+    "@socialgouv/kosko-charts": "^9.15.0",
     "@socialgouv/sre-seal": "^1.13.1",
     "execa": "^5.1.1",
     "yaml": "^1.10.2"

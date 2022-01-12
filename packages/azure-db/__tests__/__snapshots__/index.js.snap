@@ -11,6 +11,11 @@ Object {
   "spec": Object {
     "backoffLimit": 5,
     "template": Object {
+      "metadata": Object {
+        "annotations": Object {
+          "kapp.k14s.io/deploy-logs": "for-new",
+        },
+      },
       "spec": Object {
         "containers": Array [
           Object {
@@ -32,7 +37,7 @@ Object {
               },
               Object {
                 "name": "NEW_DB_EXTENSIONS",
-                "value": "hstore pgcrypto citext uuid-ossp",
+                "value": "hstore pgcrypto citext uuid-ossp postgis",
               },
             ],
             "envFrom": Array [
@@ -42,7 +47,7 @@ Object {
                 },
               },
             ],
-            "image": "ghcr.io/socialgouv/docker/azure-db:6.32.2",
+            "image": "ghcr.io/socialgouv/docker/azure-db:6.56.1",
             "imagePullPolicy": "IfNotPresent",
             "name": "create-db-user",
             "resources": Object {
@@ -70,13 +75,30 @@ Object {
   "apiVersion": "batch/v1",
   "kind": "Job",
   "metadata": Object {
+    "annotations": Object {
+      "kapp.k14s.io/disable-default-label-scoping-rules": "",
+      "kapp.k14s.io/disable-default-ownership-label-rules": "",
+      "kapp.k14s.io/nonce": "",
+      "kapp.k14s.io/update-strategy": "fallback-on-replace",
+    },
+    "labels": Object {
+      "application": "sre-tools",
+      "cert": "wildcard",
+      "component": "sre-tools",
+      "owner": "sre-tools",
+      "team": "sre-tools",
+    },
     "name": "sre-tools-drop-db-job-50000",
     "namespace": "namespace-2",
   },
   "spec": Object {
     "backoffLimit": 0,
     "template": Object {
-      "metadata": Object {},
+      "metadata": Object {
+        "annotations": Object {
+          "kapp.k14s.io/deploy-logs": "",
+        },
+      },
       "spec": Object {
         "containers": Array [
           Object {
@@ -100,7 +122,7 @@ Object {
                 },
               },
             ],
-            "image": "ghcr.io/socialgouv/docker/azure-db:6.32.2",
+            "image": "ghcr.io/socialgouv/docker/azure-db:6.56.1",
             "imagePullPolicy": "IfNotPresent",
             "name": "drop-db-user",
             "resources": Object {

@@ -49,7 +49,7 @@ const args = yargs
         "pg-admin-secret",
         "name of the secret for the create-db job secretKeyRef"
       )
-      .default("pg-admin-secret", "azure-admin-pg-user")
+      .default("pg-admin-secret", "azure-pg-admin-user")
       .describe("secret-name", "alternative secret name")
       .default("secret-name", "azure-pg-user")
       .describe(
