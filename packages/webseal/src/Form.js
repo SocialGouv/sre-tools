@@ -189,7 +189,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
           style={{ marginTop: 10 }}
           rows={4}
           {...register("value", { required: true, value })}
-          placeholder="Value(s) to encrypt"
+          placeholder="MY_TOKEN=SomeSuperSecretValue\n"
         />
       </BsForm.Group>
     </BsForm>
