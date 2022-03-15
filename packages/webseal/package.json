@@ -1,6 +1,6 @@
 {
   "name": "@socialgouv/webseal",
-  "version": "1.13.3",
+  "version": "1.13.4",
   "private": true,
   "homepage": "https://socialgouv.github.io/sre-tools",
   "description": "Sealed secrets static web UI",
