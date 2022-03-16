@@ -85,7 +85,7 @@ const Editor = () => {
       }
       const sealedSecret = await getSealedSecret({
         pemKey,
-        namespace: data.namespace || "some-namespace",
+        namespace: data.namespace || null,
         name: data.name || "some-secret-name",
         scope: data.scope,
         values,
