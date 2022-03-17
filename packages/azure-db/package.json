@@ -16,7 +16,7 @@
   "dependencies": {
     "@socialgouv/kosko-charts": "^9.15.0",
     "@socialgouv/sre-seal": "^1.13.5",
-    "execa": "^5.1.1",
+    "execa": "^6.0.0",
     "yaml": "^1.10.2"
   },
   "devDependencies": {
