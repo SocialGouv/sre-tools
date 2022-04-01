@@ -187,7 +187,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
           name="value"
           id="value"
           style={{ marginTop: 10 }}
-          rows={4}
+          rows={8}
           {...register("value", { required: true, value })}
           placeholder={`MY_TOKEN=SomeSuperSecretToken
 MY_PASSWORD=SomeSuperSecretPassword`}
