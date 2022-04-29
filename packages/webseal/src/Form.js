@@ -99,6 +99,8 @@ export const Form = ({ onSubmit, initialFormData }) => {
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
                   setValue("scope", "cluster");
+                  setValue("namespace", undefined);
+                  setValue("name", undefined);
                   trigger();
                 }}
               />
