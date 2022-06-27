@@ -22,7 +22,7 @@ export const getGrafanaWorkloadsUrl = (parsed) => {
 };
 
 export const getRancherUrls = (parsed) => {
-  const projectId = process.env.RANCHER_PROJECT_ID || "";
+  const projectId = parsed.rancherProjectId || process.env.RANCHER_PROJECT_ID || "";
   if (projectId) {
     return [
       {

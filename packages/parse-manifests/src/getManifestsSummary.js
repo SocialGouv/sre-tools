@@ -55,6 +55,24 @@ const getNamespace = (manifests) => {
   }
 };
 
+const getRancherProjectId = (manifests) => {
+  const namespaces = manifests.filter((m) => m.kind === "Namespace")
+
+  if(!(namespaces.length>0)){
+    return
+  }
+  let mainNamespace = namespaces.find(
+    (manifest) =>
+      manifest.kind === "Namespace" &&
+      manifest.metadata?.annotations?.["kontinuous/mainNamespace"] === "true"
+  )
+
+  if(!mainNamespace){
+    mainNamespace = namespaces[0]
+  }
+  return mainNamespace.metadata.annotations["field.cattle.io/projectId"];
+};
+
 /** extract deployments */
 const getDeployments = (manifests) => {
   const deployments = manifests.filter((m) => m.kind === "Deployment");
@@ -144,6 +162,7 @@ const getManifestsSummary = (manifests) => {
     deployments: getDeployments(manifests),
     images: getImages(manifests),
     namespace: getNamespace(manifests),
+    rancherProjectId: getRancherProjectId(manifests),
     "app.github.com/run": getDeploymentAnnotation(
       manifests,
       "app.github.com/run"
