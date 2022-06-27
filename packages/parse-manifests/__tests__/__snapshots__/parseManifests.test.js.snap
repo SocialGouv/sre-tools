@@ -135,6 +135,7 @@ Object {
     },
   ],
   "namespace": "app-preprod",
+  "rancherProjectId": "",
   "redirects": Array [
     Object {
       "from": "www.some.url",
