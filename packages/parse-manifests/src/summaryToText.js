@@ -10,7 +10,7 @@ const summaryToText = (parsed) => {
   return `
 ### Ingresses
 
-${parsed.hosts.map((host) => ` - 🚀 https://${host}`).join("\n")}
+${parsed.hosts && parsed.hosts.map((host) => ` - 🚀 https://${host}`).join("\n")}
 ${
   (parsed.redirects.length &&
     `
@@ -24,7 +24,7 @@ ${parsed.redirects
 }
 ### Docker images
 
-${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
+${parsed.images && parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
 
 ### Debug
 
