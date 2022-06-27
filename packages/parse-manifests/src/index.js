@@ -1,5 +1,5 @@
 import YAML from "yaml";
-import getManifestsSummary from "./getManifestsSummary";
+import getManifestsSummary from "./getManifestsSummary.js";
 
 
 /** parse a bunch of yaml manifests
