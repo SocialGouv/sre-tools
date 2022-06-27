@@ -162,7 +162,7 @@ const getManifestsSummary = (manifests) => {
     deployments: getDeployments(manifests),
     images: getImages(manifests),
     namespace: getNamespace(manifests),
-    rancherProjectId: getRancherProjectId(manifests),
+    rancherProjectId: getRancherProjectId(manifests) || "",
     "app.github.com/run": getDeploymentAnnotation(
       manifests,
       "app.github.com/run"
