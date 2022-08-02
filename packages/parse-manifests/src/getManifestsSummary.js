@@ -11,7 +11,13 @@ const getHosts = (manifests) => {
   const ingresses = manifests
     .filter((m) => m.kind === "Ingress")
     .filter((m) => !isRedirectIngress(m));
-  const hosts = ingresses.flatMap((ing) => ing.spec.rules.map((r) => r.host));
+  const hosts = ingresses
+    .flatMap((ing) =>
+      ing.spec.rules.flatMap((r) => {
+        return r.http.paths.map((p) => `https://${r.host}${p.path}`);
+      })
+    )
+    .sort();
   return hosts;
 };
 
@@ -36,39 +42,39 @@ const getRedirects = (manifests) => {
 };
 
 const getNamespace = (manifests) => {
-  const namespaces = manifests.filter((m) => m.kind === "Namespace")
+  const namespaces = manifests.filter((m) => m.kind === "Namespace");
 
-  if(namespaces.length){
+  if (namespaces.length) {
     let mainNamespace = namespaces.find(
       (manifest) =>
         manifest.kind === "Namespace" &&
         manifest.metadata?.annotations?.["kontinuous/mainNamespace"] === "true"
-    )
+    );
 
-    if(!mainNamespace){
-      mainNamespace = namespaces[0]
+    if (!mainNamespace) {
+      mainNamespace = namespaces[0];
     }
     return mainNamespace.metadata.name;
   } else {
-    const firstResources = manifests.find((m) => m.kind !== "Namespace")
+    const firstResources = manifests.find((m) => m.kind !== "Namespace");
     return firstResources.metadata.namespace;
   }
 };
 
 const getRancherProjectId = (manifests) => {
-  const namespaces = manifests.filter((m) => m.kind === "Namespace")
+  const namespaces = manifests.filter((m) => m.kind === "Namespace");
 
-  if(!(namespaces.length>0)){
-    return
+  if (!(namespaces.length > 0)) {
+    return;
   }
   let mainNamespace = namespaces.find(
     (manifest) =>
       manifest.kind === "Namespace" &&
       manifest.metadata?.annotations?.["kontinuous/mainNamespace"] === "true"
-  )
+  );
 
-  if(!mainNamespace){
-    mainNamespace = namespaces[0]
+  if (!mainNamespace) {
+    mainNamespace = namespaces[0];
   }
   return mainNamespace.metadata.annotations["field.cattle.io/projectId"];
 };

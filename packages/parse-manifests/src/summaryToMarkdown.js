@@ -6,12 +6,11 @@ import {
 } from "./tools.js";
 
 const summaryToMarkdown = (parsed) => {
-
   return `
 <details>
   <summary>Ingresses</summary>
 
-${parsed.hosts.map((host) => ` - 🚀 [${host}](https://${host})`).join("\n")}
+${parsed.hosts.map((host) => ` - 🚀 [${host}](${host})`).join("\n")}
 
 </details>
 ${

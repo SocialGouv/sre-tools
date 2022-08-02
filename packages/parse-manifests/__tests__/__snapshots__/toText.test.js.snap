@@ -4,9 +4,10 @@ exports[`should render text 1`] = `
 "
 ### Ingresses
 
- - 🚀 https://backend-app-preprod.dev.company.com
- - 🚀 https://version1-app-preprod.dev.company.com
- - 🚀 https://version2-app-preprod.dev.company.com
+ - 🚀 https://backend-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/something
+ - 🚀 https://version2-app-preprod.dev.company.com/
 
 ### Redirects
 
@@ -45,9 +46,10 @@ exports[`should render text with rancher details 1`] = `
 "
 ### Ingresses
 
- - 🚀 https://backend-app-preprod.dev.company.com
- - 🚀 https://version1-app-preprod.dev.company.com
- - 🚀 https://version2-app-preprod.dev.company.com
+ - 🚀 https://backend-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/something
+ - 🚀 https://version2-app-preprod.dev.company.com/
 
 ### Redirects
 
@@ -89,9 +91,10 @@ exports[`should render text without redirect 1`] = `
 "
 ### Ingresses
 
- - 🚀 https://backend-app-preprod.dev.company.com
- - 🚀 https://version1-app-preprod.dev.company.com
- - 🚀 https://version2-app-preprod.dev.company.com
+ - 🚀 https://backend-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/
+ - 🚀 https://version1-app-preprod.dev.company.com/something
+ - 🚀 https://version2-app-preprod.dev.company.com/
 
 ### Docker images
 
