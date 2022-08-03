@@ -46,9 +46,10 @@ Object {
     },
   ],
   "hosts": Array [
-    "backend-app-preprod.dev.company.com",
-    "version1-app-preprod.dev.company.com",
-    "version2-app-preprod.dev.company.com",
+    "https://backend-app-preprod.dev.company.com/",
+    "https://version1-app-preprod.dev.company.com/",
+    "https://version1-app-preprod.dev.company.com/something",
+    "https://version2-app-preprod.dev.company.com/",
   ],
   "images": Array [
     "ghcr.io/company/app/backend:1.1.0-alpha.6",

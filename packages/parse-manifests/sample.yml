@@ -438,8 +438,16 @@ spec:
                 name: version1
                 port:
                   name: http
+            path: /something
+            pathType: Prefix
+          - backend:
+              service:
+                name: version1
+                port:
+                  name: http
             path: /
             pathType: Prefix
+
   tls:
     - hosts:
         - version1-app-preprod.dev.company.com

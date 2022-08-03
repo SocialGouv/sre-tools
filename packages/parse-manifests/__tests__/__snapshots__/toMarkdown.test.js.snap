@@ -5,9 +5,10 @@ exports[`should render markdown 1`] = `
 <details>
   <summary>Ingresses</summary>
 
- - 🚀 [backend-app-preprod.dev.company.com](https://backend-app-preprod.dev.company.com)
- - 🚀 [version1-app-preprod.dev.company.com](https://version1-app-preprod.dev.company.com)
- - 🚀 [version2-app-preprod.dev.company.com](https://version2-app-preprod.dev.company.com)
+ - 🚀 [https://backend-app-preprod.dev.company.com/](https://backend-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/](https://version1-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/something](https://version1-app-preprod.dev.company.com/something)
+ - 🚀 [https://version2-app-preprod.dev.company.com/](https://version2-app-preprod.dev.company.com/)
 
 </details>
 
@@ -46,9 +47,10 @@ exports[`should render markdown with rancher details 1`] = `
 <details>
   <summary>Ingresses</summary>
 
- - 🚀 [backend-app-preprod.dev.company.com](https://backend-app-preprod.dev.company.com)
- - 🚀 [version1-app-preprod.dev.company.com](https://version1-app-preprod.dev.company.com)
- - 🚀 [version2-app-preprod.dev.company.com](https://version2-app-preprod.dev.company.com)
+ - 🚀 [https://backend-app-preprod.dev.company.com/](https://backend-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/](https://version1-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/something](https://version1-app-preprod.dev.company.com/something)
+ - 🚀 [https://version2-app-preprod.dev.company.com/](https://version2-app-preprod.dev.company.com/)
 
 </details>
 
@@ -90,9 +92,10 @@ exports[`should render markdown without redirects 1`] = `
 <details>
   <summary>Ingresses</summary>
 
- - 🚀 [backend-app-preprod.dev.company.com](https://backend-app-preprod.dev.company.com)
- - 🚀 [version1-app-preprod.dev.company.com](https://version1-app-preprod.dev.company.com)
- - 🚀 [version2-app-preprod.dev.company.com](https://version2-app-preprod.dev.company.com)
+ - 🚀 [https://backend-app-preprod.dev.company.com/](https://backend-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/](https://version1-app-preprod.dev.company.com/)
+ - 🚀 [https://version1-app-preprod.dev.company.com/something](https://version1-app-preprod.dev.company.com/something)
+ - 🚀 [https://version2-app-preprod.dev.company.com/](https://version2-app-preprod.dev.company.com/)
 
 </details>
 
