@@ -22,17 +22,21 @@ export const getGrafanaWorkloadsUrl = (parsed) => {
 };
 
 export const getRancherUrls = (parsed) => {
-  const projectId = parsed.rancherProjectId || process.env.RANCHER_PROJECT_ID || "";
+  const projectId =
+    parsed.rancherProjectId || process.env.RANCHER_PROJECT_ID || "";
+  const clusterId = projectId.split(":")[0];
   if (projectId) {
     return [
       {
-        name: `Project rancher ${parsed.namespace}`,
-        url: `${RANCHER_URL}/p/${projectId}/workloads`,
+        name: `Namespace rancher ${parsed.namespace}`,
+        url: `${RANCHER_URL}/dashboard/c/${clusterId}/explorer/namespace/${parsed.namespace}`,
+        legacyUrl: `${RANCHER_URL}/p/${projectId}/workloads`,
       },
       ...((parsed.deployments &&
         parsed.deployments.map((deployment) => ({
           name: `Deployment ${deployment.name}`,
-          url: `${RANCHER_URL}/p/${projectId}/workload/deployment:${parsed.namespace}:${deployment.name}`,
+          url: `${RANCHER_URL}/dashboard/c/${clusterId}/explorer/apps.deployment/${parsed.namespace}/${deployment.name}`,
+          legacyUrl: `${RANCHER_URL}/p/${projectId}/workload/deployment:${parsed.namespace}:${deployment.name}`,
         }))) ||
         []),
     ];
