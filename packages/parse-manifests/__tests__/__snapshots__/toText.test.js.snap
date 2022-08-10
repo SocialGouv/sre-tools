@@ -79,10 +79,10 @@ https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kuber
 
 #### 👮‍♂️ Rancher project app-preprod:
 
- - Project rancher app-preprod : https://rancher.fabrique.social.gouv.fr/p/xyz/workloads
- - Deployment backend : https://rancher.fabrique.social.gouv.fr/p/xyz/workload/deployment:app-preprod:backend
- - Deployment version1 : https://rancher.fabrique.social.gouv.fr/p/xyz/workload/deployment:app-preprod:version1
- - Deployment version2 : https://rancher.fabrique.social.gouv.fr/p/xyz/workload/deployment:app-preprod:version2
+ - Namespace rancher app-preprod : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/namespace/app-preprod
+ - Deployment backend : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/backend
+ - Deployment version1 : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/version1
+ - Deployment version2 : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/version2
 
 "
 `;
