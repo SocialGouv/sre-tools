@@ -5,10 +5,14 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { Clipboard } from "react-feather";
 import yaml from "js-yaml";
 
+import dotenv from "dotenv";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Form } from "./Form";
 import { certificates } from "./certificates.js";
+
+dotenv.config({ multiline: true, debug: true, path: false });
 
 const Intro = () => (
   <Jumbotron style={{ padding: "2rem 1rem" }}>
@@ -56,6 +60,16 @@ const Copier = ({ text }) => {
   );
 };
 
+export const parseClearText = (text) => {
+  let values = {};
+  if (text.match(/^([\w_-\d]+)=(.+)$/im)) {
+    values = dotenv.parse(Buffer.from(text));
+  } else {
+    values.VALUE = text;
+  }
+  return values;
+};
+
 const Editor = () => {
   const [formData, setFormData] = useState({
     cluster: "dev",
@@ -70,19 +84,10 @@ const Editor = () => {
     setFormData(data);
     setYamlResult("");
     setEncrypted("");
+
     if (data.value && data.value !== formData.value) {
       const pemKey = certificates[data.cluster];
-      const values = {};
-      if (data.value.match(/^([\w_-\d]+)=(.+)$/im)) {
-        data.value.split("\n").forEach((row) => {
-          const matches = row.match(/^([\w_-\d]+)=(.*)$/i);
-          if (matches) {
-            values[matches[1]] = matches[2];
-          }
-        });
-      } else {
-        values.VALUE = data.value;
-      }
+      const values = parseClearText(data.value);
       const sealedSecret = await getSealedSecret({
         pemKey,
         namespace: data.namespace || null,
