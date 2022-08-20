@@ -140,8 +140,8 @@ const getImages = (manifests) => {
 const getResume = (manifests) =>
   manifests.map((manifest) => ({
     kind: manifest.kind,
-    name: manifest.metadata.name,
-    namespace: manifest.metadata.namespace,
+    name: manifest.metadata?.name,
+    namespace: manifest.metadata?.namespace,
   }));
 
 /** assume isProduction when using production ssl annotation */
