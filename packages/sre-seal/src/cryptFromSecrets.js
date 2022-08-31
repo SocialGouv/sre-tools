@@ -4,6 +4,9 @@ const crypt = require("./crypt");
 const clusterWideAnnotations = {
   "sealedsecrets.bitnami.com/cluster-wide": "true",
 };
+const namespaceWideAnnotations = {
+  "sealedsecrets.bitnami.com/namespace-wide": "true",
+};
 
 // convert a dict of plaintext secrets to sealed-secrets
 const cryptFromSecrets = ({ context, namespace, name, secrets }) =>
@@ -17,7 +20,7 @@ const cryptFromSecrets = ({ context, namespace, name, secrets }) =>
       }).then((value) => ({ key, value }))
     )
   ).then((encrypteds) => {
-    const annotations = context === "prod" ? {} : clusterWideAnnotations;
+    const annotations = context === "prod" ? namespaceWideAnnotations : clusterWideAnnotations;
     return createSealedSecret({
       namespace,
       name,
