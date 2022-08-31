@@ -34,7 +34,9 @@ Object {
   "apiVersion": "bitnami.com/v1alpha1",
   "kind": "SealedSecret",
   "metadata": Object {
-    "annotations": Object {},
+    "annotations": Object {
+      "sealedsecrets.bitnami.com/namespace-wide": "true",
+    },
     "name": "app-prod-sealed-secret",
     "namespace": "my-app-namespace",
   },
@@ -45,7 +47,9 @@ Object {
     },
     "template": Object {
       "metadata": Object {
-        "annotations": Object {},
+        "annotations": Object {
+          "sealedsecrets.bitnami.com/namespace-wide": "true",
+        },
         "name": "app-prod-sealed-secret",
       },
       "type": "Opaque",
