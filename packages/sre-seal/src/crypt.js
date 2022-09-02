@@ -11,7 +11,7 @@ const sealedSecretsUrls = {
 const crypt = async ({ context, namespace, name, input }) => {
   const args = [["--raw", "--context", context]];
   if (context === "prod") {
-    args.push(["--name", name]);
+    args.push(["--scope", "namespace-wide"]);
     args.push(["--namespace", namespace]);
   } else {
     args.push(["--scope", "cluster-wide"]);

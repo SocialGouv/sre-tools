@@ -41,7 +41,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
   const defaultValues = {
     ...initialFormData,
     ...queryParams,
-    scope: queryParams.cluster === "prod" ? "strict" : "cluster",
+    scope: queryParams.cluster === "prod" ? "namespace" : "cluster",
   };
 
   const { register, handleSubmit, watch, setValue, trigger, getValues } =
