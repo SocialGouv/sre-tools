@@ -110,7 +110,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
                 {...register("cluster")}
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
-                  setValue("scope", "strict");
+                  setValue("scope", "namespace");
                   trigger();
                 }}
               />
@@ -136,7 +136,6 @@ export const Form = ({ onSubmit, initialFormData }) => {
               <RadioChoice
                 name="scope"
                 value="namespace"
-                disabled={cluster === "prod"}
                 {...register("scope")}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
@@ -146,6 +145,7 @@ export const Form = ({ onSubmit, initialFormData }) => {
               <RadioChoice
                 name="scope"
                 value="strict"
+                disabled={cluster === "prod"}
                 {...register("scope")}
                 onChange={(e) => {
                   setValue("scope", e.target.value);
