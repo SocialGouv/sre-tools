@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Row, Col, Form as BsForm, Button } from "react-bootstrap";
+import { Row, Col, Form as BsForm, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useQueryParams } from "./useQueryParams";
 
@@ -156,32 +156,34 @@ export const Form = ({ onSubmit, initialFormData }) => {
           </Row>
         </Col>
       </Row>
-      {(scope === "namespace" || scope === "strict") && (
-        <BsForm.Group as={Row}>
-          <BsForm.Label column>Namespace</BsForm.Label>
-          <Col sm="9">
-            <BsForm.Control
-              name="namespace"
-              {...register("namespace", { required: true })}
-              required
-              type="text"
-              placeholder="K8s Namespace"
-            />
-          </Col>
-        </BsForm.Group>
-      )}
-      {scope === "strict" && (
-        <BsForm.Group as={Row}>
-          <BsForm.Label column>Secret name</BsForm.Label>
-          <Col sm="9">
-            <BsForm.Control
-              name="name"
-              {...register("name", { required: true })}
-              type="text"
-              placeholder="K8s secret name"
-            />
-          </Col>
-        </BsForm.Group>
+      <BsForm.Group as={Row}>
+        <BsForm.Label column>Namespace *</BsForm.Label>
+        <Col sm="9">
+          <BsForm.Control
+            name="namespace"
+            {...register("namespace", { required: true })}
+            required
+            type="text"
+            placeholder="K8s Namespace"
+          />
+        </Col>
+      </BsForm.Group>
+      <BsForm.Group as={Row}>
+        <BsForm.Label column>Secret name *</BsForm.Label>
+        <Col sm="9">
+          <BsForm.Control
+            name="name"
+            {...register("name", { required: true })}
+            type="text"
+            placeholder="K8s secret name"
+          />
+        </Col>
+      </BsForm.Group>
+      {cluster === "prod" && (
+        <Alert variant="warning">
+          ⚠️ En production, pensez à re-sceller l'ensemble de vos valeurs et
+          récupérer le fichier YAML complet ci-dessous.
+        </Alert>
       )}
       <BsForm.Group>
         <BsForm.Control

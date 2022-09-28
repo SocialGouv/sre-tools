@@ -95,7 +95,7 @@ const Editor = () => {
         scope: data.scope,
         values,
       });
-      if (data.scope === "strict" && (!data.namespace || !data.name)) {
+      if (!data.namespace || !data.name) {
         console.log("namespace and name are mandatory");
         setYamlResult("");
         setEncrypted("");
@@ -125,7 +125,7 @@ const Editor = () => {
 
           {
             <>
-              <Card style={{ marginTop: 10 }}>
+              <Card style={{ marginTop: 10, display: "none" }}>
                 <Card.Body>
                   <Card.Title>
                     Encrypted <Copier text={encrypted} />
