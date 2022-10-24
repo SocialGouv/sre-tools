@@ -99,8 +99,8 @@ export const Form = ({ onSubmit, initialFormData }) => {
                 onChange={(e) => {
                   setValue("cluster", e.target.value);
                   setValue("scope", "cluster");
-                  setValue("namespace", undefined);
-                  setValue("name", undefined);
+                  // setValue("namespace", undefined);
+                  // setValue("name", undefined);
                   trigger();
                 }}
               />
@@ -157,14 +157,16 @@ export const Form = ({ onSubmit, initialFormData }) => {
         </Col>
       </Row>
       <BsForm.Group as={Row}>
-        <BsForm.Label column>Namespace *</BsForm.Label>
+        <BsForm.Label column>
+          Namespace {cluster === "prod" ? "*" : ""}
+        </BsForm.Label>
         <Col sm="9">
           <BsForm.Control
             name="namespace"
             {...register("namespace", { required: true })}
             required
             type="text"
-            placeholder="K8s Namespace"
+            placeholder="K8s Namespace (optional in dev)"
           />
         </Col>
       </BsForm.Group>
