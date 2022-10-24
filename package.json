@@ -17,7 +17,7 @@
   },
   "resolutions": {
     "jest": "27.5.1",
-    "@typescript-eslint/typescript-estree": "4.28.5",
+    "@typescript-eslint/typescript-estree": "4.33.0",
     "@babel/plugin-transform-modules-commonjs": "7.14.5"
   }
 }
