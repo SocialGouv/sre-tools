@@ -88,22 +88,25 @@ const Editor = () => {
     if (data.value && data.value !== formData.value) {
       const pemKey = certificates[data.cluster];
       const values = parseClearText(data.value);
-      const sealedSecret = await getSealedSecret({
-        pemKey,
-        namespace: data.namespace || null,
-        name: data.name || "some-secret-name",
-        scope: data.scope,
-        values,
-      });
-      if (!data.namespace || !data.name) {
+
+      if ((data.cluster === "prod" && !data.namespace) || !data.name) {
         console.log("namespace and name are mandatory");
         setYamlResult("");
         setEncrypted("");
+        return;
       } else if (!data.value) {
         console.log("value is mandatory");
         setYamlResult("");
         setEncrypted("");
+        return;
       } else {
+        const sealedSecret = await getSealedSecret({
+          pemKey,
+          namespace: data.namespace || null,
+          name: data.name || "some-secret-name",
+          scope: data.scope,
+          values,
+        });
         const keys = Object.keys(values);
         if (keys.length === 1) {
           setEncrypted(sealedSecret.spec.encryptedData[keys[0]]);
