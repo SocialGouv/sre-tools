@@ -11,3 +11,4 @@ To use `sre-seal` and `sre-secrets`, you'll need `kubectl` configured with exist
 | [parse-manifests](./packages/parse-manifests)      | Extract minimal infos from k8S manifests |
 | [WebSeal](https://socialgouv.github.io/sre-tools/) | Online sealed-secrets generator          |
 
+
