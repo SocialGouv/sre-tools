@@ -9,9 +9,7 @@ plugins:
       publishCmd: |
         echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
         npm whoami
-        cd packages/csv-anonymify && npm publish
-        cd ../../packages/csv-sample && npm publish
-        cd ../../packages/match-entities && npm publish
+        cd packages/parse-manifests && npm publish
   - - "@semantic-release/git"
     - assets:
         - CHANGELOG.md
