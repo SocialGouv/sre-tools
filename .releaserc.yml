@@ -7,7 +7,9 @@ plugins:
           --no-git-tag-version \
           --yes
       publishCmd: |
-        yarn lerna publish from-git --yes
+        echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> .npmrc
+        npm whoami
+        cd packages/parse-manifests && npm publish
   - - "@semantic-release/git"
     - assets:
         - CHANGELOG.md
