@@ -7,12 +7,16 @@ import {
 
 const summaryToMarkdown = (parsed) => {
   return `
-<details>
+${
+  (parsed.hosts.length &&
+    `<details>
   <summary>Ingresses</summary>
 
 ${parsed.hosts.map((host) => ` - 🚀 [${host}](${host})`).join("\n")}
 
-</details>
+</details>`) ||
+  ""
+}
 ${
   (parsed.redirects.length &&
     `
@@ -27,12 +31,16 @@ ${parsed.redirects
 `) ||
   ""
 }
-<details>
+${
+  (parsed.images.length &&
+    `<details>
   <summary>Docker images</summary>
 
 ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
 
-</details>
+</details>`) ||
+  ""
+}
 
 <details>
   <summary>Debug</summary>

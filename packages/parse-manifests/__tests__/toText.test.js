@@ -26,3 +26,8 @@ test("should render text without redirect", () => {
   const yaml = fs.readFileSync(path.join("sample.yml")).toString();
   expect(toText(yaml)).toMatchSnapshot();
 });
+
+test("should render text without ingress", () => {
+  const yaml = fs.readFileSync(path.join("sample2.yml")).toString();
+  expect(toText(yaml)).toMatchSnapshot();
+});

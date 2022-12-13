@@ -1,0 +1,521 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  labels:
+    app: backend
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  name: backend
+  namespace: app-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ""
+        kapp.k14s.io/disable-default-label-scoping-rules: ""
+        app.github.com/job: manifests-preproduction
+        app.github.com/ref: refs/tags/v1.1.0-alpha.6
+        app.github.com/repo: company/app
+        app.github.com/run: "1127909139"
+        app.github.com/sha: 9aae750
+      labels:
+        app: backend
+        application: app
+        owner: app
+        team: app
+        cert: wildcard
+    spec:
+      containers:
+        - image: ghcr.io/company/app/backend:1.1.0-alpha.6
+          livenessProbe:
+            httpGet:
+              path: /_health
+              port: http
+            initialDelaySeconds: 30
+          name: backend
+          ports:
+            - containerPort: 1337
+              name: http
+          readinessProbe:
+            httpGet:
+              path: /_health
+              port: http
+            initialDelaySeconds: 30
+          resources:
+            requests:
+              cpu: 300m
+              memory: 256Mi
+            limits:
+              cpu: "1"
+              memory: 1Gi
+          startupProbe:
+            httpGet:
+              path: /_health
+              port: http
+            initialDelaySeconds: 30
+          volumeMounts:
+            - mountPath: /public/uploads
+              name: uploads
+          envFrom:
+            - secretRef:
+                name: azure-pg-user
+            - secretRef:
+                name: backend-sealed-secret
+          env:
+            - name: DATABASE_CLIENT
+              value: postgres
+            - name: DATABASE_NAME
+              value: $(PGDATABASE)
+            - name: DATABASE_HOST
+              value: $(PGHOST)
+            - name: DATABASE_PORT
+              value: $(PGPORT)
+            - name: DATABASE_USERNAME
+              value: $(PGUSER)
+            - name: DATABASE_PASSWORD
+              value: $(PGPASSWORD)
+            - name: DATABASE_SSL
+              value: "true"
+      volumes:
+        - persistentVolumeClaim:
+            claimName: uploads
+          name: uploads
+      initContainers:
+        - name: some-duplicate-image
+          image: ghcr.io/company/docker/wait-for-postgres:6.38.3
+        - env:
+            - name: WAIT_FOR_RETRIES
+              value: "24"
+          envFrom:
+            - secretRef:
+                name: azure-pg-user
+          image: ghcr.io/company/docker/wait-for-postgres:6.38.3
+          imagePullPolicy: Always
+          name: wait-for-postgres
+          resources:
+            limits:
+              cpu: 20m
+              memory: 32Mi
+            requests:
+              cpu: 5m
+              memory: 16Mi
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  name: backend-sealed-secret
+  namespace: app-preprod
+  labels:
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+spec:
+  encryptedData:
+    XXX: >-
+      AZAFAZF
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+        kapp.k14s.io/disable-default-ownership-label-rules: ""
+        kapp.k14s.io/disable-default-label-scoping-rules: ""
+        app.github.com/job: manifests-preproduction
+        app.github.com/ref: refs/tags/v1.1.0-alpha.6
+        app.github.com/repo: company/app
+        app.github.com/run: "1127909139"
+        app.github.com/sha: 9aae750
+      name: backend-sealed-secret
+      labels:
+        application: app
+        owner: app
+        team: app
+        cert: wildcard
+    type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: backend
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  name: backend
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  namespace: app-preprod
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 1337
+  selector:
+    app: backend
+  type: ClusterIP
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: azure-app-volume
+  namespace: app-preprod
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+spec:
+  encryptedData:
+    XXX: >-
+      YYY
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+      name: azure-app-volume
+      namespace: app-preprod
+    type: Opaque
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: uploads
+  annotations:
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  labels:
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  namespace: app-preprod
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  selector:
+    matchLabels:
+      usage: app-uploads
+  storageClassName: ""
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    usage: app-uploads
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  name: app-uploads
+  annotations:
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  namespace: app-preprod
+spec:
+  accessModes:
+    - ReadWriteMany
+  azureFile:
+    secretName: azure-app-volume
+    secretNamespace: app-preprod
+    shareName: uploads
+  capacity:
+    storage: 5Gi
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: ""
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  labels:
+    app: version1
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+    component: nginx
+  name: version1
+  namespace: app-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: version1
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ""
+        kapp.k14s.io/disable-default-label-scoping-rules: ""
+        app.github.com/job: manifests-preproduction
+        app.github.com/ref: refs/tags/v1.1.0-alpha.6
+        app.github.com/repo: company/app
+        app.github.com/run: "1127909139"
+        app.github.com/sha: 9aae750
+      labels:
+        app: version1
+        application: app
+        owner: app
+        team: app
+        cert: wildcard
+        component: nginx
+    spec:
+      containers:
+        - image: ghcr.io/company/app/frontend-version1:1.1.0-alpha.6
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: version1
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-app-preprod.dev.company.com/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: version1
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  name: version1
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  namespace: app-preprod
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: version1
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  labels:
+    app: version2
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+    component: nginx
+  name: version2
+  namespace: app-preprod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: version2
+  template:
+    metadata:
+      annotations:
+        kapp.k14s.io/disable-default-ownership-label-rules: ""
+        kapp.k14s.io/disable-default-label-scoping-rules: ""
+        app.github.com/job: manifests-preproduction
+        app.github.com/ref: refs/tags/v1.1.0-alpha.6
+        app.github.com/repo: company/app
+        app.github.com/run: "1127909139"
+        app.github.com/sha: 9aae750
+      labels:
+        app: version2
+        application: app
+        owner: app
+        team: app
+        cert: wildcard
+        component: nginx
+    spec:
+      containers:
+        - image: ghcr.io/company/app/frontend-version2:1.1.0-alpha.6
+          livenessProbe:
+            failureThreshold: 6
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 30
+            periodSeconds: 5
+            timeoutSeconds: 5
+          name: version2
+          ports:
+            - containerPort: 80
+              name: http
+          readinessProbe:
+            failureThreshold: 15
+            httpGet:
+              path: /index.html
+              port: http
+            initialDelaySeconds: 0
+            periodSeconds: 5
+            successThreshold: 1
+            timeoutSeconds: 1
+          resources:
+            limits:
+              cpu: 500m
+              memory: 128Mi
+            requests:
+              cpu: 5m
+              memory: 32Mi
+          startupProbe:
+            failureThreshold: 12
+            httpGet:
+              path: /index.html
+              port: http
+            periodSeconds: 5
+          env:
+            - name: REACT_APP_API_URL
+              value: https://backend-app-preprod.dev.company.com/
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: version2
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+  name: version2
+  annotations:
+    kapp.k14s.io/disable-default-ownership-label-rules: ""
+    kapp.k14s.io/disable-default-label-scoping-rules: ""
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  namespace: app-preprod
+spec:
+  ports:
+    - name: http
+      port: 80
+      targetPort: 80
+  selector:
+    app: version2
+  type: ClusterIP
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  annotations:
+    sealedsecrets.bitnami.com/cluster-wide: "true"
+    app.github.com/job: manifests-preproduction
+    app.github.com/ref: refs/tags/v1.1.0-alpha.6
+    app.github.com/repo: company/app
+    app.github.com/run: "1127909139"
+    app.github.com/sha: 9aae750
+  name: azure-pg-user
+  namespace: app-preprod
+  labels:
+    application: app
+    owner: app
+    team: app
+    cert: wildcard
+spec:
+  encryptedData:
+    XXX: >-
+      YYY
+  template:
+    metadata:
+      annotations:
+        sealedsecrets.bitnami.com/cluster-wide: "true"
+        app.github.com/job: manifests-preproduction
+        app.github.com/ref: refs/tags/v1.1.0-alpha.6
+        app.github.com/repo: company/app
+        app.github.com/run: "1127909139"
+        app.github.com/sha: 9aae750
+      name: azure-pg-user
+      labels:
+        application: app
+        owner: app
+        team: app
+        cert: wildcard
+    type: Opaque
