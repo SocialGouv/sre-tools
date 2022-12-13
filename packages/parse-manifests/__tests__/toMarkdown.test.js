@@ -24,3 +24,8 @@ test("should render markdown without redirects", () => {
   const yaml = fs.readFileSync(path.join("sample.yml")).toString();
   expect(toMarkdown(yaml)).toMatchSnapshot();
 });
+
+test("should render markdown without ingress", () => {
+  const yaml = fs.readFileSync(path.join("sample2.yml")).toString();
+  expect(toMarkdown(yaml)).toMatchSnapshot();
+});
