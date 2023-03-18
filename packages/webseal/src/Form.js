@@ -33,6 +33,38 @@ const removeInvalidKeys = (keyValidator) => (object) =>
 
 const keepValidQueryParamKeys = removeInvalidKeys(isValidQueryParamsKey);
 
+const YAML_LIKE_LINE_RE = /^([\w\d-_]+):\s(.*)$/m; // variable: some-value
+
+// naive yaml style variable listing
+const isYamlVariables = (string) => {
+  const yamlRows = string
+    .trim()
+    .split("\n")
+    .filter((row) => row.trim().length)
+    .map((row) => row.match(YAML_LIKE_LINE_RE))
+    .filter(Boolean);
+  if (
+    yamlRows.length ===
+    string
+      .trim()
+      .split("\n")
+      .filter((row) => row.trim().length).length
+  ) {
+    // only when all lines are detected
+    return true;
+  }
+  return false;
+};
+
+const yamlToEnv = (string) =>
+  string
+    .trim()
+    .split("\n")
+    .map((row) => row.match(YAML_LIKE_LINE_RE))
+    .filter(Boolean)
+    .map(([_, key, value]) => `${key}=${value}`)
+    .join("\n");
+
 export const Form = ({ onSubmit, initialFormData }) => {
   const [queryParamsData, setQueryParamsData] = useQueryParams();
 
@@ -53,7 +85,6 @@ export const Form = ({ onSubmit, initialFormData }) => {
   const _onSubmit = (data) => {
     setQueryParamsData(keepValidQueryParamKeys(data));
     onSubmit(data);
-    //console.log("submit", data);
   };
 
   const cluster = watch("cluster");
@@ -81,6 +112,14 @@ export const Form = ({ onSubmit, initialFormData }) => {
     );
     return () => subscription.unsubscribe();
   }, [watch]);
+
+  const onValuePaste = (e) => {
+    const value = e.clipboardData.getData("Text");
+    if (isYamlVariables(value)) {
+      e.preventDefault();
+      setValue("value", yamlToEnv(value));
+    }
+  };
 
   return (
     <BsForm onSubmit={handleSubmit(_onSubmit)}>
@@ -191,10 +230,16 @@ export const Form = ({ onSubmit, initialFormData }) => {
         <BsForm.Control
           as="textarea"
           name="value"
+          value={value}
           id="value"
           style={{ marginTop: 10 }}
           rows={8}
           {...register("value", { required: true, value })}
+          onPaste={onValuePaste}
+          onChange={(e) => {
+            setValue("value", e.target.value);
+            trigger();
+          }}
           placeholder={`MY_TOKEN=SomeSuperSecretToken
 MY_PASSWORD=SomeSuperSecretPassword`}
         />

@@ -80,7 +80,6 @@ const Editor = () => {
   const [encrypted, setEncrypted] = useState(null);
   const [yamlResult, setYamlResult] = useState(null);
   const onSubmit = async (data) => {
-    //console.log("onSubmit", data);
     setFormData(data);
     setYamlResult("");
     setEncrypted("");
