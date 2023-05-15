@@ -9,24 +9,25 @@
   "dependencies": {
     "@socialgouv/aes-gcm-rsa-oaep": "^1.1.2",
     "bootstrap": "4.6.1",
-    "dotenv": "^16.0.1",
+    "dotenv": "^16.0.3",
     "js-yaml": "^4.1.0",
     "query-string": "^7.0.1",
     "react": "17.0.2",
     "react-bootstrap": "1.6.4",
-    "react-copy-to-clipboard": "^5.0.4",
+    "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "17.0.2",
     "react-feather": "^2.0.9",
-    "react-hook-form": "7.12.2",
+    "react-hook-form": "7.43.9",
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {
+    "jest": "^29.5.0",
     "typescript": "4.3.5"
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
-    "test": "exit 0",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "browserslist": [

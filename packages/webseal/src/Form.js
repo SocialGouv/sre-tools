@@ -4,6 +4,8 @@ import { Row, Col, Form as BsForm, Alert } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { useQueryParams } from "./useQueryParams";
 
+import { toEnv } from "./yamlToEnv";
+
 const RadioChoice = React.forwardRef(({ name, value, ...props }, ref) => (
   <BsForm.Check
     inline
@@ -32,38 +34,6 @@ const removeInvalidKeys = (keyValidator) => (object) =>
     );
 
 const keepValidQueryParamKeys = removeInvalidKeys(isValidQueryParamsKey);
-
-const YAML_LIKE_LINE_RE = /^([\w\d-_]+):\s(.*)$/m; // variable: some-value
-
-// naive yaml style variable listing
-const isYamlVariables = (string) => {
-  const yamlRows = string
-    .trim()
-    .split("\n")
-    .filter((row) => row.trim().length)
-    .map((row) => row.match(YAML_LIKE_LINE_RE))
-    .filter(Boolean);
-  if (
-    yamlRows.length ===
-    string
-      .trim()
-      .split("\n")
-      .filter((row) => row.trim().length).length
-  ) {
-    // only when all lines are detected
-    return true;
-  }
-  return false;
-};
-
-const yamlToEnv = (string) =>
-  string
-    .trim()
-    .split("\n")
-    .map((row) => row.match(YAML_LIKE_LINE_RE))
-    .filter(Boolean)
-    .map(([_, key, value]) => `${key}=${value}`)
-    .join("\n");
 
 export const Form = ({ onSubmit, initialFormData }) => {
   const [queryParamsData, setQueryParamsData] = useQueryParams();
@@ -115,10 +85,8 @@ export const Form = ({ onSubmit, initialFormData }) => {
 
   const onValuePaste = (e) => {
     const value = e.clipboardData.getData("Text");
-    if (isYamlVariables(value)) {
-      e.preventDefault();
-      setValue("value", yamlToEnv(value));
-    }
+    e.preventDefault();
+    setValue("value", toEnv(value));
   };
 
   return (
