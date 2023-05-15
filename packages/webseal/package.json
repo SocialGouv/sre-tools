@@ -21,7 +21,6 @@
     "react-scripts": "^4.0.3"
   },
   "devDependencies": {
-    "jest": "^29.5.0",
     "typescript": "4.3.5"
   },
   "scripts": {
@@ -29,6 +28,9 @@
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
     "eject": "react-scripts eject"
+  },
+  "resolutions": {
+    "jest": "^27"
   },
   "browserslist": [
     ">0.2%",
