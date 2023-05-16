@@ -1,3 +1,4 @@
+import "os-browserify";
 import React, { useState } from "react";
 import { Card, Jumbotron, Container, Row, Col } from "react-bootstrap";
 import { getSealedSecret } from "@socialgouv/aes-gcm-rsa-oaep";
