@@ -63,6 +63,7 @@ const Copier = ({ text }) => {
 
 export const parseClearText = (text) => {
   let values = {};
+  // detect if multiple variables detected
   if (text.match(/^([\w_-\d]+)=(.+)$/im)) {
     values = dotenv.parse(Buffer.from(text));
   } else {

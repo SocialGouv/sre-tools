@@ -8,26 +8,26 @@ b=43"
 `;
 
 exports[`toEnv : multiple inputs 1`] = `
-"SOME_TOKEN=\\"abcRE6jnuXVj234Y65zfzeUipcdO\\"
-SOME_SECRET=\\"-----BEGIN RSA PRIVATE KEY-----
+"SOME_TOKEN=\`abcRE6jnuXVj234Y65zfzeUipcdO\`
+SOME_SECRET=\`-----BEGIN RSA PRIVATE KEY-----
 MIIJKAIBAAKCAlkznfzefekBG6MkFlzDVu/C8+c/XABs4HEQNsz61wdKTv9olitl
 QcJ6USzSsQNymwjgkWkkGH987z33As6c0VnqXZBeW2RZouctk4P3888cUBmC8AX+
 JvmbEZ3IBic1uXkTY8tyXtvdmzBJClTFMqDBr9bwq975Yosj35lmp+JEFLdOsZT/
------END RSA PRIVATE KEY-----\\"
-SOME_EMAIL=\\"aaa@chez.com, bbb@chez.com\\"
-SOME_DB=\\"postgres://user:pass@host:port/db?sslmode=require\\""
+-----END RSA PRIVATE KEY-----\`
+SOME_EMAIL=\`aaa@chez.com, bbb@chez.com\`
+SOME_DB=\`postgres://user:pass@host:port/db?sslmode=require\`"
 `;
 
 exports[`toEnv : valid YAML 1`] = `
-"A=\\"42\\"
-B=\\"43\\""
+"A=\`42\`
+B=\`43\`"
 `;
 
 exports[`toEnv : valid YAML multilines 1`] = `
-"A=\\"42\\"
-B=\\"424\\"
-C=\\"nlabalbalelkfnzemflkfenz
-zekfjbzkmfjbzemfjbzefmze\\""
+"A=\`42\`
+B=\`424\`
+C=\`nlabalbalelkfnzemflkfenz
+zekfjbzkmfjbzemfjbzefmze\`"
 `;
 
-exports[`toEnv : valid YAML quoted 1`] = `"A=\\"blablabla\\""`;
+exports[`toEnv : valid YAML quoted 1`] = `"A=\`blablabla\`"`;
