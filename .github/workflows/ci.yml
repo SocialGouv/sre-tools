@@ -39,7 +39,7 @@ jobs:
         run: yarn test-coverage
 
       - name: Send test coverage to codecov
-        uses: codecov/codecov-action@v2
+        uses: codecov/codecov-action@v3
         continue-on-error: true
 
       - name: Generate sre-secrets artifacts
