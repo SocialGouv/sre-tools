@@ -84,9 +84,13 @@ export const Form = ({ onSubmit, initialFormData }) => {
   }, [watch]);
 
   const onValuePaste = (e) => {
-    const value = e.clipboardData.getData("Text");
-    e.preventDefault();
-    setValue("value", toEnv(value));
+    const pastedValue = e.clipboardData.getData("Text");
+    const isSelected =
+      e.target.selectionStart === 0 && e.target.selectionEnd === value.length;
+    if (pastedValue && (value.trim() === "" || isSelected)) {
+      e.preventDefault();
+      setValue("value", toEnv(pastedValue));
+    }
   };
 
   return (
