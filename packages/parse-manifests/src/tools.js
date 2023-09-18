@@ -15,6 +15,19 @@ export const getGrafanaPodsUrl = (parsed) => {
   return `${GRAFANA_URL}/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}`;
 };
 
+export const getGrafanaCnpgUrls = (parsed) => {
+  const namespace = parsed.namespace;
+  return parsed.manifests
+    .filter(
+      (m) => m.apiVersion === "postgresql.cnpg.io/v1" && m.kind == "Cluster"
+    )
+    .map((cluster) => ({
+      name: cluster.name,
+      namespace,
+      url: `${GRAFANA_URL}/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=${namespace}&var-cluster=${cluster.name}&var-instances=All`,
+    }));
+};
+
 export const getGrafanaWorkloadsUrl = (parsed) => {
   const namespace = parsed.namespace;
   const cluster = parsed.isProduction ? "prod2" : "dev2";

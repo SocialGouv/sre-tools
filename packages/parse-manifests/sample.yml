@@ -638,3 +638,9 @@ spec:
         team: app
         cert: wildcard
     type: Opaque
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: some-cnpg-cluster
+  namespace: app-preprod

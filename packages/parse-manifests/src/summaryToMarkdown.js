@@ -2,6 +2,7 @@ import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
   getGrafanaPodsUrl,
+  getGrafanaCnpgUrls,
 } from "./tools.js";
 
 const summaryToMarkdown = (parsed) => {
@@ -53,7 +54,9 @@ ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
  - [📈 Workloads monitoring for namespace ${
    parsed.namespace
  }](${getGrafanaWorkloadsUrl(parsed)})
-
+${getGrafanaCnpgUrls(parsed)
+  .map((cluster) => ` - [🐘 CNPG ${cluster.name}](${cluster.url})`)
+  .join("\n")}
 </details>
 `;
 };

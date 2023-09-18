@@ -35,6 +35,8 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
 
+ - CNPG some-cnpg-cluster: https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All
+
 "
 `;
 
@@ -73,6 +75,8 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
 
+ - CNPG some-cnpg-cluster: https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All
+
 "
 `;
 
@@ -100,6 +104,8 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 #### 📈 Workloads monitoring for namespace app-preprod:
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
+
+
 
 "
 `;
@@ -133,6 +139,8 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 #### 📈 Workloads monitoring for namespace app-preprod:
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
+
+ - CNPG some-cnpg-cluster: https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All
 
 "
 `;

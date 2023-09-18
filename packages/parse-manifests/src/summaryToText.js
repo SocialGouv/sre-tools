@@ -2,6 +2,7 @@ import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
   getGrafanaPodsUrl,
+  getGrafanaCnpgUrls,
 } from "./tools.js";
 
 const summaryToText = (parsed) => {
@@ -48,6 +49,10 @@ ${getGrafanaPodsUrl(parsed)}
 #### 📈 Workloads monitoring for namespace ${parsed.namespace}:
 
 ${getGrafanaWorkloadsUrl(parsed)}
+
+${getGrafanaCnpgUrls(parsed)
+  .map((cluster) => ` - CNPG ${cluster.name}: ${cluster.url}`)
+  .join("\n")}
 
 `;
 };
