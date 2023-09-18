@@ -35,10 +35,6 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
 
-#### 👮‍♂️ Rancher project app-preprod:
-
- - Project rancher app-preprod : https://rancher.fabrique.social.gouv.fr
-
 "
 `;
 
@@ -77,13 +73,6 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
 
-#### 👮‍♂️ Rancher project app-preprod:
-
- - Namespace rancher app-preprod : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/namespace/app-preprod
- - Deployment backend : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/backend
- - Deployment version1 : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/version1
- - Deployment version2 : https://rancher.fabrique.social.gouv.fr/dashboard/c/xyz/explorer/apps.deployment/app-preprod/version2
-
 "
 `;
 
@@ -111,10 +100,6 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 #### 📈 Workloads monitoring for namespace app-preprod:
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
-
-#### 👮‍♂️ Rancher project app-preprod:
-
- - Project rancher app-preprod : https://rancher.fabrique.social.gouv.fr
 
 "
 `;
@@ -148,10 +133,6 @@ https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kuber
 #### 📈 Workloads monitoring for namespace app-preprod:
 
 https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment
-
-#### 👮‍♂️ Rancher project app-preprod:
-
- - Project rancher app-preprod : https://rancher.fabrique.social.gouv.fr
 
 "
 `;

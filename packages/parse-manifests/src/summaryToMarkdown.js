@@ -1,7 +1,6 @@
 import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
-  getRancherUrls,
   getGrafanaPodsUrl,
 } from "./tools.js";
 
@@ -54,9 +53,6 @@ ${parsed.images.map((image) => ` - 📦 docker pull ${image}`).join("\n")}
  - [📈 Workloads monitoring for namespace ${
    parsed.namespace
  }](${getGrafanaWorkloadsUrl(parsed)})
-${getRancherUrls(parsed)
-  .map(({ name, url }) => ` - [👮‍♂️ ${name}](${url})`)
-  .join("\n")}
 
 </details>
 `;

@@ -1,7 +1,6 @@
 import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
-  getRancherUrls,
   getGrafanaPodsUrl,
 } from "./tools.js";
 
@@ -49,12 +48,6 @@ ${getGrafanaPodsUrl(parsed)}
 #### 📈 Workloads monitoring for namespace ${parsed.namespace}:
 
 ${getGrafanaWorkloadsUrl(parsed)}
-
-#### 👮‍♂️ Rancher project ${parsed.namespace}:
-
-${getRancherUrls(parsed)
-  .map(({ name, url }) => ` - ${name} : ${url}`)
-  .join("\n")}
 
 `;
 };
