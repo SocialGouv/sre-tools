@@ -1,8 +1,8 @@
 import {
   getGrafanaLogsUrl,
   getGrafanaWorkloadsUrl,
-  getRancherUrls,
   getGrafanaPodsUrl,
+  getGrafanaCnpgUrls,
 } from "./tools.js";
 
 const summaryToText = (parsed) => {
@@ -50,10 +50,8 @@ ${getGrafanaPodsUrl(parsed)}
 
 ${getGrafanaWorkloadsUrl(parsed)}
 
-#### 👮‍♂️ Rancher project ${parsed.namespace}:
-
-${getRancherUrls(parsed)
-  .map(({ name, url }) => ` - ${name} : ${url}`)
+${getGrafanaCnpgUrls(parsed)
+  .map((cluster) => ` - CNPG ${cluster.name}: ${cluster.url}`)
   .join("\n")}
 
 `;

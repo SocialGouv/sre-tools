@@ -111,7 +111,7 @@ const getDeploymentAnnotation = (manifests, annotation) => {
       deployments[0].metadata.annotations[annotation]
     );
   }
-  return {}
+  return {};
 };
 
 /** extract all images from :
@@ -135,13 +135,14 @@ const getImages = (manifests) => {
     ]);
     return Array.from(new Set(images)).sort();
   }
-  return []
+  return [];
 };
 
 /** minify manifest definition */
 const getResume = (manifests) =>
   manifests.map((manifest) => ({
     kind: manifest.kind,
+    apiVersion: manifest.apiVersion,
     name: manifest.metadata?.name,
     namespace: manifest.metadata?.namespace,
   }));
