@@ -12,7 +12,7 @@ export const getGrafanaLogsUrl = (parsed) => {
 export const getGrafanaPodsUrl = (parsed) => {
   const namespace = parsed.namespace;
   const cluster = parsed.isProduction ? "prod2" : "dev2";
-  return `${GRAFANA_URL}/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}`;
+  return `${GRAFANA_URL}/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}`;
 };
 
 export const getGrafanaCnpgUrls = (parsed) => {
@@ -31,7 +31,7 @@ export const getGrafanaCnpgUrls = (parsed) => {
 export const getGrafanaWorkloadsUrl = (parsed) => {
   const namespace = parsed.namespace;
   const cluster = parsed.isProduction ? "prod2" : "dev2";
-  return `${GRAFANA_URL}/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}&var-type=deployment`;
+  return `${GRAFANA_URL}/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}&var-type=deployment`;
 };
 
 export const getRancherUrls = (parsed) => {
