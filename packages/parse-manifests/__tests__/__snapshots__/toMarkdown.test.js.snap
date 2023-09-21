@@ -34,8 +34,8 @@ exports[`should render markdown 1`] = `
   <summary>Debug</summary>
 
  - [📕 Loki logs for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D)
- - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
- - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
+ - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
+ - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
  - [🐘 CNPG some-cnpg-cluster](https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All)
 </details>
 "
@@ -75,8 +75,8 @@ exports[`should render markdown with rancher details 1`] = `
   <summary>Debug</summary>
 
  - [📕 Loki logs for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D)
- - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
- - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
+ - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
+ - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
  - [🐘 CNPG some-cnpg-cluster](https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All)
 </details>
 "
@@ -100,8 +100,8 @@ exports[`should render markdown without ingress 1`] = `
   <summary>Debug</summary>
 
  - [📕 Loki logs for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D)
- - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
- - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
+ - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
+ - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
 
 </details>
 "
@@ -133,8 +133,8 @@ exports[`should render markdown without redirects 1`] = `
   <summary>Debug</summary>
 
  - [📕 Loki logs for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/explore?orgId=1&left=%5B%22now-6h%22,%22now%22,%22Loki%22,%7B%22expr%22:%22%7Bnamespace%3D%5C%22app-preprod%5C%22%7D%22%7D%5D)
- - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/85a562078cdf77779eaa1add43ccec1e/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
- - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/a87fb0d919ec0ea5f6543124e16c42a5/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
+ - [📈 Pods monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod)
+ - [📈 Workloads monitoring for namespace app-preprod](https://grafana.fabrique.social.gouv.fr/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=dev2&var-namespace=app-preprod&var-type=deployment)
  - [🐘 CNPG some-cnpg-cluster](https://grafana.fabrique.social.gouv.fr/d/z7FCA4Nn1/cloudnativepg?orgId=1&refresh=30s&var-DS_PROMETHEUS=default&var-namespace=app-preprod&var-cluster=some-cnpg-cluster&var-instances=All)
 </details>
 "
