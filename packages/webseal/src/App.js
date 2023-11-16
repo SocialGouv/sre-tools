@@ -116,6 +116,10 @@ const Editor = () => {
             "Not available for multiple values, use the below secret"
           );
         }
+        if (data.cluster !== "prod") {
+          // remove namespace in dev so it can be set dynamically
+          delete sealedSecret.metadata.namespace;
+        }
         setYamlResult(yaml.dump(sealedSecret, { noRefs: true, lineWidth: -1 }));
       }
     }

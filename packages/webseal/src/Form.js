@@ -167,20 +167,22 @@ export const Form = ({ onSubmit, initialFormData }) => {
           </Row>
         </Col>
       </Row>
-      <BsForm.Group as={Row}>
-        <BsForm.Label column>
-          Namespace {cluster === "prod" ? "*" : ""}
-        </BsForm.Label>
-        <Col sm="9">
-          <BsForm.Control
-            name="namespace"
-            {...register("namespace", { required: true })}
-            required
-            type="text"
-            placeholder="K8s Namespace (optional in dev)"
-          />
-        </Col>
-      </BsForm.Group>
+      {cluster === "prod" && (
+        <BsForm.Group as={Row}>
+          <BsForm.Label column>
+            Namespace {cluster === "prod" ? "*" : ""}
+          </BsForm.Label>
+          <Col sm="9">
+            <BsForm.Control
+              name="namespace"
+              {...register("namespace", { required: true })}
+              required
+              type="text"
+              placeholder="K8s Namespace (optional in dev)"
+            />
+          </Col>
+        </BsForm.Group>
+      )}
       <BsForm.Group as={Row}>
         <BsForm.Label column>Secret name *</BsForm.Label>
         <Col sm="9">
