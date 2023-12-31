@@ -73,7 +73,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.SOCIALGROOVYBOT_NPM_TOKEN }}
 
       - name: Download sre-secrets artifact
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v4
         with:
           name: sre-secrets
           path: ./packages/sre-secrets/dist
