@@ -37,10 +37,10 @@ const GRAFANA_PODS_VAR_DATASOURCE =
 
 
 const DEV_CLUSTER_NAME =
-  process.env.PROVIDER === "ovh" ? "ovh-dev" : DEFAULT_DEV_CLUSTER_NAME;
+  process.env.PROVIDER === "ovh" ? "ovh-dev" : "dev2";
 
 const PROD_CLUSTER_NAME =
-  process.env.PROVIDER === "ovh" ? "ovh-prod" : DEFAULT_PROD_CLUSTER_NAME;
+  process.env.PROVIDER === "ovh" ? "ovh-prod" : "prod2";
 
 const GRAFANA_URL = process.env.GRAFANA_URL || DEFAULT_GRAFANA_URL;
 
