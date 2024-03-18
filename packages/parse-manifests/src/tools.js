@@ -1,5 +1,48 @@
-const GRAFANA_URL =
-  process.env.GRAFANA_URL || "https://grafana.fabrique.social.gouv.fr";
+const DEFAULT_GRAFANA_URL =
+  process.env.PROVIDER === "ovh"
+    ? "https://grafana-ovh.fabrique.social.gouv.fr"
+    : "https://grafana.fabrique.social.gouv.fr";
+
+const DEFAULT_GRAFANA_WORKLOADS_D =
+  process.env.PROVIDER === "ovh"
+    ? "a164a7f0339f99e89cea5cb47e9be617V2"
+    : "m_UCAGgIz";
+
+const DEFAULT_GRAFANA_WORKLOADS_VAR_DATASOURCE =
+  process.env.PROVIDER === "ovh"
+    ? "eb239be0-0ac2-41d5-9e1a-061f951a07a3"
+    : "default";
+
+const DEFAULT_GRAFANA_PODS_D =
+  process.env.PROVIDER === "ovh"
+    ? "a7df53d7-0696-4e00-821b-c56b66e5c20a"
+    : "dRAC0MRIz";
+
+const DEFAULT_GRAFANA_PODS_VAR_DATASOURCE =
+  process.env.PROVIDER === "ovh" ? "P5DCFC7561CCDE821" : "default";
+
+const GRAFANA_WORKLOADS_D =
+  process.env.GRAFANA_WORKLOADS_D ||
+  DEFAULT_GRAFANA_WORKLOADS_D;
+
+const GRAFANA_WORKLOADS_VAR_DATASOURCE =
+  process.env.GRAFANA_WORKLOADS_VAR_DATASOURCE ||
+  DEFAULT_GRAFANA_WORKLOADS_VAR_DATASOURCE;
+
+const GRAFANA_PODS_D = process.env.GRAFANA_PODS_D || DEFAULT_GRAFANA_PODS_D;
+
+const GRAFANA_PODS_VAR_DATASOURCE =
+  process.env.GRAFANA_PODS_VAR_DATASOURCE ||
+  DEFAULT_GRAFANA_PODS_VAR_DATASOURCE;
+
+
+const DEV_CLUSTER_NAME =
+  process.env.PROVIDER === "ovh" ? "ovh-dev" : DEV_CLUSTER_NAME;
+
+const PROD_CLUSTER_NAME =
+  process.env.PROVIDER === "ovh" ? "ovh-prod" : PROD_CLUSTER_NAME;
+
+const GRAFANA_URL = process.env.GRAFANA_URL || DEFAULT_GRAFANA_URL;
 
 const RANCHER_URL =
   process.env.RANCHER_URL || "https://rancher.fabrique.social.gouv.fr";
@@ -11,8 +54,8 @@ export const getGrafanaLogsUrl = (parsed) => {
 
 export const getGrafanaPodsUrl = (parsed) => {
   const namespace = parsed.namespace;
-  const cluster = parsed.isProduction ? "prod2" : "dev2";
-  return `${GRAFANA_URL}/d/dRAC0MRIz/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}`;
+  const cluster = parsed.isProduction ? PROD_CLUSTER_NAME : DEV_CLUSTER_NAME;
+  return `${GRAFANA_URL}/d/${GRAFANA_PODS_D}/kubernetes-compute-resources-namespace-pods?orgId=1&refresh=10s&var-datasource=${GRAFANA_PODS_VAR_DATASOURCE}&var-cluster=${cluster}&var-namespace=${namespace}`;
 };
 
 export const getGrafanaCnpgUrls = (parsed) => {
@@ -30,8 +73,8 @@ export const getGrafanaCnpgUrls = (parsed) => {
 
 export const getGrafanaWorkloadsUrl = (parsed) => {
   const namespace = parsed.namespace;
-  const cluster = parsed.isProduction ? "prod2" : "dev2";
-  return `${GRAFANA_URL}/d/m_UCAGgIz/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=default&var-cluster=${cluster}&var-namespace=${namespace}&var-type=deployment`;
+  const cluster = parsed.isProduction ? PROD_CLUSTER_NAME : DEV_CLUSTER_NAME;
+  return `${GRAFANA_URL}/d/${GRAFANA_WORKLOADS_D}/kubernetes-compute-resources-namespace-workloads?orgId=1&refresh=10s&var-datasource=${GRAFANA_WORKLOADS_VAR_DATASOURCE}&var-cluster=${cluster}&var-namespace=${namespace}&var-type=deployment`;
 };
 
 export const getRancherUrls = (parsed) => {
